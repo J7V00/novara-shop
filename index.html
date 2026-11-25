@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0F141D">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NOVARA">
+  <meta name="application-name" content="NOVARA">
+  <title>NOVARA | خصومات الخميس إلى الأحد الكبرى</title>
+
+  <link id="appFavicon" rel="icon" type="image/jpeg" href="novara-icon.jpg">
+  <link id="appleTouchIcon" rel="apple-touch-icon" sizes="512x512" href="novara-icon.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #F9F7F3;
+      --bg-surface: #FFFFFF;
+      --bg-soft: #F2EFE9;
+      --ink: #1C2331;
+      --muted: #6E7685;
+      --accent: #9E7B4F;
+      --accent-soft: rgba(158, 123, 79, 0.12);
+      --emerald: #1F7A54;
+      --danger: #C0392B;
+      --border: #E6E1D6;
+      --shadow: 0 12px 35px rgba(28, 35, 49, 0.06);
+      --radius: 14px;
+      --font-sans: "IBM Plex Sans Arabic", "Plus Jakarta Sans", sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      background: var(--bg-main);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    body.modal-open { overflow: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    /* شريط علوي */
+    .top-bar {
+      background: #1C2331;
+      color: #EAD8BE;
+      padding: 9px 5%;
+      font-size: 12.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .status-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #A7F3D0; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #34D399; }
+
+    /* الهيدر */
+    .header {
+      min-height: 76px;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--ink);
+      user-select: none;
+      cursor: pointer;
+    }
+    .brand-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      object-fit: cover;
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(28, 35, 49, 0.2);
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+    .logo:hover .brand-emblem { transform: scale(1.06); }
+
+    .nav { display: flex; align-items: center; gap: 22px; }
+    .nav a { font-size: 14px; font-weight: 500; color: var(--muted); transition: 0.2s; }
+    .nav a:hover { color: var(--accent); }
+
+    .actions { display: flex; align-items: center; gap: 8px; }
+    .lang-btn {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .lang-btn:hover { background: var(--accent); color: #fff; }
+
+    .icon-btn, .cart-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--bg-surface);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+    .icon-btn:hover, .cart-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cart-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 19px;
+      height: 19px;
+      padding: 0 5px;
+      border-radius: 20px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      display: grid;
+      place-items: center;
+    }
+
+    /* الواجهة الرئيسية */
+    .hero {
+      padding: 48px 5%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 38px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F5F2EB 100%);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      display: inline-block;
+      background: var(--accent-soft);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 3.8vw, 45px);
+      line-height: 1.28;
+      margin: 14px 0;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .hero h1 span { color: var(--accent); font-weight: 400; }
+    .hero p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+      max-width: 540px;
+      margin-bottom: 24px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: #fff;
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      border: 0;
+      transition: 0.25s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+    .hero-visual {
+      height: 360px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-caption {
+      position: absolute;
+      bottom: 16px;
+      inset-inline: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .hero-caption span { font-size: 11px; color: var(--accent); font-weight: 600; display: block; }
+    .hero-caption strong { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+
+    /* الأقسام الـ 10 */
+    .section { padding: 48px 5%; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 14px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 26px; font-weight: 600; margin-top: 6px; }
+    .section-head p { font-size: 13.5px; color: var(--muted); }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .dept-card {
+      height: 150px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      padding: 0;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .dept-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .dept-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.45s; }
+    .dept-card:hover img { transform: scale(1.06); }
+    .dept-card span {
+      position: absolute;
+      bottom: 0;
+      inset-inline: 0;
+      background: linear-gradient(transparent, rgba(28, 35, 49, 0.94));
+      color: #fff;
+      padding: 24px 6px 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    /* أدوات التصفية والبحث */
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 14px;
+      height: 44px;
+      width: min(460px, 100%);
+    }
+    .search-wrap input { width: 100%; border: 0; outline: 0; background: transparent; font-size: 13.5px; color: var(--ink); }
+
+    .price-filter { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    .price-filter input {
+      width: 85px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 10px;
+      background: var(--bg-surface);
+      color: var(--ink);
+    }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .filter-btn {
+      padding: 7px 14px;
+      border-radius: 25px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .results-bar { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+    .sort-select { height: 36px; padding: 0 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); color: var(--ink); font-size: 13px; }
+
+    /* شبكة المنتجات الـ 50 */
+    .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: 0.25s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
+    .card-img { height: 240px; position: relative; background: var(--bg-soft); overflow: hidden; cursor: pointer; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.45s; }
+    .card:hover .card-img img { transform: scale(1.04); }
+    .badge-season {
+      position: absolute;
+      bottom: 10px;
+      inset-inline-start: 10px;
+      background: rgba(28, 35, 49, 0.88);
+      color: #fff;
+      padding: 2px 9px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+    .badge-discount {
+      position: absolute;
+      top: 10px;
+      inset-inline-start: 10px;
+      background: var(--danger);
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .fav-btn {
+      position: absolute;
+      top: 10px;
+      inset-inline-end: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-size: 16px;
+      display: grid;
+      place-items: center;
+    }
+    .is-fav .fav-btn { color: var(--danger); }
+
+    .card-body { padding: 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .card-cat { font-size: 11.5px; color: var(--accent); font-weight: 600; }
+    .card-title { font-size: 15px; font-weight: 600; color: var(--ink); cursor: pointer; }
+    .card-spec { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .card-size-hint { font-size: 11px; color: var(--ink); background: var(--bg-soft); padding: 3px 8px; border-radius: 6px; width: fit-content; }
+    .card-price { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
+    .card-price strong { font-size: 17.5px; font-weight: 700; color: var(--ink); }
+    .card-price del { font-size: 12.5px; color: var(--muted); }
+    .card-cb { font-size: 11px; color: var(--emerald); background: rgba(31, 122, 84, 0.08); padding: 3px 8px; border-radius: 6px; width: fit-content; }
+
+    .card-btns { display: grid; grid-template-columns: 1fr auto auto; gap: 6px; margin-top: auto; padding-top: 10px; }
+    .btn-add {
+      padding: 9px 8px;
+      border-radius: 9px;
+      border: 1px solid var(--ink);
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .btn-add:hover { background: var(--ink); color: #fff; }
+    .btn-spec {
+      padding: 0 9px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg-main);
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .btn-buy {
+      padding: 0 12px;
+      border-radius: 9px;
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-buy:hover { background: var(--ink); }
+
+    #noProducts { text-align: center; padding: 40px; color: var(--muted); font-size: 15px; }
+
+    /* الفوتر */
+    .footer { background: #1C2331; color: #E5E7EB; padding: 38px 5% 20px; margin-top: 30px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer .logo { color: #fff; }
+    .footer-copy { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 22px; padding-top: 14px; text-align: center; font-size: 12px; color: #9CA3AF; }
+
+    /* السلة والنوافذ */
+    .overlay { position: fixed; inset: 0; background: rgba(28, 35, 49, 0.72); backdrop-filter: blur(7px); z-index: 45; display: none; }
+    .overlay.active { display: flex; justify-content: center; align-items: center; padding: 14px; }
+    .cart-overlay.active { justify-content: flex-end; padding: 0; }
+    .cart-drawer { background: #fff; width: min(430px, 100%); height: 100%; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; }
+    .modal-box { position: relative; background: #fff; width: min(540px, 100%); max-height: 92vh; overflow-y: auto; padding: 24px; border-radius: 18px; box-shadow: var(--shadow); }
+    .modal-wide { width: min(860px, 100%); }
+    .close-btn { position: absolute; top: 14px; inset-inline-end: 14px; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: var(--ink); font-size: 16px; z-index: 5; }
+
+    /* نافذة الترحيب الكبيرة للخصومات */
+    .promo-splash-box {
+      width: min(680px, 100%);
+      background: linear-gradient(145deg, #161D2B 0%, #232E45 100%);
+      color: #fff;
+      border: 2px solid #D6B879;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      border-radius: 22px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.45);
+      animation: popIn 0.35s ease;
+    }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+    .promo-splash-badge {
+      display: inline-block;
+      background: #C0392B;
+      color: #fff;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .promo-splash-box h2 {
+      font-size: clamp(24px, 3.8vw, 36px);
+      font-weight: 700;
+      color: #F3DFB9;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    .promo-splash-box p {
+      font-size: 15px;
+      color: #D1D5DB;
+      max-width: 520px;
+      margin: 0 auto 20px;
+      line-height: 1.8;
+    }
+    .promo-tags-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .promo-pill {
+      background: rgba(214, 184, 121, 0.16);
+      border: 1px solid rgba(214, 184, 121, 0.45);
+      color: #F3DFB9;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .promo-enter-btn {
+      background: linear-gradient(135deg, #E2C07D, #B89146);
+      color: #111827;
+      border: 0;
+      padding: 15px 36px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(214, 184, 121, 0.35);
+      transition: 0.25s;
+    }
+    .promo-enter-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+    .cart-item { display: grid; grid-template-columns: 60px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .cart-item img { width: 60px; height: 64px; border-radius: 8px; object-fit: cover; }
+    .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .qty-row button { width: 26px; height: 26px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-main); }
+    .summary-line { display: flex; justify-content: space-between; margin: 7px 0; font-size: 13.5px; color: var(--muted); }
+    .summary-total { display: flex; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 17px; font-weight: 700; }
+
+    .product-detail-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 22px; align-items: start; }
+    .single-front-img { width: 100%; height: 360px; border-radius: 14px; object-fit: cover; border: 1px solid var(--border); background: var(--bg-soft); }
+
+    .specs-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 12px; border: 1px solid var(--border); }
+    .specs-table th, .specs-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: start; }
+    .specs-table th { width: 38%; color: var(--muted); background: var(--bg-main); font-weight: 500; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0 14px; }
+    .chip { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 12.5px; }
+    .chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .pay-methods-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0 12px; }
+    .pay-method-btn {
+      padding: 11px 6px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-align: center;
+      transition: 0.2s;
+    }
+    .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .pay-method-btn.stc.active { background: #4F008C; border-color: #4F008C; color: #fff; }
+
+    .form-col { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; text-align: start; }
+    .form-col label { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+    .form-col input { height: 44px; border: 1px solid var(--border); border-radius: 10px; padding: 0 12px; background: var(--bg-main); }
+    .form-col input:focus { outline: none; border-color: var(--accent); background: #fff; }
+
+    .whatsapp-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      margin: 14px 0 10px;
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.32);
+      transition: 0.2s;
+    }
+    .whatsapp-cta:hover { filter: brightness(1.05); transform: translateY(-2px); }
+
+    .toasts { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 99; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .toast { background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 25px; font-size: 13px; box-shadow: var(--shadow); }
+
+    @media (max-width: 1050px) {
+      .dept-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-inline: auto; }
+      .hero-btns { justify-content: center; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-detail-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .nav { display: none; }
+      .products-grid { gap: 10px; }
+      .card-img { height: 185px; }
+      .card-btns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- شريط علوي -->
+  <div class="top-bar">
+    <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • خصومات الخميس إلى الأحد (5% إلى 20%) على الملابس والأجهزة</span></span>
+    <span id="countdownText"></span>
+  </div>
+
+  <!-- الهيدر -->
+  <header class="header">
+    <div class="logo" id="secretLogoTrigger" title="NOVARA">
+      <img class="brand-emblem" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M256 76 L266 102 L292 112 L266 122 L256 148 L246 122 L220 112 L246 102 Z%27 fill=%27%23D6B879%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
+      <span>NOVARA</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#home" data-i18n="navHome">الرئيسية</a>
+      <a href="#departments" data-i18n="navDepts">الأقسام (10)</a>
+      <a href="#products" data-i18n="navCatalog">المنتجات (50)</a>
+      <a href="#contact" data-i18n="navContact">تواصل معنا</a>
+    </nav>
+
+    <div class="actions">
+      <button type="button" class="lang-btn" id="langToggle">English</button>
+      <button type="button" class="icon-btn" id="accountBtn" title="حسابي">♙</button>
+      <button type="button" class="cart-btn" id="cartBtn" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 7H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- الواجهة الرئيسية -->
+    <section class="hero" id="home">
+      <div>
+        <span class="eyebrow" data-i18n="heroBadge">THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF</span>
+        <h1 data-i18n="heroTitle">خصومات الخميس إلى الأحد <span>على الملابس والكمبيوترات وسوني 5 والمطبخ</span></h1>
+        <p data-i18n="heroDesc">عروض استثنائية من الخميس إلى الأحد بخصومات من 5% إلى 20% على الملابس الرجالية والنسائية الفاخرة، أجهزة الكمبيوتر واللابتوب، سوني 5، الساعات الذكية، وأجهزة المطبخ مع كاش باك فوري 10%.</p>
+        <div class="hero-btns">
+          <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح العروض والخصومات الآن ←</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200" alt="NOVARA Collection">
+        <div class="hero-caption">
+          <span data-i18n="capSub">THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS</span>
+          <strong data-i18n="capTitle">خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- الـ 10 أقسام -->
+    <section class="section" id="departments" style="padding-bottom:10px;">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="deptEyebrow">10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)</span>
+          <h2 data-i18n="deptHeading">تسوق حسب القسم (10 أماكن)</h2>
+        </div>
+        <p data-i18n="deptNote">اضغط على أي قسم لعرض الـ 5 منتجات الفريدة الخاصة به</p>
+      </div>
+      <div class="dept-grid" id="deptGrid">
+        <button type="button" class="dept-card" data-cat="men_wear"><img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt=""><span data-i18n="d1">1. ملابس رجالية (5)</span></button>
+        <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (5)</span></button>
+        <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (5)</span></button>
+        <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (5)</span></button>
+        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 (5)</span></button>
+        <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (5)</span></button>
+        <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (5)</span></button>
+        <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (5)</span></button>
+        <button type="button" class="dept-card" data-cat="watches"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt=""><span data-i18n="d9">9. ساعات أبل AI وساعات (5)</span></button>
+        <button type="button" class="dept-card" data-cat="kitchen"><img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=600" alt=""><span data-i18n="d10">10. أجهزة المطبخ والمنزل (5)</span></button>
+      </div>
+    </section>
+
+    <!-- الكتالوج الكامل -->
+    <section class="section" id="products">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="catEyebrow">THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF</span>
+          <h2 data-i18n="catHeading">جميع المنتجات والعروض (50 منتجاً)</h2>
+        </div>
+        <p data-i18n="catNote">كل منتج مختلف تماماً بصورته ومواصفاته — اضغط على أي منتج لعرض صورته الكاملة وجدول المواصفات</p>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث عن فستان، بنطلون، كنزة، آيفون 18، آيباد، ماك بوك، سوني 5، ساعة، ماكينة قهوة..."></label>
+        <div class="price-filter">
+          <span data-i18n="priceLbl">السعر:</span>
+          <input type="number" id="minPrice" min="0" placeholder="Min">
+          <input type="number" id="maxPrice" min="0" placeholder="Max">
+        </div>
+      </div>
+
+      <div class="filters" id="filterBar">
+        <button type="button" class="filter-btn active" data-cat="all" data-i18n="fAll">الكل (50)</button>
+        <button type="button" class="filter-btn" data-cat="men_wear" data-i18n="f1">ملابس رجالية (5)</button>
+        <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (5)</button>
+        <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (5)</button>
+        <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (5)</button>
+        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون 18 و 17 (5)</button>
+        <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (5)</button>
+        <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (5)</button>
+        <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (5)</button>
+        <button type="button" class="filter-btn" data-cat="watches" data-i18n="f9">ساعات أبل AI وساعات (5)</button>
+        <button type="button" class="filter-btn" data-cat="kitchen" data-i18n="f10">أجهزة المطبخ (5)</button>
+        <button type="button" class="filter-btn" id="favFilterBtn" data-i18n="fFav">♥ المفضلة</button>
+      </div>
+
+      <div class="results-bar">
+        <span id="resultsCount">50 منتج</span>
+        <select id="sortSelect" class="sort-select">
+          <option value="def" data-i18n="sDef">الترتيب حسب الأقسام (الافتراضي)</option>
+          <option value="asc" data-i18n="sAsc">السعر: الأقل أولاً</option>
+          <option value="desc" data-i18n="sDesc">السعر: الأعلى أولاً</option>
+        </select>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+      <p id="noProducts" hidden data-i18n="noProd">لا توجد منتجات تطابق بحثك.</p>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="footer-top">
+      <div class="logo">
+        <img class="brand-emblem" style="width:36px;height:36px;" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
+        <span>NOVARA</span>
+      </div>
+      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">خصومات الخميس إلى الأحد (5% - 20%) • 50 منتجاً فريداً مرتباً في 10 أقسام.</p>
+    </div>
+    <div class="footer-copy">© 2026 NOVARA. All Rights Reserved.</div>
+  </footer>
+
+  <!-- نافذة الترحيب الكبيرة للخصومات فور دخول المتجر -->
+  <div class="overlay active" id="promoSplashModal">
+    <div class="promo-splash-box">
+      <button type="button" class="close-btn" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.25);" data-close="promoSplashModal">✕</button>
+      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 مهرجان الخصومات الكبرى (الخميس إلى الأحد)</div>
+      <h2 data-i18n="splashTitle">خصومات ضخمة على الملابس والكمبيوترات وأجهزة سوني 5!</h2>
+      <p data-i18n="splashDesc">أهلاً بك في NOVARA — تصفح جميع المنتجات بحرية واستمتع بخصومات من 5% إلى 20% وكاش باك 10% على جميع الأقسام.</p>
+      <div class="promo-tags-row">
+        <span class="promo-pill" data-i18n="sp1">🧥 خصومات الملابس (5% - 20%)</span>
+        <span class="promo-pill" data-i18n="sp2">💻 خصومات الكمبيوترات واللابتوب</span>
+        <span class="promo-pill" data-i18n="sp3">🎮 عروض أجهزة سوني 5</span>
+        <span class="promo-pill" data-i18n="sp4">🍳 أجهزة المطبخ والساعات الذكية</span>
+      </div>
+      <button type="button" class="promo-enter-btn" id="enterDealsBtn" data-i18n="splashCta">ابدأ التسوق الآن ←</button>
+    </div>
+  </div>
+
+  <!-- السلة الجانبية -->
+  <div class="overlay cart-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;">
+        <h3 data-i18n="cartTitle">سلة المشتريات</h3>
+        <button type="button" class="close-btn" style="position:static" id="closeCart">✕</button>
+      </div>
+      <div id="cartItems" style="flex:1;overflow-y:auto;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;">
+        <div class="summary-line"><span data-i18n="subLbl">المجموع الفرعي</span><strong id="cartSub">0 ر.س</strong></div>
+        <div class="summary-line"><span data-i18n="shipLbl">الشحن</span><strong id="cartShip">مجاني</strong></div>
+        <div class="summary-line" style="color:var(--emerald)"><span data-i18n="cbLbl">كاش باك فوري (10%)</span><strong id="cartCb">0 ر.س</strong></div>
+        <div class="summary-total"><span data-i18n="totLbl">الإجمالي</span><strong id="cartTotal">0 ر.س</strong></div>
+        <button type="button" class="btn-primary" style="width:100%;justify-content:center;margin-top:10px;" id="checkoutBtn" data-i18n="checkoutCta">متابعة للدفع السريع ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- نافذة تفاصيل المنتج -->
+  <div class="overlay" id="productModal">
+    <div class="modal-box modal-wide">
+      <button type="button" class="close-btn" data-close="productModal">✕</button>
+      <div id="productDetails"></div>
+    </div>
+  </div>
+
+  <!-- نافذة تسجيل الدخول والدفع السريع (تظهر عند الضغط على متابعة / الدفع السريع) -->
+  <div class="overlay" id="checkoutModal">
+    <div class="modal-box">
+      <button type="button" class="close-btn" data-close="checkoutModal">✕</button>
+      <div id="coFormWrap">
+        <span class="eyebrow">SIGN IN & FAST PAY</span>
+        <h3 style="margin:6px 0 4px" data-i18n="coTitle">تسجيل الدخول وإتمام الدفع السريع</h3>
+        <p id="coSummary" style="font-size:13px;color:var(--muted)"></p>
+        <form id="coForm" class="form-col" novalidate>
+          <label data-i18n="lblName">الاسم الكامل *</label>
+          <input id="coName" type="text" placeholder="اكتب اسمك الكامل" required>
+
+          <label data-i18n="lblPhone">رقم الجوال *</label>
+          <input id="coPhone" type="tel" dir="ltr" placeholder="05xxxxxxxx" required>
+
+          <label data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</label>
+          <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
+
+          <label data-i18n="lblPayMethod">اختر وسيلة الدفع السريع *</label>
+          <div class="pay-methods-grid" id="payMethodsGrid">
+            <button type="button" class="pay-method-btn active" data-method="Apple Pay"> Apple Pay</button>
+            <button type="button" class="pay-method-btn stc" data-method="stc pay">stc pay</button>
+            <button type="button" class="pay-method-btn" data-method="Fast Pay (مدى/فيزا)">⚡ Pay سريع</button>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">دفع الآن والمتابعة عبر واتساب ←</button>
+        </form>
+      </div>
+      <div id="coDone" hidden style="text-align:center;padding:12px 0;"></div>
+    </div>
+  </div>
+
+  <!-- نافذة الحساب -->
+  <div class="overlay" id="accountModal">
+    <div class="modal-box">
+      <button type="button" class="close-btn" data-close="accountModal">✕</button>
+      <h3 style="text-align:center" data-i18n="accTitle">بيانات حسابك</h3>
+      <form id="accForm" class="form-col" novalidate>
+        <label data-i18n="lblName">الاسم الكامل *</label>
+        <input id="accName" type="text" required>
+        <label data-i18n="lblPhone">رقم الجوال *</label>
+        <input id="accPhone" type="tel" dir="ltr" required>
+        <label data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</label>
+        <input id="accEmail" type="email" dir="ltr" required>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;" data-i18n="saveAcc">حفظ البيانات ✓</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- نافذة المالك/المدير المخفية (5 نقرات على الشعار + الرمز 12345) -->
+  <div class="overlay" id="adminModal">
+    <div class="modal-box modal-wide">
+      <button type="button" class="close-btn" data-close="adminModal">✕</button>
+      <div id="adminLock" style="text-align:center;padding:24px 10px;">
+        <span class="eyebrow">OWNER & MANAGER PORTAL</span>
+        <h3 style="margin:8px 0">بوابة مالك التطبيق الخاصة</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">أدخل الرمز السري (12345) لعرض سجل الطلبات والمدفوعات</p>
+        <form id="pinForm" style="display:flex;gap:8px;max-width:300px;margin:0 auto;">
+          <input id="pinInput" type="password" inputmode="numeric" placeholder="•••••" style="flex:1;height:42px;border:1px solid var(--border);border-radius:8px;text-align:center;font-size:18px;letter-spacing:4px;" required>
+          <button type="submit" class="btn-primary">دخول</button>
+        </form>
+      </div>
+      <div id="adminBody" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-inline-end:36px;">
+          <div>
+            <h3>لوحة مالك التطبيق — سجل الطلبات والعملاء</h3>
+            <small id="adminTotalsBar" style="color:var(--emerald);font-weight:600;"></small>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="filter-btn" id="exportCsvBtn">تصدير Excel</button>
+            <button type="button" class="filter-btn" id="clearOrders" style="color:var(--danger);">مسح السجل</button>
+          </div>
+        </div>
+        <div id="ordersList" style="display:flex;flex-direction:column;gap:10px;max-height:58vh;overflow-y:auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      "use strict";
+
+      const CONFIG = {
+        ownerWebhookUrl: "https://formspree.io/f/meagnzqj",
+        merchantWhatsApp: "966500000000",
+        managerPin: "12345"
+      };
+
+      async function notifyOwnerCloud(payload) {
+        if (!CONFIG.ownerWebhookUrl) return;
+        try {
+          await fetch(CONFIG.ownerWebhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify(payload)
+          });
+        } catch {}
+      }
+
+      (function setupExternalAppIcon() {
+        try {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext("2d");
+            const minSide = Math.min(img.width, img.height);
+            const sx = (img.width - minSide) / 2;
+            const sy = (img.height - minSide) / 2;
+            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, 512, 512);
+            const pngUrl = canvas.toDataURL("image/png");
+
+            const fav = document.getElementById("appFavicon");
+            const apple = document.getElementById("appleTouchIcon");
+            if (fav) { fav.type = "image/png"; fav.href = pngUrl; }
+            if (apple) apple.href = pngUrl;
+
+            const manifest = {
+              name: "NOVARA Shop",
+              short_name: "NOVARA",
+              start_url: ".",
+              display: "standalone",
+              background_color: "#0F141D",
+              theme_color: "#0F141D",
+              icons: [{ src: pngUrl, sizes: "512x512", type: "image/png", purpose: "any maskable" }]
+            };
+            const mLink = document.createElement("link");
+            mLink.rel = "manifest";
+            mLink.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: "application/json" }));
+            document.head.appendChild(mLink);
+          };
+          img.src = "novara-icon.jpg";
+        } catch {}
+      })();
+
+      let lang = localStorage.getItem("novara-lang") || "ar";
+
+      const I18N = {
+        ar: {
+          topStatus: "NOVARA • خصومات الخميس إلى الأحد (5% إلى 20%) على الملابس والأجهزة",
+          navHome: "الرئيسية",
+          navDepts: "الأقسام (10)",
+          navCatalog: "المنتجات (50)",
+          navContact: "تواصل معنا",
+          heroBadge: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
+          heroTitle: "خصومات الخميس إلى الأحد <span>على الملابس والكمبيوترات وسوني 5 والمطبخ</span>",
+          heroDesc: "عروض استثنائية من الخميس إلى الأحد بخصومات من 5% إلى 20% على الملابس الرجالية والنسائية الفاخرة، أجهزة الكمبيوتر واللابتوب، سوني 5، الساعات الذكية، وأجهزة المطبخ مع كاش باك فوري 10%.",
+          heroCta: "تصفح العروض والخصومات الآن ←",
+          capSub: "THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS",
+          capTitle: "خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%",
+          splashBadge: "🔥 مهرجان الخصومات الكبرى (الخميس إلى الأحد)",
+          splashTitle: "خصومات ضخمة على الملابس والكمبيوترات وأجهزة سوني 5!",
+          splashDesc: "أهلاً بك في NOVARA — تصفح جميع المنتجات بحرية واستمتع بخصومات من 5% إلى 20% وكاش باك 10% على جميع الأقسام.",
+          sp1: "🧥 خصومات الملابس (5% - 20%)",
+          sp2: "💻 خصومات الكمبيوترات واللابتوب",
+          sp3: "🎮 عروض أجهزة سوني 5",
+          sp4: "🍳 أجهزة المطبخ والساعات الذكية",
+          splashCta: "ابدأ التسوق الآن ←",
+          deptEyebrow: "10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)",
+          deptHeading: "تسوق حسب القسم (10 أماكن)",
+          deptNote: "اضغط على أي قسم لعرض الـ 5 منتجات الفريدة الخاصة به",
+          d1: "1. ملابس رجالية (5)", d2: "2. ملابس نسائية وفساتين (5)",
+          d3: "3. بناطيل رجالية ونسائية (5)", d4: "4. كنزات وجواكيت (5)",
+          d5: "5. آيفون 18 و 17 (5)", d6: "6. أجهزة الآيباد (5)",
+          d7: "7. ماك بوك ولابتوب وبي سي (5)", d8: "8. أجهزة سوني 5 (5)",
+          d9: "9. ساعات أبل AI وساعات (5)", d10: "10. أجهزة المطبخ والمنزل (5)",
+          catEyebrow: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
+          catHeading: "جميع المنتجات والعروض (50 منتجاً)",
+          catNote: "كل منتج مختلف تماماً بصورته ومواصفاته — اضغط على أي منتج لعرض صورته الكاملة وجدول المواصفات",
+          searchPh: "ابحث عن فستان، بنطلون، كنزة، آيفون 18، آيباد، ماك بوك، سوني 5، ساعة، ماكينة قهوة...",
+          priceLbl: "السعر:",
+          fAll: "الكل (50)", f1: "ملابس رجالية (5)", f2: "ملابس نسائية وفساتين (5)",
+          f3: "بناطيل رجالية ونسائية (5)", f4: "كنزات وجواكيت (5)", f5: "آيفون 18 و 17 (5)",
+          f6: "الآيباد (5)", f7: "ماك بوك ولابتوب وبي سي (5)", f8: "سوني 5 (5)",
+          f9: "ساعات أبل AI وساعات (5)", f10: "أجهزة المطبخ (5)",
+          fFav: "♥ المفضلة",
+          sDef: "الترتيب حسب الأقسام (الافتراضي)", sAsc: "السعر: الأقل أولاً", sDesc: "السعر: الأعلى أولاً",
+          noProd: "لا توجد منتجات تطابق بحثك.",
+          footerTag: "خصومات الخميس إلى الأحد (5% - 20%) • 50 منتجاً فريداً مرتباً في 10 أقسام.",
+          cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
+          cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
+          coTitle: "تسجيل الدخول وإتمام الدفع السريع", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
+          lblEmail: "البريد الإلكتروني (Gmail) *",
+          lblPayMethod: "اختر وسيلة الدفع السريع *", confirmBtn: "دفع الآن والمتابعة عبر واتساب ←",
+          accTitle: "بيانات حسابك", saveAcc: "حفظ البيانات ✓",
+          addBtn: "أضف للسلة +", specBtn: "المواصفات", buyBtn: "متابعة",
+          free: "مجاني", currency: "ر.س", countUnit: "منتج",
+          cbTag: n => `💸 كاش باك فوري: ${n} ر.س`,
+          emptyCart: "سلتك فارغة حالياً",
+          addedToast: name => `تمت إضافة «${name}» للسلة ✓`
+        },
+        en: {
+          topStatus: "NOVARA • Thursday to Sunday Deals (5% to 20% Off) on Fashion & Appliances",
+          navHome: "Home",
+          navDepts: "Departments (10)",
+          navCatalog: "Products (50)",
+          navContact: "Contact",
+          heroBadge: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
+          heroTitle: "Thursday to Sunday Deals <span>Across Fashion, Computers, PS5 & Kitchen</span>",
+          heroDesc: "Massive weekend discounts from Thursday to Sunday (5% to 20% Off) across luxury men's & women's clothing, laptops & PCs, PlayStation 5, smart watches, and kitchen appliances with 10% instant cashback.",
+          heroCta: "Browse Deals & Discounts Now →",
+          capSub: "THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS",
+          capTitle: "Thursday to Sunday Deals (5% - 20%) + 10% Instant Cashback",
+          splashBadge: "🔥 Mega Discount Event (Thursday to Sunday)",
+          splashTitle: "Huge Discounts on Clothing, Computers & PlayStation 5!",
+          splashDesc: "Welcome to NOVARA — Browse freely and enjoy 5% to 20% discounts and 10% cashback across all departments.",
+          sp1: "🧥 Clothing Deals (5% - 20% Off)",
+          sp2: "💻 Computers & Laptops Deals",
+          sp3: "🎮 PlayStation 5 Special Offers",
+          sp4: "🍳 Kitchen & Smart Watches Offers",
+          splashCta: "Start Shopping Now →",
+          deptEyebrow: "10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)",
+          deptHeading: "Shop by Department (10 Places)",
+          deptNote: "Click any department to view its 5 unique items",
+          d1: "1. Men's Wear (5)", d2: "2. Women's Wear & Dresses (5)",
+          d3: "3. Men's & Women's Pants (5)", d4: "4. Sweaters & Jackets (5)",
+          d5: "5. iPhone 18 & 17 (5)", d6: "6. iPads (5)",
+          d7: "7. MacBook, Laptop & PC (5)", d8: "8. Sony PS5 (5)",
+          d9: "9. AI Apple & Modern Watches (5)", d10: "10. Kitchen & Home (5)",
+          catEyebrow: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
+          catHeading: "All Unique Products & Offers (50 Items)",
+          catNote: "Every single product is distinct in photo and specs — click any item for full details",
+          searchPh: "Search dress, pants, sweater, iPhone 18, iPad, MacBook, PS5, watch, coffee machine...",
+          priceLbl: "Price:",
+          fAll: "All (50)", f1: "Men's Wear (5)", f2: "Women's Wear & Dresses (5)",
+          f3: "Pants (5)", f4: "Sweaters & Jackets (5)", f5: "iPhone 18 & 17 (5)",
+          f6: "iPads (5)", f7: "MacBook & PC (5)", f8: "Sony PS5 (5)",
+          f9: "AI Watches (5)", f10: "Kitchen (5)",
+          fFav: "♥ Favorites",
+          sDef: "Ordered by Department (Default)", sAsc: "Price: Low to High", sDesc: "Price: High to Low",
+          noProd: "No products match your search.",
+          footerTag: "Thursday to Sunday Deals (5% - 20%) • 50 Unique Products in 10 Departments.",
+          cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
+          cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
+          coTitle: "Sign In & Express Payment", lblName: "Full Name *", lblPhone: "Mobile Number *",
+          lblEmail: "Email Address (Gmail) *",
+          lblPayMethod: "Choose Fast Payment Method *", confirmBtn: "Pay Now & Message on WhatsApp →",
+          accTitle: "Your Account Details", saveAcc: "Save Details ✓",
+          addBtn: "Add to Bag +", specBtn: "Specs", buyBtn: "Continue",
+          free: "Free", currency: "SAR", countUnit: "items",
+          cbTag: n => `💸 Instant Cashback: ${n} SAR`,
+          emptyCart: "Your shopping bag is empty",
+          addedToast: name => `Added "${name}" to bag ✓`
+        }
+      };
+
+      const products = [
+        // 1. ملابس رجالية
+        { id: 1, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "ثوب رجالي ملكي قماش ياباني أبيض", nameEn: "Men's Royal Japanese White Thobe", specAr: "قماش ياباني ناعم مقاوم للتجعد • تفصيل سعودي متقن", specEn: "Wrinkle-Resistant Soft Japanese Fabric • Tailored Fit", price: 400, oldPrice: 500, image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800", variants: ["54 M", "56 L", "58 XL", "60 2XL"], specs: { "القماش": "ياباني فاخر نص وقفة", "المقاسات": "54M إلى 60 2XL" } },
+        { id: 2, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "قميص رجالي قطن أكسفورد ناعم", nameEn: "Men's Soft Oxford Cotton Dress Shirt", specAr: "قطن 100% يسمح بالتنفس وسهل الكي", specEn: "100% Breathable Easy-Iron Cotton", price: 340, oldPrice: 400, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن أكسفورد 100%", "المقاسات": "M إلى 3XL" } },
+        { id: 3, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "تيشيرت بولو رجالي قطن مصري فاخر", nameEn: "Men's Egyptian Cotton Polo Shirt", specAr: "قطن بيكيه ناعم بارد للحر • ألوان ثابتة", specEn: "Cooling Soft Cotton Piqué • Fade-Resistant", price: 304, oldPrice: 320, image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن مصري 100%", "المقاسات": "M إلى 3XL" } },
+        { id: 4, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بدلة عمل رجالية رسمية حديثة", nameEn: "Men's Modern Tailored Work Suit", specAr: "قماش صوف وفيسكوز ناعم مبطن للدوام والاجتماعات", specEn: "Soft Wool-Viscose Lined Office Suit", price: 810, oldPrice: 900, image: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "صوف ناعم وفيسكوز", "المقاسات": "M إلى 3XL" } },
+        { id: 5, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "طقم لينن رجالي صيفي كاجوال ناعم", nameEn: "Men's Casual Soft Summer Linen Set", specAr: "كتان طبيعي بارد ومريح للرحلات والإطلالات اليومية", specEn: "Cooling Natural Linen for Casual Days", price: 495, oldPrice: 550, image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "القماش": "كتان وقطن طبيعي", "الموسم": "صيفي بارد" } },
+
+        // 2. ملابس نسائية وفساتين
+        { id: 6, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان نسائي طويل شيفون ناعم محتشم", nameEn: "Women's Modest Long Soft Chiffon Dress", specAr: "قماش شيفون ناعم مبطن بالكامل • تصميم محتشم راقٍ", specEn: "Fully Lined Soft Chiffon • Elegant Modest Cut", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "شيفون فاخر + بطانة قطنية", "المقاسات": "S إلى 3XL" } },
+        { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
+        { id: 8, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "قميص نسائي حريري ناعم بأكمام طويلة", nameEn: "Women's Silky Satin Long-Sleeve Blouse", specAr: "ملمس حريري ناعم مقاوم للتجعد • قصة محتشمة", specEn: "Wrinkle-Free Silky Satin • Modest Fit", price: 504, oldPrice: 560, image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "ساتان حريري ناعم", "المقاسات": "S إلى 3XL" } },
+        { id: 9, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان سهرة نسائي طويل بقصة راقية", nameEn: "Women's Elegant Evening Gown Dress", specAr: "قماش ناعم فاخر للمناسبات والاستقبالات", specEn: "Luxury Soft Fabric for Special Occasions", price: 810, oldPrice: 900, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الخامة": "قماش سهرة ناعم مبطن", "المقاسات": "S إلى 2XL" } },
+        { id: 10, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "طقم بليزر عمل نسائي رسمي حديث", nameEn: "Women's Modern Tailored Work Blazer Set", specAr: "قماش كريب مفصل ناعم مبطن للعمل", specEn: "Soft Lined Crepe Blazer for Office", price: 675, oldPrice: 750, image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "كريب مفصل ناعم", "المقاسات": "S إلى 3XL" } },
+
+        // 3. بناطيل رجالية ونسائية
+        { id: 11, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون تشينو رجالي قطن سوبريما مرن", nameEn: "Men's Stretch Supima Cotton Chino Pants", specAr: "98% قطن سوبريما ناعم + 2% مطاط لراحة الحركة", specEn: "98% Supima Soft Cotton + 2% Elastane", price: 330, oldPrice: 380, image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800", variants: ["32", "34", "36", "38", "40", "42"], specs: { "الفئة": "رجالي", "القماش": "قطن سوبريما ناعم" } },
+        { id: 12, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون صوف رجالي شتوي رسمي دافئ", nameEn: "Men's Winter Soft Wool Formal Pants", specAr: "صوف ميرينو ناعم دافئ للبرد والدوام", specEn: "Soft Merino Wool Blend for Winter", price: 425, oldPrice: 500, image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800", variants: ["32", "34", "36", "38", "40", "42"], specs: { "الفئة": "رجالي", "القماش": "صوف ميرينو ناعم" } },
+        { id: 13, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون نسائي واسع الأرجل كريب ناعم", nameEn: "Women's High-Waist Soft Crepe Wide Pants", specAr: "قماش كريب ناعم وانسيابي مريح للعمل", specEn: "Flowing Soft Crepe Fabric", price: 544, oldPrice: 640, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "نسائي", "القماش": "كريب إسباني ناعم" } },
+        { id: 14, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون نسائي قماش رسمي بقصة مستقيمة", nameEn: "Women's Tailored Straight-Leg Soft Pants", specAr: "قماش ناعم مرن بخصر عالٍ مريح", specEn: "Soft Stretch Tailored Fabric", price: 513, oldPrice: 570, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "فيسكوز ناعم مرن" } },
+        { id: 15, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون كارجو رجالي قطن تويل ناعم", nameEn: "Men's Soft Twill Cotton Cargo Pants", specAr: "قطن تويل ناعم بجيوب جانبية أنيقة", specEn: "Soft Cotton Twill with Side Pockets", price: 360, oldPrice: 400, image: "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=800", variants: ["32", "34", "36", "38", "40"], specs: { "الفئة": "رجالي", "القماش": "قطن تويل ناعم" } },
+
+        // 4. كنزات وجواكيت
+        { id: 16, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت رجالي صوف ميرينو مبطن ناعم", nameEn: "Men's Soft Merino Wool Lined Jacket", specAr: "صوف ميرينو ناعم الملمس • بطانة حرارية للبرد", specEn: "Ultra-Soft Merino Wool • Thermal Lining", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "رجالي", "القماش": "صوف ميرينو ناعم" } },
+        { id: 17, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي طويل ترينش كوت كشمير ناعم", nameEn: "Women's Long Soft Cashmere Trench Coat", specAr: "مزيج الكشمير والصوف الناعم مع حزام خصر", specEn: "Cashmere-Wool Blend with Waist Belt", price: 840, oldPrice: 980, image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "نسائي", "الخامة": "كشمير وصوف ناعم" } },
+        { id: 18, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "كنزة رجالية صوف كشمير شتوية ناعمة", nameEn: "Men's Soft Cashmere Winter Knit Sweater", specAr: "صوف كشمير ناعم ودافئ للبرد • لا يسبب حكة", specEn: "Ultra-Soft Cashmere Blend • Itch-Free", price: 380, oldPrice: 450, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "رجالي", "الخامة": "صوف كشمير ناعم" } },
+        { id: 19, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "كنزة نسائية تريكو ناعمة للشتاء", nameEn: "Women's Cozy Soft Knit Winter Sweater", specAr: "خيوط قطن وصوف ناعمة دافئة وخفيفة", specEn: "Soft Cotton-Wool Warm Knitwear", price: 522, oldPrice: 580, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "الخامة": "تريكو قطن وصوف ناعم" } },
+        { id: 20, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي بافر شتوي مبطن ناعم", nameEn: "Women's Soft Quilted Winter Puffer Jacket", specAr: "قماش ناعم مقاوم للرياح والمطر مع قبعة دافئة", specEn: "Soft Windproof Shell with Warm Hood", price: 720, oldPrice: 900, image: "https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "مايكروفايبر ناعم" } },
+
+        // 5. آيفون 18 و 17
+        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
+        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
+        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
+
+        // 6. أجهزة الآيباد
+        { id: 26, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", nameEn: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", specAr: "معالج Apple M4 • شاشة Tandem OLED 120Hz • نحافة 5.3 ملم", specEn: "Apple M4 Chip • Tandem OLED 120Hz • 5.3mm Thin", price: 3569, oldPrice: 4199, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800", variants: ["أسود فلكي 256GB", "فضي 512GB"], specs: { "المعالج": "Apple M4", "الشاشة": "11 بوصة Tandem OLED" } },
+        { id: 27, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 13 M4 (512GB Wi-Fi)", nameEn: "Apple iPad Pro 13 M4 (512GB Wi-Fi)", specAr: "شاشة عملاقة 13 بوصة OLED • معالج M4 الخارق", specEn: "13\" Ultra Retina OLED • Apple M4 Chip", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=800", variants: ["أسود فلكي 512GB", "فضي 1TB"], specs: { "المعالج": "Apple M4", "الشاشة": "13 بوصة OLED" } },
+        { id: 28, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Air 13 M2 (256GB)", nameEn: "Apple iPad Air 13 M2 (256GB)", specAr: "شاشة كبيرة 13 بوصة • معالج Apple M2 • مثالي للدراسة", specEn: "13\" Liquid Retina Display • Apple M2 Chip", price: 2889, oldPrice: 3399, image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800", variants: ["أزرق 256GB", "رمادي فلكي 256GB", "ذهبي نجمي 256GB"], specs: { "المعالج": "Apple M2", "الشاشة": "13 بوصة Liquid Retina" } },
+        { id: 29, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Air 11 M2 مع لوحة مفاتيح Magic Keyboard", nameEn: "Apple iPad Air 11 M2 with Magic Keyboard", specAr: "معالج Apple M2 • متكامل مع لوحة المفاتيح والقلم للعمل", specEn: "Apple M2 Chip • Complete with Magic Keyboard", price: 2719, oldPrice: 3199, image: "https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800", variants: ["أزرق 256GB", "بنفسجي 256GB"], specs: { "المعالج": "Apple M2", "الشاشة": "11 بوصة" } },
+        { id: 30, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad mini 7 (A17 Pro - 256GB)", nameEn: "Apple iPad mini 7 (A17 Pro - 256GB)", specAr: "حجم مدمج 8.3 بوصة • شريحة A17 Pro • خفيف جداً", specEn: "Compact 8.3\" Display • A17 Pro Chip", price: 2124, oldPrice: 2499, image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=800", variants: ["رمادي فلكي 256GB", "بنفسجي 256GB"], specs: { "المعالج": "Apple A17 Pro", "الشاشة": "8.3 بوصة" } },
+
+        // 7. ماك بوك ولابتوب وبي سي
+        { id: 31, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب Apple MacBook Pro 14 (M3 Pro)", nameEn: "Apple MacBook Pro 14 (M3 Pro)", specAr: "معالج M3 Pro • رام 18GB • تخزين 512GB SSD • شاشة 120Hz", specEn: "M3 Pro Chip • 18GB RAM • 512GB SSD • 120Hz XDR", price: 6159, oldPrice: 7699, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800", variants: ["18GB / 512GB SSD", "36GB / 1TB SSD"], specs: { "المعالج": "Apple M3 Pro", "البطارية": "18 ساعة" } },
+        { id: 32, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب Apple MacBook Air 15 M3 (16GB / 512GB)", nameEn: "Apple MacBook Air 15 M3 (16GB / 512GB)", specAr: "شاشة 15.3 بوصة • خفيف ونحيف جداً • بطارية 18 ساعة", specEn: "15.3\" Liquid Retina • Silent Fanless Design", price: 4719, oldPrice: 5899, image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800", variants: ["سماء الليل 512GB", "ذهبي نجمي 512GB"], specs: { "المعالج": "Apple M3", "الرام": "16GB" } },
+        { id: 33, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب ASUS ROG Strix G16 (RTX 4070)", nameEn: "ASUS ROG Strix G16 Gaming Laptop (RTX 4070)", specAr: "Core i9-14900HX • كرت RTX 4070 8GB • شاشة 16 إنش 240Hz", specEn: "Core i9-14900HX • RTX 4070 8GB • 16\" 240Hz", price: 4959, oldPrice: 6199, image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800", variants: ["16GB / 1TB SSD", "32GB / 1TB SSD"], specs: { "المعالج": "Core i9-14900HX", "كرت الشاشة": "RTX 4070 8GB" } },
+        { id: 34, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "كمبيوتر مكتبي Apple iMac 24 M3 (الكل في واحد)", nameEn: "Apple iMac 24-inch M3 All-in-One Desktop", specAr: "شاشة 4.5K Retina 24 بوصة • معالج M3 • شامل الكيبورد والماوس", specEn: "24\" 4.5K Retina • M3 Chip • Keyboard & Mouse", price: 4959, oldPrice: 6199, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800", variants: ["فضي 256GB", "أزرق 512GB"], specs: { "الشاشة": "24 بوصة 4.5K Retina", "المعالج": "Apple M3" } },
+        { id: 35, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "كمبيوتر PC Gaming متكامل (RTX 4070 Super)", nameEn: "Custom PC Gaming Tower (RTX 4070 Super)", specAr: "Core i7-14700KF • كرت RTX 4070 Super 12GB • رام 32GB DDR5", specEn: "Core i7-14700KF • RTX 4070 Super 12GB • 32GB DDR5", price: 5439, oldPrice: 6799, image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800", variants: ["PC Tower Only", "Full Bundle + 240Hz Monitor"], specs: { "المعالج": "Core i7-14700KF", "كرت الشاشة": "RTX 4070 SUPER 12GB" } },
+
+        // 8. أجهزة سوني 5
+        { id: 36, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "جهاز سوني PlayStation 5 Pro (2TB SSD)", nameEn: "Sony PlayStation 5 Pro Console (2TB SSD)", specAr: "جهاز سوني 5 برو الكامل • سعة 2TB SSD • دقة 4K 120Hz • ضمان سنتين", specEn: "Full PS5 Pro Console • 2TB SSD • 4K 120Hz • 2-Yr Warranty", price: 2719, oldPrice: 3399, image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800", variants: ["نسخة 2TB الرسمية"], specs: { "التخزين": "2TB SSD فائق السرعة", "الدقة": "4K 120Hz / 8K", "الضمان": "سنتين الوكيل الرسمي" } },
+        { id: 37, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "جهاز سوني PlayStation 5 Slim (نسخة الأقراص 1TB)", nameEn: "Sony PlayStation 5 Slim Disc Edition (1TB)", specAr: "تصميم سليم نحيف مع قارئ أقراص 4K Blu-ray وسعة 1TB", specEn: "Slim Design with 4K Blu-ray Disc Drive & 1TB SSD", price: 1919, oldPrice: 2399, image: "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?w=800", variants: ["نسخة الأقراص 1TB"], specs: { "التخزين": "1TB SSD", "المشغل": "4K UHD Blu-ray" } },
+        { id: 38, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "نظارة الواقع الافتراضي Sony PlayStation VR2", nameEn: "Sony PlayStation VR2 Headset", specAr: "شاشات 4K HDR OLED • تتبع حركة العين • تجربة واقع افتراضي مذهلة", specEn: "4K HDR OLED Displays • Eye Tracking • PS5 Compatible", price: 1999, oldPrice: 2499, image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800", variants: ["PS VR2 Standard"], specs: { "الشاشة": "OLED 2000×2040 لكل عين", "التوافق": "PlayStation 5" } },
+        { id: 39, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "سماعة الرأس اللاسلكية Sony PULSE Elite لـ PS5", nameEn: "Sony PULSE Elite Wireless Headset for PS5", specAr: "صوت ثلاثي الأبعاد فائق النقاء مع ميكروفون عازل للضوضاء", specEn: "Planar Magnetic Drivers • 3D Audio for PS5", price: 639, oldPrice: 799, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800", variants: ["أبيض وأسود"], specs: { "التقنية": "Tempest 3D AudioTech", "البطارية": "30 ساعة" } },
+        { id: 40, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "قرص تخزين فائق السرعة WD_BLACK 2TB SSD لـ PS5", nameEn: "WD_BLACK 2TB NVMe SSD with Heatsink for PS5", specAr: "توسعة رسمية لسوني 5 بسرعة 7300MB/s مع مشتت حراري", specEn: "Official PS5 Expansion • 7300MB/s with Heatsink", price: 719, oldPrice: 899, image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=800", variants: ["سعة 2TB", "سعة 4TB"], specs: { "السرعة": "7300MB/s", "التوافق": "PlayStation 5 / Pro" } },
+
+        // 9. ساعات أبل AI وساعات حديثة
+        { id: 41, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة ذكية حديثة للرجال والنساء (AMOLED AI)", nameEn: "Modern AI AMOLED Smart Watch for Men & Women", specAr: "تصميم عصري للرجال والنساء • شاشة AMOLED ذكية وبطارية 14 يوماً", specEn: "For Men & Women • AMOLED AI Display • 14-Day Battery", price: 1596, oldPrice: 1995, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800", variants: ["فضي (للرجال والنساء)", "ذهبي وردي (للرجال والنساء)", "أسود ملكي"], specs: { "الفئة": "للرجال والنساء معاً", "الذكاء الاصطناعي": "مساعد ذكي AI مدمج", "البطارية": "14 يوماً" } },
+        { id: 42, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة Apple Watch Ultra 3 بالذكاء الاصطناعي (AI)", nameEn: "Apple Watch Ultra 3 with Apple Intelligence (AI)", specAr: "مدعومة بالذكاء الاصطناعي AI • هيكل تيتانيوم 49mm • بطارية 72 ساعة", specEn: "AI-Powered Health & Siri • 49mm Titanium • 72h Battery", price: 2889, oldPrice: 3399, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800", variants: ["تيتانيوم طبيعي", "تيتانيوم أسود"], specs: { "الذكاء الاصطناعي": "Apple Intelligence مدمج", "الهيكل": "تيتانيوم 49 ملم" } },
+        { id: 43, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة Apple Watch Series 11 بالذكاء الاصطناعي (AI)", nameEn: "Apple Watch Series 11 AI Smart Watch (46mm)", specAr: "مساعد ذكي بالذكاء الاصطناعي • تحليل صحي متقدم • شحن سريع", specEn: "AI Health Insights • Wide OLED • Fast Charge", price: 1784, oldPrice: 2099, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800", variants: ["أسود فاحم", "ذهبي وردي", "فضي"], specs: { "الذكاء الاصطناعي": "تحليل صحي ومساعد ذكي AI", "المقاس": "46 ملم" } },
+        { id: 44, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة رجالية حديثة كرونوغراف ستانلس ستيل", nameEn: "Men's Modern Stainless Chronograph Watch", specAr: "ساعة رجالية حديثة • زجاج ياقوتي ضد الخدش • مقاومة للماء", specEn: "Men's Modern Design • Sapphire Crystal • Water Resistant", price: 697, oldPrice: 820, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800", variants: ["ميناء كحلي", "ميناء أسود"], specs: { "الفئة": "ساعة رجالية حديثة", "الزجاج": "ياقوتي" } },
+        { id: 45, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة رجالية حديثة بسير جلد إيطالي فاخر", nameEn: "Men's Modern Italian Leather Dress Watch", specAr: "ساعة رجالية أنيقة • تصميم نحيف 6.5 ملم • مقاومة للماء", specEn: "Men's Slim Modern Watch • Genuine Italian Leather", price: 594, oldPrice: 699, image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=800", variants: ["بني / ذهبي", "أسود / فضي"], specs: { "الفئة": "ساعة رجالية حديثة", "السير": "جلد إيطالي طبيعي" } },
+
+        // 10. أجهزة المطبخ والمنزل
+        { id: 46, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "ثلاجة مطبخ ذكية بابين (18 قدم - شاشة لمس)", nameEn: "Smart Double-Door Kitchen Refrigerator (18 Cu.Ft)", specAr: "تبريد بالبخار No-Frost • شاشة لمس • ضمان 5 سنوات كمبروسر", specEn: "No-Frost Inverter • Touch Panel • 5-Yr Warranty", price: 9000, oldPrice: 11250, image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800", variants: ["فضي ستانلس ستيل", "أسود مطفي"], specs: { "السعة": "18 قدم (510 لتر)", "الضمان": "5 سنوات كمبروسر" } },
+        { id: 47, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "فرن ميكروويف وشواية ديجيتال للمطبخ (30 لتر)", nameEn: "Digital Kitchen Microwave & Grill Oven (30L)", specAr: "سعة 30 لتر • تسخين وشواء احترافي • قفل أمان", specEn: "30L Capacity • Grill Function • Safety Lock", price: 3295, oldPrice: 3876, image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=800", variants: ["فضي", "أسود"], specs: { "القدرة": "1000 واط", "السعة": "30 لتر" } },
+        { id: 48, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "مكنسة كهربائية روبوت ذكية (كنس ومسح بالليزر)", nameEn: "Smart LiDAR Robot Vacuum & Mop (5000Pa)", specAr: "قوة شفط 5000Pa • خريطة ليزر للبيت • تحكم بالجوال", specEn: "5000Pa Suction • Laser Mapping • App Control", price: 2725, oldPrice: 3406, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800", variants: ["أسود ملكي", "أبيض لؤلؤي"], specs: { "الشفط": "5000Pa", "البطارية": "150 دقيقة" } },
+        { id: 49, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "قلاية هوائية كهربائية ديجيتال للمطبخ (8 لتر)", nameEn: "Digital Kitchen Air Fryer XL (8L Window)", specAr: "سعة عائلية 8 لتر • شاشة لمس 12 برنامج • طهي صحي بدون زيت", specEn: "8L Family Size • 12 Touch Presets • Oil-Free", price: 1700, oldPrice: 2125, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800", variants: ["أسود وذهبي", "فضي"], specs: { "السعة": "8 لتر (1800 واط)" } },
+        { id: 50, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "ماكينة قهوة إسبريسو وكابتشينو احترافية (20 بار)", nameEn: "Professional Espresso & Cappuccino Machine (20 Bar)", specAr: "ماكينة قهوة ستانلس ستيل • ضغط 20 بار • عصا تبخير للحليب", specEn: "Stainless Steel Coffee Machine • 20-Bar Pump • Steam Wand", price: 1200, oldPrice: 1500, image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=800", variants: ["فضي ستانلس ستيل", "أسود"], specs: { "الجهاز": "ماكينة قهوة إسبريسو احترافية", "الضغط": "20 بار", "الخزان": "1.5 لتر" } }
+      ];
+
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const read = (k, f) => { try { return JSON.parse(localStorage.getItem(k)) ?? f; } catch { return f; } };
+      const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+      const fmt = n => `${Math.round(n).toLocaleString("en-US")} ${I18N[lang].currency}`;
+
+      const fallbackImg = "data:image/svg+xml;utf8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#F2EFE9"/><text x="50%" y="52%" fill="#9E7B4F" font-family="sans-serif" font-size="30" text-anchor="middle">NOVARA</text></svg>'
+      );
+      document.addEventListener("error", e => {
+        if (e.target && e.target.tagName === "IMG" && e.target.src !== fallbackImg) e.target.src = fallbackImg;
+      }, true);
+
+      const toastHost = document.createElement("div");
+      toastHost.className = "toasts";
+      document.body.append(toastHost);
+      const toast = msg => {
+        const t = document.createElement("div");
+        t.className = "toast";
+        t.textContent = msg;
+        toastHost.append(t);
+        setTimeout(() => t.remove(), 2400);
+      };
+
+      let cart = read("novara-cart", []);
+      let favs = new Set(read("novara-favs", []));
+      let orders = read("novara-orders", []);
+      let customer = read("novara-customer", null);
+      let activeCat = "all";
+      let favOnly = false;
+      let adminOpen = false;
+      let selectedPayMethod = "Apple Pay";
+
+      function detectDevice() {
+        const ua = navigator.userAgent;
+        if (/iPhone|iPad|iPod/i.test(ua)) return "iPhone / iPad";
+        if (/Android/i.test(ua)) return "Android";
+        return "Computer / PC";
+      }
+
+      const openModal = id => { $("#" + id).classList.add("active"); document.body.classList.add("modal-open"); };
+      const closeModal = id => { $("#" + id).classList.remove("active"); document.body.classList.remove("modal-open"); };
+
+      function applyLanguage() {
+        const t = I18N[lang];
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        $("#langToggle").textContent = lang === "ar" ? "English" : "عربي";
+
+        $$("[data-i18n]").forEach(el => {
+          const key = el.dataset.i18n;
+          if (t[key]) el.innerHTML = t[key];
+        });
+        $$("[data-i18n-placeholder]").forEach(el => {
+          const key = el.dataset.i18nPlaceholder;
+          if (t[key]) el.placeholder = t[key];
+        });
+
+        renderFilteredProducts();
+        renderCart();
+        updateCountdown();
+      }
+
+      $("#langToggle").addEventListener("click", () => {
+        lang = lang === "ar" ? "en" : "ar";
+        localStorage.setItem("novara-lang", lang);
+        applyLanguage();
+      });
+
+      const grid = $("#productsGrid");
+      function renderFilteredProducts() {
+        const t = I18N[lang];
+        const q = $("#searchInput").value.trim().toLowerCase();
+        const min = Number($("#minPrice").value) || 0;
+        const max = Number($("#maxPrice").value) || Infinity;
+        const sort = $("#sortSelect").value;
+
+        let list = products.filter(p => {
+          const okCat = activeCat === "all" || p.cat === activeCat;
+          const okQ = !q || `${p.nameAr} ${p.nameEn} ${p.specAr} ${p.specEn} ${p.deptAr} ${p.deptEn}`.toLowerCase().includes(q);
+          const okP = p.price >= min && p.price <= max;
+          const okF = !favOnly || favs.has(p.id);
+          return okCat && okQ && okP && okF;
+        });
+
+        if (sort === "asc") list.sort((a, b) => a.price - b.price);
+        else if (sort === "desc") list.sort((a, b) => b.price - a.price);
+        else list.sort((a, b) => a.id - b.id);
+
+        $("#resultsCount").textContent = `${list.length} ${t.countUnit}`;
+        $("#noProducts").hidden = list.length !== 0;
+
+        grid.innerHTML = list.map(p => {
+          const name = lang === "ar" ? p.nameAr : p.nameEn;
+          const dept = lang === "ar" ? p.deptAr : p.deptEn;
+          const spec = lang === "ar" ? p.specAr : p.specEn;
+          const cb = Math.round(p.price * 0.10);
+          const discPct = p.oldPrice ? Math.min(20, Math.max(5, Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100))) : 0;
+          const isFav = favs.has(p.id);
+
+          return `
+            <article class="card ${isFav ? "is-fav" : ""}" data-id="${p.id}">
+              <div class="card-img">
+                <img src="${p.image}" alt="${name}" loading="lazy">
+                ${discPct > 0 ? `<span class="badge-discount">-${discPct}%</span>` : ""}
+                <span class="badge-season">${dept}</span>
+                <button type="button" class="fav-btn" aria-label="Favorite">${isFav ? "♥" : "♡"}</button>
+              </div>
+              <div class="card-body">
+                <span class="card-cat">${dept}</span>
+                <h3 class="card-title">${name}</h3>
+                <p class="card-spec">${spec}</p>
+                <div class="card-size-hint">📏 ${p.variants.slice(0, 3).join(" • ")}</div>
+                <div class="card-price">
+                  <strong>${fmt(p.price)}</strong>
+                  ${p.oldPrice ? `<del>${fmt(p.oldPrice)}</del>` : ""}
+                </div>
+                <div class="card-cb">${t.cbTag(cb)}</div>
+                <div class="card-btns">
+                  <button type="button" class="btn-add">${t.addBtn}</button>
+                  <button type="button" class="btn-spec">${t.specBtn}</button>
+                  <button type="button" class="btn-buy">${t.buyBtn}</button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function addToCart(id, openCo = false, variant = null) {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        const v = variant || p.variants[0];
+        const item = cart.find(x => x.id === id && x.variant === v);
+        if (item) item.qty++;
+        else cart.push({ id, nameAr: p.nameAr, nameEn: p.nameEn, variant: v, price: p.price, qty: 1, image: p.image });
+        saveCart();
+        if (openCo) openCheckout();
+        else toast(I18N[lang].addedToast(lang === "ar" ? p.nameAr : p.nameEn));
+      }
+
+      function saveCart() {
+        write("novara-cart", cart);
+        renderCart();
+      }
+
+      function renderCart() {
+        const t = I18N[lang];
+        const qty = cart.reduce((s, i) => s + i.qty, 0);
+        const sub = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        const cb = Math.round(sub * 0.10);
+
+        $("#cartCount").textContent = qty;
+        $("#cartSub").textContent = fmt(sub);
+        $("#cartShip").textContent = t.free;
+        $("#cartCb").textContent = fmt(cb);
+        $("#cartTotal").textContent = fmt(sub);
+
+        const box = $("#cartItems");
+        if (!cart.length) {
+          box.innerHTML = `<p style="text-align:center;color:var(--muted);padding:40px 0;">${t.emptyCart}</p>`;
+          return;
+        }
+        box.innerHTML = cart.map((i, idx) => `
+          <div class="cart-item">
+            <img src="${i.image}" alt="">
+            <div>
+              <strong style="font-size:13.5px;display:block">${lang === "ar" ? i.nameAr : i.nameEn}</strong>
+              <small style="color:var(--accent);font-size:11.5px">${i.variant}</small>
+              <div style="font-weight:600;font-size:13px">${fmt(i.price * i.qty)}</div>
+              <div class="qty-row">
+                <button type="button" data-act="dec" data-i="${idx}">−</button>
+                <span>${i.qty}</span>
+                <button type="button" data-act="inc" data-i="${idx}">+</button>
+                <button type="button" data-act="del" data-i="${idx}" style="width:auto;padding:0 8px;color:var(--danger);margin-inline-start:auto;">✕</button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      $("#cartItems").addEventListener("click", e => {
+        const b = e.target.closest("button[data-act]");
+        if (!b) return;
+        const idx = Number(b.dataset.i);
+        const act = b.dataset.act;
+        if (act === "inc") cart[idx].qty++;
+        else if (act === "dec") cart[idx].qty > 1 ? cart[idx].qty-- : cart.splice(idx, 1);
+        else if (act === "del") cart.splice(idx, 1);
+        saveCart();
+      });
+
+      function openDetail(id) {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        const t = I18N[lang];
+        const name = lang === "ar" ? p.nameAr : p.nameEn;
+        const spec = lang === "ar" ? p.specAr : p.specEn;
+        const dept = lang === "ar" ? p.deptAr : p.deptEn;
+        let chosen = p.variants[0];
+
+        const rows = Object.entries(p.specs).map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join("");
+        const chips = p.variants.map((v, i) => `<button type="button" class="chip ${i === 0 ? "active" : ""}" data-v="${v}">${v}</button>`).join("");
+
+        $("#productDetails").innerHTML = `
+          <div>
+            <img class="single-front-img" src="${p.image}" alt="${name}">
+          </div>
+          <div>
+            <span class="eyebrow">${dept}</span>
+            <h2 style="font-size:21px;font-weight:600;margin:8px 0">${name}</h2>
+            <p style="font-size:13.5px;color:var(--muted)">${spec}</p>
+            <div class="card-price" style="margin:12px 0">
+              <strong style="font-size:22px">${fmt(p.price)}</strong>
+              ${p.oldPrice ? `<del>${fmt(p.oldPrice)}</del>` : ""}
+            </div>
+            <div class="card-cb" style="margin-bottom:10px">${t.cbTag(Math.round(p.price * 0.10))}</div>
+            <table class="specs-table"><tbody>${rows}</tbody></table>
+            <div class="chips" style="margin-top:14px;">${chips}</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" class="btn-add" id="mAdd">${t.addBtn}</button>
+              <button type="button" class="btn-primary" style="justify-content:center" id="mBuy">${t.buyBtn}</button>
+            </div>
+          </div>
+        `;
+
+        $$(".chip", $("#productDetails")).forEach(c => c.addEventListener("click", () => {
+          $$(".chip", $("#productDetails")).forEach(x => x.classList.remove("active"));
+          c.classList.add("active");
+          chosen = c.dataset.v;
+        }));
+        $("#mAdd").onclick = () => { addToCart(id, false, chosen); closeModal("productModal"); };
+        $("#mBuy").onclick = () => { closeModal("productModal"); addToCart(id, true, chosen); };
+        openModal("productModal");
+      }
+
+      $$(".pay-method-btn").forEach(btn => btn.addEventListener("click", () => {
+        $$(".pay-method-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedPayMethod = btn.dataset.method;
+      }));
+
+      // تظهر شاشة تسجيل الدخول والدفع السريع عند الضغط على "متابعة" أو "متابعة للدفع السريع"
+      function openCheckout() {
+        if (!cart.length) return;
+        closeModal("cartOverlay");
+        if (customer) {
+          $("#coName").value = customer.name || "";
+          $("#coPhone").value = customer.phone || "";
+          $("#coEmail").value = customer.email || "";
+        }
+        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        $("#coSummary").textContent = `${cart.reduce((s, i) => s + i.qty, 0)} ${I18N[lang].countUnit} • ${fmt(total)}`;
+        $("#coFormWrap").hidden = false;
+        $("#coDone").hidden = true;
+        openModal("checkoutModal");
+      }
+
+      $("#checkoutBtn").addEventListener("click", openCheckout);
+      $("#coForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = $("#coName").value.trim();
+        const phone = $("#coPhone").value.trim();
+        const email = $("#coEmail").value.trim();
+        if (name.length < 2 || phone.length < 8 || !email.includes("@")) {
+          toast(lang === "ar" ? "يرجى إدخال الاسم الكامل ورقم الجوال والبريد الإلكتروني" : "Please enter full name, mobile, and Gmail");
+          return;
+        }
+        customer = { name, phone, email };
+        write("novara-customer", customer);
+
+        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
+        const device = detectDevice();
+        const itemsSummary = cart.map(i => `${i.nameAr} (${i.variant}) ×${i.qty} = ${i.price * i.qty} ر.س`).join("\n");
+
+        const orderRecord = {
+          orderId,
+          date: new Date().toLocaleString("ar-SA"),
+          name, phone, email,
+          device,
+          payMethod: selectedPayMethod,
+          total,
+          items: itemsSummary
+        };
+        orders.unshift(orderRecord);
+        write("novara-orders", orders);
+
+        // 1. إرسال الطلب تلقائياً إلى Formspree
+        notifyOwnerCloud({
+          _subject: `طلب شراء جديد #${orderId} - ${name} (${total} ر.س)`,
+          event: "طلب شراء جديد",
+          order_id: orderId,
+          customer_name: name,
+          customer_phone: phone,
+          customer_email: email,
+          device: device,
+          payment_method: selectedPayMethod,
+          total_paid: `${total} ر.س`,
+          items: itemsSummary
+        });
+
+        // 2. تجهيز رسالة الواتساب لإرسال الموقع والإضافات
+        const waText = encodeURIComponent(
+          `مرحباً، أتممت طلبي في متجر NOVARA:\n` +
+          `• رقم الطلب: ${orderId}\n` +
+          `• الاسم: ${name}\n` +
+          `• الجوال: ${phone}\n` +
+          `• وسيلة الدفع: ${selectedPayMethod}\n` +
+          `• الإجمالي: ${total} ر.س\n\n` +
+          `المنتجات المختارة:\n${itemsSummary}\n\n` +
+          `📍 سأرسل لك موقعي الآن وأي إضافات أو ملاحظات أرغب بها:`
+        );
+        const waUrl = `https://wa.me/${CONFIG.merchantWhatsApp}?text=${waText}`;
+
+        // 3. إظهار شاشة التواصل عبر واتساب لإرسال الموقع والإضافات
+        $("#coFormWrap").hidden = true;
+        $("#coDone").hidden = false;
+        $("#coDone").innerHTML = `
+          <div style="font-size:44px;margin-bottom:8px">📍💬</div>
+          <h3 style="color:var(--ink);margin-bottom:6px;">${lang === "ar" ? "تواصل عبر واتساب لإرسال الموقع والإضافات" : "Message on WhatsApp to Send Your Location & Extras"}</h3>
+          <p style="margin:6px 0;font-size:14px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">
+            ${lang === "ar"
+              ? "اضغط على الزر بالأسفل لفتح الواتساب ومراسلتنا لإرسال موقعك وتأكيد أي إضافات أو ملاحظات تريدها مع طلبك:"
+              : "Tap below to open WhatsApp and send us your location along with any extra items or notes:"}
+          </p>
+          <a href="${waUrl}" target="_blank" class="whatsapp-cta">💬 ${lang === "ar" ? "تواصل مع واتساب لإرسال الموقع ←" : "Contact WhatsApp to Send Location →"}</a>
+          <button type="button" class="btn-add" style="width:100%" id="doneClose">${lang === "ar" ? "العودة للمتجر" : "Back to Store"}</button>
+        `;
+        $("#doneClose").onclick = () => closeModal("checkoutModal");
+        cart = [];
+        saveCart();
+      });
+
+      // بوابة مالك التطبيق المخفية (5 نقرات على الشعار + الرمز 12345)
+      let logoClicks = 0;
+      let clickTimer = null;
+      const openSecretAdmin = () => {
+        $("#adminLock").hidden = adminOpen;
+        $("#adminBody").hidden = !adminOpen;
+        if (adminOpen) renderAdminData();
+        openModal("adminModal");
+      };
+
+      $("#secretLogoTrigger").addEventListener("click", () => {
+        logoClicks++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => { logoClicks = 0; }, 1500);
+        if (logoClicks >= 5) {
+          logoClicks = 0;
+          openSecretAdmin();
+        }
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "m") {
+          e.preventDefault();
+          openSecretAdmin();
+        }
+      });
+
+      function renderAdminData() {
+        const totalRev = orders.reduce((s, o) => s + o.total, 0);
+        $("#adminTotalsBar").textContent = `عدد الطلبات: ${orders.length} • إجمالي المدفوعات: ${totalRev.toLocaleString("en-US")} ر.س`;
+
+        const oList = $("#ordersList");
+        if (!orders.length) {
+          oList.innerHTML = `<p style="text-align:center;color:var(--muted);padding:24px">لا توجد طلبات مسجلة حتى الآن.</p>`;
+        } else {
+          oList.innerHTML = orders.map(o => `
+            <div style="border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;background:var(--bg-main);">
+              <div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
+                <span>#${o.orderId} — ${o.name}</span>
+                <span style="color:var(--emerald)">مدفوع: ${o.total} ر.س (${o.payMethod})</span>
+              </div>
+              <div style="color:var(--muted);font-size:12px;line-height:1.7;">
+                <div>📱 الجوال: <strong dir="ltr">${o.phone}</strong> | 📧 البريد: <strong dir="ltr">${o.email}</strong></div>
+                <div>💻 الجهاز: <strong>${o.device}</strong> | 🕒 الوقت: ${o.date}</div>
+              </div>
+              <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);font-size:12.5px;white-space:pre-line;">${o.items}</div>
+            </div>
+          `).join("");
+        }
+      }
+
+      $("#pinForm").addEventListener("submit", e => {
+        e.preventDefault();
+        if ($("#pinInput").value.trim() === CONFIG.managerPin) {
+          adminOpen = true;
+          $("#adminLock").hidden = true;
+          $("#adminBody").hidden = false;
+          renderAdminData();
+          toast("مرحباً بك يا مالك التطبيق ✓");
+        } else {
+          toast("✕ الرمز السري غير صحيح");
+        }
+      });
+
+      $("#clearOrders").addEventListener("click", () => {
+        orders = [];
+        write("novara-orders", []);
+        renderAdminData();
+      });
+
+      $("#exportCsvBtn").addEventListener("click", () => {
+        if (!orders.length) return;
+        const headers = ["رقم الطلب", "التاريخ", "الاسم", "الجوال", "البريد الإلكتروني", "الجهاز", "وسيلة الدفع", "المنتجات", "الإجمالي"];
+        const orderRows = orders.map(o => [o.orderId, `"${o.date}"`, `"${o.name}"`, `"${o.phone}"`, `"${o.email}"`, `"${o.device}"`, `"${o.payMethod}"`, `"${o.items.replace(/\n/g, " | ")}"`, o.total]);
+        const csv = "\uFEFF" + [headers.join(","), ...orderRows.map(r => r.join(","))].join("\n");
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
+        a.download = `NOVARA_Orders_${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+      });
+
+      $("#accountBtn").addEventListener("click", () => {
+        if (customer) { $("#accName").value = customer.name || ""; $("#accPhone").value = customer.phone || ""; $("#accEmail").value = customer.email || ""; }
+        openModal("accountModal");
+      });
+      $("#accForm").addEventListener("submit", e => {
+        e.preventDefault();
+        customer = { name: $("#accName").value.trim(), phone: $("#accPhone").value.trim(), email: $("#accEmail").value.trim() };
+        write("novara-customer", customer);
+        toast("✓ تم حفظ بياناتك");
+        closeModal("accountModal");
+      });
+
+      $("#enterDealsBtn").addEventListener("click", () => {
+        closeModal("promoSplashModal");
+        $("#products").scrollIntoView({ behavior: "smooth" });
+      });
+
+      $("#cartBtn").addEventListener("click", () => openModal("cartOverlay"));
+      $("#closeCart").addEventListener("click", () => closeModal("cartOverlay"));
+      $$("[data-close]").forEach(b => b.addEventListener("click", () => closeModal(b.dataset.close)));
+      $$(".overlay").forEach(ov => ov.addEventListener("click", e => {
+        if (e.target === ov) closeModal(ov.id);
+      }));
+
+      grid.addEventListener("click", e => {
+        const card = e.target.closest(".card");
+        if (!card) return;
+        const id = Number(card.dataset.id);
+        if (e.target.closest(".fav-btn")) {
+          const on = !favs.has(id);
+          on ? favs.add(id) : favs.delete(id);
+          write("novara-favs", [...favs]);
+          card.classList.toggle("is-fav", on);
+          e.target.closest(".fav-btn").textContent = on ? "♥" : "♡";
+          if (favOnly) renderFilteredProducts();
+        } else if (e.target.closest(".btn-add")) addToCart(id, false);
+        else if (e.target.closest(".btn-buy")) addToCart(id, true);
+        else openDetail(id);
+      });
+
+      $("#searchInput").addEventListener("input", renderFilteredProducts);
+      $("#minPrice").addEventListener("input", renderFilteredProducts);
+      $("#maxPrice").addEventListener("input", renderFilteredProducts);
+      $("#sortSelect").addEventListener("change", renderFilteredProducts);
+
+      const selectCategory = cat => {
+        activeCat = cat;
+        $$(".filter-btn[data-cat]").forEach(x => x.classList.toggle("active", x.dataset.cat === cat));
+        renderFilteredProducts();
+      };
+
+      $$(".filter-btn[data-cat]").forEach(b => b.addEventListener("click", () => selectCategory(b.dataset.cat)));
+      $$(".dept-card[data-cat]").forEach(c => c.addEventListener("click", () => {
+        selectCategory(c.dataset.cat);
+        $("#products").scrollIntoView({ behavior: "smooth" });
+      }));
+
+      $("#favFilterBtn").addEventListener("click", e => {
+        favOnly = !favOnly;
+        e.target.classList.toggle("active", favOnly);
+        renderFilteredProducts();
+      });
+
+      function updateCountdown() {
+        const now = new Date();
+        const day = now.getDay();
+        const p = n => String(n).padStart(2, "0");
+
+        if (day === 4 || day === 5 || day === 6 || day === 0) {
+          const daysUntilSunEnd = day === 0 ? 0 : (7 - day);
+          const endSunday = new Date(now);
+          endSunday.setDate(now.getDate() + daysUntilSunEnd);
+          endSunday.setHours(23, 59, 59, 999);
+          const ms = endSunday - now;
+          const d = Math.floor(ms / 864e5);
+          const h = p(Math.floor(ms / 36e5) % 24);
+          const m = p(Math.floor(ms / 6e4) % 60);
+          const s = p(Math.floor(ms / 1e3) % 60);
+          $("#countdownText").textContent = lang === "ar"
+            ? `🔥 خصومات الخميس إلى الأحد سارية الآن — تنتهي بعد ${d}ي ${h}:${m}:${s}`
+            : `🔥 Thu–Sun Deals Live Now — Ends in ${d}d ${h}:${m}:${s}`;
+        } else {
+          const daysToThu = (4 - day + 7) % 7;
+          const nextThu = new Date(now);
+          nextThu.setDate(now.getDate() + daysToThu);
+          nextThu.setHours(0, 0, 0, 0);
+          const ms = nextThu - now;
+          const d = Math.floor(ms / 864e5);
+          const h = p(Math.floor(ms / 36e5) % 24);
+          const m = p(Math.floor(ms / 6e4) % 60);
+          const s = p(Math.floor(ms / 1e3) % 60);
+          $("#countdownText").textContent = lang === "ar"
+            ? `⏳ تبدأ خصومات الخميس إلى الأحد بعد ${d}ي ${h}:${m}:${s}`
+            : `⏳ Thu–Sun Deals start in ${d}d ${h}:${m}:${s}`;
+        }
+      }
+      setInterval(updateCountdown, 1000);
+
+      document.body.classList.add("modal-open");
+      applyLanguage();
+    });
+  </script>
+</body>
+</html>
