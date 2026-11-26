@@ -849,22 +849,6 @@
     <div class="footer-copy">© 2026 NOVARA. All Rights Reserved.</div>
   </footer>
 
-  <!-- نافذة الترحيب الكبيرة بعروض الجمعة البيضاء فور الدخول -->
-  <div class="overlay active" id="promoSplashModal">
-    <div class="promo-splash-box">
-      <button type="button" class="close-btn" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.25);" data-close="promoSplashModal">✕</button>
-      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 عروض قوية للجمعة البيضاء في NOVARA</div>
-      <h2 data-i18n="splashTitle">سماعة + آيفون + كفر + ساعة = 6,499 ر.س، وبالخصم 5,999 ر.س فقط!</h2>
-      <p data-i18n="splashDesc">استفد من أقوى عروض الجمعة البيضاء والخميس إلى الأحد على 66 منتجاً مختلفاً في 11 قسماً مع كاش باك فوري 10%.</p>
-      <div class="promo-tags-row">
-        <span class="promo-pill" data-i18n="sp1">🎧 سماعة + 📱 آيفون + 🛡️ كفر + ⌚ ساعة = 5,999 ر.س</span>
-        <span class="promo-pill" data-i18n="sp2">🖼️ 66 منتجاً في 11 قسماً</span>
-        <span class="promo-pill" data-i18n="sp3">💸 كاش باك فوري 10%</span>
-      </div>
-      <button type="button" class="promo-enter-btn" id="enterDealsBtn" data-i18n="splashCta">تصفح العروض والـ 66 منتجاً ←</button>
-    </div>
-  </div>
-
   <!-- السلة الجانبية -->
   <div class="overlay cart-overlay" id="cartOverlay">
     <div class="cart-drawer">
@@ -909,7 +893,7 @@
           <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span></label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
-          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">دفع الآن والمتابعة عبر واتساب ←</button>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">تأكيد الحساب ✓</button>
         </form>
       </div>
       <div id="coDone" hidden style="text-align:center;padding:12px 0;"></div>
@@ -1536,20 +1520,47 @@
       }));
 
       function openCheckout() {
-        if (!cart.length) return;
+        if (!cart.length) {
+          toast(lang === "ar" ? "سلتك فارغة حالياً" : "Your shopping bag is empty");
+          return;
+        }
         closeModal("cartOverlay");
+        $("#coFormWrap").hidden = false;
+        $("#coDone").hidden = true;
         if (customer) {
           $("#coName").value = customer.name || "";
           $("#coPhone").value = customer.phone || "";
           $("#coEmail").value = customer.email || "";
         }
         const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        $("#coSummary").textContent = `${lang === "ar" ? "الإجمالي المطلوب:" : "Total Amount:"} ${fmt(total)}`;
+        openModal("checkoutModal");
+      }
 
+      $("#checkoutBtn").addEventListener("click", openCheckout);
+
+      $("#coForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = $("#coName").value.trim().replace(/\s+/g, " ");
+        const rawPhone = $("#coPhone").value.trim();
+        const email = $("#coEmail").value.trim();
+        const cleanPhone = rawPhone.replace(/[\s\-()]/g, "");
+
+        if (!name || !cleanPhone || !email) {
+          toast(lang === "ar" ? "يرجى إدخال الاسم ورقم الجوال والبريد الإلكتروني" : "Please enter name, mobile number, and email");
+          return;
+        }
+
+        customer = { name, phone: cleanPhone, email };
+        write("novara-customer", customer);
+        if (typeof syncAccountButton === "function") syncAccountButton();
+
+        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
         const device = detectDevice();
         const itemsSummary = cart.map(i => `${i.nameAr} (${i.variant}) ×${i.qty} = ${i.price * i.qty} ر.س`).join("\n");
 
-        const orderRecord = {
+        orders.unshift({
           orderId,
           date: new Date().toLocaleString("ar-SA"),
           name,
@@ -1558,8 +1569,7 @@
           device,
           total,
           items: itemsSummary
-        };
-        orders.unshift(orderRecord);
+        });
         write("novara-orders", orders);
 
         notifyOwnerCloud({
@@ -1574,8 +1584,6 @@
           items: itemsSummary
         });
 
-        const totalLabel = fmt(total);
-
         $("#coFormWrap").hidden = true;
         $("#coDone").hidden = false;
         $("#coDone").innerHTML = `
@@ -1583,7 +1591,7 @@
           <h3 style="color:var(--emerald);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك بنجاح ✓" : "Your Account Is Confirmed ✓"}</h3>
           <p style="margin:6px 0;font-size:14px;color:var(--ink);font-weight:600;">${name} • <span dir="ltr">${cleanPhone}</span></p>
           <p style="margin:2px 0 10px;font-size:13px;color:var(--muted);" dir="ltr">${email}</p>
-          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${totalLabel}</p>
+          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
           <button type="button" class="btn-primary" style="width:100%;justify-content:center" id="doneClose">${lang === "ar" ? "العودة للمتجر ✓" : "Back to Store ✓"}</button>
         `;
         $("#doneClose").onclick = () => closeModal("checkoutModal");
@@ -1826,7 +1834,6 @@
       }
       setInterval(updateCountdown, 1000);
 
-      document.body.classList.add("modal-open");
       applyLanguage();
     });
   </script>
