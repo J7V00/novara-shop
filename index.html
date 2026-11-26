@@ -1370,7 +1370,7 @@
           return `
             <article class="card ${isFav ? "is-fav" : ""}" data-id="${p.id}">
               <div class="card-img">
-                <img src="${p.image}" alt="${name}" loading="lazy">
+                <img src="${encodeURI(p.image)}" alt="${name}" loading="lazy">
                 ${discPct > 0 ? `<span class="badge-discount">-${discPct}%</span>` : ""}
                 <span class="badge-season">${dept}</span>
                 <button type="button" class="fav-btn" aria-label="Favorite">${isFav ? "♥" : "♡"}</button>
@@ -1507,7 +1507,7 @@
 
         $("#productDetails").innerHTML = `
           <div>
-            <img class="single-front-img" src="${p.image}" alt="${name}">
+            <img class="single-front-img" src="${encodeURI(p.image)}" alt="${name}">
           </div>
           <div>
             <span class="eyebrow">${dept}</span>
