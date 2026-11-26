@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NOVARA">
   <meta name="application-name" content="NOVARA">
-  <title>NOVARA | باقة الآيفون الكبرى وخصومات الخميس إلى الأحد (60 منتجاً)</title>
+  <title>NOVARA | عروض قوية للجمعة البيضاء (60 منتجاً)</title>
 
   <link id="appFavicon" rel="icon" type="image/jpeg" href="novara-icon.jpg">
   <link id="appleTouchIcon" rel="apple-touch-icon" sizes="512x512" href="novara-icon.jpg">
@@ -151,7 +151,7 @@
       place-items: center;
     }
 
-    /* العرض الكبير في أعلى التطبيق (باقة الآيفون 6000 -> 5000) */
+    /* اللوحة الكبيرة في أعلى التطبيق (عروض قوية للجمعة البيضاء) */
     .mega-bundle-banner {
       margin: 22px 5% 0;
       background: linear-gradient(135deg, #0F141D 0%, #1E293B 55%, #2C2112 100%);
@@ -160,7 +160,7 @@
       padding: 28px 32px;
       color: #fff;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       align-items: center;
       gap: 24px;
       box-shadow: 0 18px 45px rgba(15, 20, 29, 0.22);
@@ -182,7 +182,7 @@
       font-weight: 700;
       color: #F3DFB9;
       line-height: 1.32;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .mega-items-pills {
       display: flex;
@@ -194,10 +194,10 @@
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(214, 184, 121, 0.45);
       color: #F8FAFC;
-      padding: 6px 13px;
+      padding: 6px 14px;
       border-radius: 10px;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 13.5px;
+      font-weight: 600;
     }
     .mega-price-box {
       display: flex;
@@ -241,13 +241,12 @@
     }
     .mega-cta-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
     .mega-visual {
-      height: 250px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1.5px solid rgba(214, 184, 121, 0.5);
-      position: relative;
+      border: 1.5px solid rgba(214, 184, 121, 0.55);
+      background: #0B192C;
     }
-    .mega-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .mega-visual img { width: 100%; height: auto; object-fit: contain; }
 
     /* الواجهة الرئيسية */
     .hero {
@@ -518,7 +517,7 @@
     .modal-wide { width: min(860px, 100%); }
     .close-btn { position: absolute; top: 14px; inset-inline-end: 14px; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: var(--ink); font-size: 16px; z-index: 5; }
 
-    /* نافذة الترحيب الكبيرة للعرض */
+    /* نافذة الترحيب الكبيرة بالعرض */
     .promo-splash-box {
       width: min(680px, 100%);
       background: linear-gradient(145deg, #161D2B 0%, #232E45 100%);
@@ -664,7 +663,7 @@
 <body>
   <!-- شريط علوي -->
   <div class="top-bar">
-    <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • العرض الكبير: آيفون + سماعة + إيربودز + كفر بـ 5,000 ر.س بدلاً من 6,000 ر.س</span></span>
+    <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س</span></span>
     <span id="countdownText"></span>
   </div>
 
@@ -676,7 +675,7 @@
     </div>
 
     <nav class="nav">
-      <a href="#megaOffer" data-i18n="navOffer">العرض الكبير</a>
+      <a href="#megaOffer" data-i18n="navOffer">عروض الجمعة البيضاء</a>
       <a href="#departments" data-i18n="navDepts">الأقسام (10)</a>
       <a href="#products" data-i18n="navCatalog">المنتجات (60)</a>
       <a href="#contact" data-i18n="navContact">تواصل معنا</a>
@@ -693,34 +692,34 @@
   </header>
 
   <main>
-    <!-- العرض الكبير في أعلى التطبيق -->
+    <!-- اللوحة الكبيرة في أعلى التطبيق: عروض قوية للجمعة البيضاء -->
     <section class="mega-bundle-banner" id="megaOffer">
       <div>
-        <span class="mega-tag" data-i18n="megaBadge">🔥 العرض الكبير الحصري • وفّر 1,000 ر.س فوراً</span>
-        <h2 data-i18n="megaTitle">باقة الآيفون المتكاملة: آيفون + سماعة + إيربودز + كفر</h2>
+        <span class="mega-tag" data-i18n="megaBadge">🔥 عروض قوية للجمعة البيضاء • وفّر 500 ر.س</span>
+        <h2 data-i18n="megaTitle">عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة</h2>
         <div class="mega-items-pills">
-          <span class="mega-item-chip" data-i18n="mItem1">📱 آيفون برو ماكس</span>
-          <span class="mega-item-chip" data-i18n="mItem2">🎧 سماعة رأس لاسلكية</span>
-          <span class="mega-item-chip" data-i18n="mItem3">🎵 إيربودز برو</span>
-          <span class="mega-item-chip" data-i18n="mItem4">🛡️ كفر حماية فاخر</span>
+          <span class="mega-item-chip" data-i18n="mItem1">🎧 سماعة</span>
+          <span class="mega-item-chip" data-i18n="mItem2">📱 آيفون</span>
+          <span class="mega-item-chip" data-i18n="mItem3">🛡️ كفر</span>
+          <span class="mega-item-chip" data-i18n="mItem4">⌚ ساعة</span>
         </div>
         <div class="mega-price-box">
-          <span class="mega-old-price" data-i18n="megaOld">السعر الأصلي: 6,000 ر.س</span>
-          <span class="mega-new-price" data-i18n="megaNew">مع الخصم: 5,000 ر.س</span>
-          <span class="mega-save-badge" data-i18n="megaSave">خصم 1,000 ر.س</span>
+          <span class="mega-old-price" data-i18n="megaOld">السعر الأصلي: 6,499 ر.س</span>
+          <span class="mega-new-price" data-i18n="megaNew">بالخصم: 5,999 ر.س</span>
+          <span class="mega-save-badge" data-i18n="megaSave">خصم الجمعة البيضاء</span>
         </div>
-        <button type="button" class="mega-cta-btn" id="orderMegaBundleBtn" data-i18n="megaCta">اطلب الباقة الآن بـ 5,000 ر.س (متابعة) ←</button>
+        <button type="button" class="mega-cta-btn" id="orderMegaBundleBtn" data-i18n="megaCta">اطلب العرض الآن بـ 5,999 ر.س (متابعة) ←</button>
       </div>
-      <div class="mega-visual" style="height: auto; background: #0B192C;">
-  <img src="mega-offer.jpeg" alt="العرض الأقوى - مجموعة التميز المتكاملة" style="width: 100%; height: auto; object-fit: contain;">
-</div>
+      <div class="mega-visual">
+        <img src="mega-offer.jpeg" alt="عروض قوية للجمعة البيضاء - سماعة وآيفون وكفر وساعة">
+      </div>
     </section>
 
     <!-- الواجهة الرئيسية -->
     <section class="hero" id="home">
       <div>
-        <span class="eyebrow" data-i18n="heroBadge">THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS</span>
-        <h1 data-i18n="heroTitle">خصومات الخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span></h1>
+        <span class="eyebrow" data-i18n="heroBadge">WHITE FRIDAY DEALS • 60 UNIQUE ITEMS</span>
+        <h1 data-i18n="heroTitle">عروض الجمعة البيضاء والخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span></h1>
         <p data-i18n="heroDesc">تشكيلة جديدة وموسعة من 60 منتجاً مختلفاً في 10 أقسام متكاملة بخصومات من 5% إلى 20% وكاش باك فوري 10%.</p>
         <div class="hero-btns">
           <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح الـ 60 منتجاً الآن ←</a>
@@ -730,7 +729,7 @@
         <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200" alt="NOVARA Collection">
         <div class="hero-caption">
           <span data-i18n="capSub">60 UNIQUE ITEMS • 10 DEPARTMENTS</span>
-          <strong data-i18n="capTitle">خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%</strong>
+          <strong data-i18n="capTitle">عروض الجمعة البيضاء + خصومات 5% - 20% + كاش باك 10%</strong>
         </div>
       </div>
     </section>
@@ -749,7 +748,7 @@
         <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (6)</span></button>
         <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (6)</span></button>
         <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (6)</span></button>
-        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 والباقة (6)</span></button>
+        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 وعروض الجمعة (6)</span></button>
         <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (6)</span></button>
         <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (6)</span></button>
         <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (6)</span></button>
@@ -762,14 +761,14 @@
     <section class="section" id="products">
       <div class="section-head">
         <div>
-          <span class="eyebrow" data-i18n="catEyebrow">THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS</span>
+          <span class="eyebrow" data-i18n="catEyebrow">WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS</span>
           <h2 data-i18n="catHeading">جميع المنتجات والعروض (60 منتجاً)</h2>
         </div>
         <p data-i18n="catNote">60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء</p>
       </div>
 
       <div class="toolbar">
-        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 60 منتجاً: باقة آيفون، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة..."></label>
+        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 60 منتجاً: الجمعة البيضاء، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة..."></label>
         <div class="price-filter">
           <span data-i18n="priceLbl">السعر:</span>
           <input type="number" id="minPrice" min="0" placeholder="Min">
@@ -783,7 +782,7 @@
         <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (6)</button>
         <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (6)</button>
         <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (6)</button>
-        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون والباقة الكبرى (6)</button>
+        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون وعروض الجمعة (6)</button>
         <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (6)</button>
         <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (6)</button>
         <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (6)</button>
@@ -812,21 +811,21 @@
         <img class="brand-emblem" style="width:36px;height:36px;" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
         <span>NOVARA</span>
       </div>
-      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">باقة الآيفون الكبرى (5,000 ر.س بدلاً من 6,000 ر.س) • 60 منتجاً فريداً في 10 أقسام.</p>
+      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 60 منتجاً في 10 أقسام.</p>
     </div>
     <div class="footer-copy">© 2026 NOVARA. All Rights Reserved.</div>
   </footer>
 
-  <!-- نافذة الترحيب الكبيرة بالعرض الضخم فور الدخول -->
+  <!-- نافذة الترحيب الكبيرة بعروض الجمعة البيضاء فور الدخول -->
   <div class="overlay active" id="promoSplashModal">
     <div class="promo-splash-box">
       <button type="button" class="close-btn" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.25);" data-close="promoSplashModal">✕</button>
-      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 العرض الكبير الحصري في NOVARA</div>
-      <h2 data-i18n="splashTitle">آيفون + سماعة + إيربودز + كفر = 6,000 ر.س، ومع الخصم 5,000 ر.س فقط!</h2>
-      <p data-i18n="splashDesc">استمتع بالباقة المتكاملة مع خصم فوري 1,000 ر.س، بالإضافة إلى 60 منتجاً جديداً ومختلفاً في 10 أقسام بخصومات تصل إلى 20%.</p>
+      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 عروض قوية للجمعة البيضاء في NOVARA</div>
+      <h2 data-i18n="splashTitle">سماعة + آيفون + كفر + ساعة = 6,499 ر.س، وبالخصم 5,999 ر.س فقط!</h2>
+      <p data-i18n="splashDesc">استفد من أقوى عروض الجمعة البيضاء والخميس إلى الأحد على 60 منتجاً مختلفاً في 10 أقسام مع كاش باك فوري 10%.</p>
       <div class="promo-tags-row">
-        <span class="promo-pill" data-i18n="sp1">📱 آيفون + سماعة + إيربودز + كفر = 5,000 ر.س</span>
-        <span class="promo-pill" data-i18n="sp2">🧥 60 منتجاً جديداً في 10 أقسام</span>
+        <span class="promo-pill" data-i18n="sp1">🎧 سماعة + 📱 آيفون + 🛡️ كفر + ⌚ ساعة = 5,999 ر.س</span>
+        <span class="promo-pill" data-i18n="sp2">🧥 60 منتجاً في 10 أقسام</span>
         <span class="promo-pill" data-i18n="sp3">💸 كاش باك فوري 10%</span>
       </div>
       <button type="button" class="promo-enter-btn" id="enterDealsBtn" data-i18n="splashCta">تصفح العروض والـ 60 منتجاً ←</button>
@@ -859,7 +858,7 @@
     </div>
   </div>
 
-  <!-- نافذة تسجيل الدخول والدفع السريع (تظهر عند الضغط على متابعة / الدفع السريع) -->
+  <!-- نافذة تسجيل الدخول والدفع السريع -->
   <div class="overlay" id="checkoutModal">
     <div class="modal-box">
       <button type="button" class="close-btn" data-close="checkoutModal">✕</button>
@@ -999,32 +998,32 @@
 
       const I18N = {
         ar: {
-          topStatus: "NOVARA • العرض الكبير: آيفون + سماعة + إيربودز + كفر بـ 5,000 ر.س بدلاً من 6,000 ر.س",
-          navOffer: "العرض الكبير",
+          topStatus: "NOVARA • عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س",
+          navOffer: "عروض الجمعة البيضاء",
           navDepts: "الأقسام (10)",
           navCatalog: "المنتجات (60)",
           navContact: "تواصل معنا",
-          megaBadge: "🔥 العرض الكبير الحصري • وفّر 1,000 ر.س فوراً",
-          megaTitle: "باقة الآيفون المتكاملة: آيفون + سماعة + إيربودز + كفر",
-          mItem1: "📱 آيفون برو ماكس",
-          mItem2: "🎧 سماعة رأس لاسلكية",
-          mItem3: "🎵 إيربودز برو",
-          mItem4: "🛡️ كفر حماية فاخر",
-          megaOld: "السعر الأصلي: 6,000 ر.س",
-          megaNew: "مع الخصم: 5,000 ر.س",
-          megaSave: "خصم 1,000 ر.س",
-          megaCta: "اطلب الباقة الآن بـ 5,000 ر.س (متابعة) ←",
-          heroBadge: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS",
-          heroTitle: "خصومات الخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span>",
+          megaBadge: "🔥 عروض قوية للجمعة البيضاء • وفّر 500 ر.س",
+          megaTitle: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة",
+          mItem1: "🎧 سماعة",
+          mItem2: "📱 آيفون",
+          mItem3: "🛡️ كفر",
+          mItem4: "⌚ ساعة",
+          megaOld: "السعر الأصلي: 6,499 ر.س",
+          megaNew: "بالخصم: 5,999 ر.س",
+          megaSave: "خصم الجمعة البيضاء",
+          megaCta: "اطلب العرض الآن بـ 5,999 ر.س (متابعة) ←",
+          heroBadge: "WHITE FRIDAY DEALS • 60 UNIQUE ITEMS",
+          heroTitle: "عروض الجمعة البيضاء والخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span>",
           heroDesc: "تشكيلة جديدة وموسعة من 60 منتجاً مختلفاً في 10 أقسام متكاملة بخصومات من 5% إلى 20% وكاش باك فوري 10%.",
           heroCta: "تصفح الـ 60 منتجاً الآن ←",
           capSub: "60 UNIQUE ITEMS • 10 DEPARTMENTS",
-          capTitle: "خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%",
-          splashBadge: "🔥 العرض الكبير الحصري في NOVARA",
-          splashTitle: "آيفون + سماعة + إيربودز + كفر = 6,000 ر.س، ومع الخصم 5,000 ر.س فقط!",
-          splashDesc: "استمتع بالباقة المتكاملة مع خصم فوري 1,000 ر.س، بالإضافة إلى 60 منتجاً جديداً ومختلفاً في 10 أقسام بخصومات تصل إلى 20%.",
-          sp1: "📱 آيفون + سماعة + إيربودز + كفر = 5,000 ر.س",
-          sp2: "🧥 60 منتجاً جديداً في 10 أقسام",
+          capTitle: "عروض الجمعة البيضاء + خصومات 5% - 20% + كاش باك 10%",
+          splashBadge: "🔥 عروض قوية للجمعة البيضاء في NOVARA",
+          splashTitle: "سماعة + آيفون + كفر + ساعة = 6,499 ر.س، وبالخصم 5,999 ر.س فقط!",
+          splashDesc: "استفد من أقوى عروض الجمعة البيضاء والخميس إلى الأحد على 60 منتجاً مختلفاً في 10 أقسام مع كاش باك فوري 10%.",
+          sp1: "🎧 سماعة + 📱 آيفون + 🛡️ كفر + ⌚ ساعة = 5,999 ر.س",
+          sp2: "🧥 60 منتجاً في 10 أقسام",
           sp3: "💸 كاش باك فوري 10%",
           splashCta: "تصفح العروض والـ 60 منتجاً ←",
           deptEyebrow: "10 ORGANIZED DEPARTMENTS (6 UNIQUE ITEMS EACH)",
@@ -1032,22 +1031,22 @@
           deptNote: "اضغط على أي قسم لعرض الـ 6 منتجات الفريدة الخاصة به",
           d1: "1. ملابس رجالية (6)", d2: "2. ملابس نسائية وفساتين (6)",
           d3: "3. بناطيل رجالية ونسائية (6)", d4: "4. كنزات وجواكيت (6)",
-          d5: "5. آيفون 18 و 17 والباقة (6)", d6: "6. أجهزة الآيباد (6)",
+          d5: "5. آيفون 18 و 17 وعروض الجمعة (6)", d6: "6. أجهزة الآيباد (6)",
           d7: "7. ماك بوك ولابتوب وبي سي (6)", d8: "8. أجهزة سوني 5 (6)",
           d9: "9. ساعات أبل AI وساعات (6)", d10: "10. أجهزة المطبخ والمنزل (6)",
-          catEyebrow: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS",
+          catEyebrow: "WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS",
           catHeading: "جميع المنتجات والعروض (60 منتجاً)",
           catNote: "60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء",
-          searchPh: "ابحث في 60 منتجاً: باقة آيفون، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة...",
+          searchPh: "ابحث في 60 منتجاً: الجمعة البيضاء، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة...",
           priceLbl: "السعر:",
           fAll: "الكل (60)", f1: "ملابس رجالية (6)", f2: "ملابس نسائية وفساتين (6)",
-          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "آيفون والباقة الكبرى (6)",
+          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "آيفون وعروض الجمعة (6)",
           f6: "الآيباد (6)", f7: "ماك بوك ولابتوب وبي سي (6)", f8: "سوني 5 (6)",
           f9: "ساعات أبل AI وساعات (6)", f10: "أجهزة المطبخ (6)",
           fFav: "♥ المفضلة",
           sDef: "الترتيب حسب الأقسام (الافتراضي)", sAsc: "السعر: الأقل أولاً", sDesc: "السعر: الأعلى أولاً",
           noProd: "لا توجد منتجات تطابق بحثك.",
-          footerTag: "باقة الآيفون الكبرى (5,000 ر.س بدلاً من 6,000 ر.س) • 60 منتجاً فريداً في 10 أقسام.",
+          footerTag: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 60 منتجاً في 10 أقسام.",
           cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
           cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
           coTitle: "تسجيل الدخول وإتمام الدفع السريع", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
@@ -1061,31 +1060,31 @@
           addedToast: name => `تمت إضافة «${name}» للسلة ✓`
         },
         en: {
-          topStatus: "NOVARA • Mega Offer: iPhone + Headphones + AirPods + Case for 5,000 SAR (was 6,000 SAR)",
-          navOffer: "Mega Offer",
+          topStatus: "NOVARA • Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR)",
+          navOffer: "White Friday Deals",
           navDepts: "Departments (10)",
           navCatalog: "Products (60)",
           navContact: "Contact",
-          megaBadge: "🔥 Exclusive Mega Bundle • Save 1,000 SAR Instantly",
-          megaTitle: "Ultimate iPhone Bundle: iPhone + Headphones + AirPods + Case",
-          mItem1: "📱 iPhone Pro Max",
-          mItem2: "🎧 Wireless Headphones",
-          mItem3: "🎵 AirPods Pro",
-          mItem4: "🛡️ Protective Case",
-          megaOld: "Original Price: 6,000 SAR",
-          megaNew: "Discount Price: 5,000 SAR",
-          megaSave: "Save 1,000 SAR",
-          megaCta: "Order Bundle Now for 5,000 SAR (Continue) →",
-          heroBadge: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS",
-          heroTitle: "Thursday to Sunday Deals <span>Across 60 Unique Fashion, Tech, PS5 & Kitchen Items</span>",
+          megaBadge: "🔥 Strong White Friday Deals • Save 500 SAR",
+          megaTitle: "Strong White Friday Deals: Headphones + iPhone + Case + Watch",
+          mItem1: "🎧 Headphones",
+          mItem2: "📱 iPhone",
+          mItem3: "🛡️ Case",
+          mItem4: "⌚ Watch",
+          megaOld: "Original Price: 6,499 SAR",
+          megaNew: "With Discount: 5,999 SAR",
+          megaSave: "White Friday Discount",
+          megaCta: "Order Deal Now for 5,999 SAR (Continue) →",
+          heroBadge: "WHITE FRIDAY DEALS • 60 UNIQUE ITEMS",
+          heroTitle: "White Friday & Weekend Deals <span>Across 60 Unique Fashion, Tech, PS5 & Kitchen Items</span>",
           heroDesc: "Expanded collection of 60 distinct items organized across 10 departments with 5% to 20% discounts and 10% instant cashback.",
           heroCta: "Browse All 60 Products Now →",
           capSub: "60 UNIQUE ITEMS • 10 DEPARTMENTS",
-          capTitle: "Thursday to Sunday Deals (5% - 20%) + 10% Instant Cashback",
-          splashBadge: "🔥 NOVARA Mega Bundle Offer",
-          splashTitle: "iPhone + Headphones + AirPods + Case = 6,000 SAR, Now 5,000 SAR Only!",
-          splashDesc: "Grab the complete bundle with 1,000 SAR off, plus 60 unique products across 10 departments.",
-          sp1: "📱 iPhone + Headphones + AirPods + Case = 5,000 SAR",
+          capTitle: "White Friday Deals + 5% - 20% Off + 10% Instant Cashback",
+          splashBadge: "🔥 Strong White Friday Deals at NOVARA",
+          splashTitle: "Headphones + iPhone + Case + Watch = 6,499 SAR, Now 5,999 SAR Only!",
+          splashDesc: "Grab our strongest White Friday deals across 60 unique products in 10 departments with 10% instant cashback.",
+          sp1: "🎧 Headphones + 📱 iPhone + 🛡️ Case + ⌚ Watch = 5,999 SAR",
           sp2: "🧥 60 Unique Products in 10 Departments",
           sp3: "💸 10% Instant Cashback",
           splashCta: "Explore Deals & 60 Products →",
@@ -1094,22 +1093,22 @@
           deptNote: "Click any department to view its 6 unique items",
           d1: "1. Men's Wear (6)", d2: "2. Women's Wear & Dresses (6)",
           d3: "3. Men's & Women's Pants (6)", d4: "4. Sweaters & Jackets (6)",
-          d5: "5. iPhone & Mega Bundle (6)", d6: "6. iPads (6)",
+          d5: "5. iPhone & White Friday Deals (6)", d6: "6. iPads (6)",
           d7: "7. MacBook, Laptop & PC (6)", d8: "8. Sony PS5 (6)",
           d9: "9. AI Apple & Modern Watches (6)", d10: "10. Kitchen & Home (6)",
-          catEyebrow: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS",
+          catEyebrow: "WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS",
           catHeading: "All Unique Products & Offers (60 Items)",
           catNote: "60 completely distinct items — click 'Continue' on any product to buy",
-          searchPh: "Search 60 items: iPhone bundle, dress, pants, jacket, iPad, MacBook, PS5, watch, coffee...",
+          searchPh: "Search 60 items: White Friday, abaya, dress, pants, jacket, iPad, MacBook, PS5, watch, coffee...",
           priceLbl: "Price:",
           fAll: "All (60)", f1: "Men's Wear (6)", f2: "Women's Wear & Dresses (6)",
-          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhone & Bundle (6)",
+          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhone & White Friday (6)",
           f6: "iPads (6)", f7: "MacBook & PC (6)", f8: "Sony PS5 (6)",
           f9: "AI Watches (6)", f10: "Kitchen (6)",
           fFav: "♥ Favorites",
           sDef: "Ordered by Department (Default)", sAsc: "Price: Low to High", sDesc: "Price: High to Low",
           noProd: "No products match your search.",
-          footerTag: "Mega iPhone Bundle (5,000 SAR instead of 6,000 SAR) • 60 Unique Products in 10 Departments.",
+          footerTag: "Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR) • 60 Items.",
           cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
           cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
           coTitle: "Sign In & Express Payment", lblName: "Full Name *", lblPhone: "Mobile Number *",
@@ -1133,9 +1132,9 @@
         { id: 5, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "طقم لينن رجالي صيفي كاجوال ناعم", nameEn: "Men's Casual Soft Summer Linen Set", specAr: "كتان طبيعي بارد ومريح للرحلات والإطلالات اليومية", specEn: "Cooling Natural Linen for Casual Days", price: 495, oldPrice: 550, image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "القماش": "كتان وقطن طبيعي", "الموسم": "صيفي بارد" } },
         { id: 51, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بشت رجالي ملكي خفيف للمناسبات", nameEn: "Men's Lightweight Royal Occasion Bisht", specAr: "حياكة يدوية فاخرة بخيوط ذهبية • قماش صيفي خفيف", specEn: "Handcrafted Gold-Thread Embroidery • Light Fabric", price: 1120, oldPrice: 1400, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800", variants: ["وسط", "كبير", "ملكي"], specs: { "التطريز": "زري ذهبي فاخر", "المناسبات": "أعراس وأعياد" } },
 
-        // 2. ملابس نسائية وفساتين (6 منتجات)
+        // 2. ملابس نسائية وفساتين (6 منتجات - شامل صورة العباية السوداء المرسلة)
         { id: 6, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان نسائي طويل شيفون ناعم محتشم", nameEn: "Women's Modest Long Soft Chiffon Dress", specAr: "قماش شيفون ناعم مبطن بالكامل • تصميم محتشم راقٍ", specEn: "Fully Lined Soft Chiffon • Elegant Modest Cut", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "شيفون فاخر + بطانة قطنية", "المقاسات": "S إلى 3XL" } },
-        { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
+        { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "abaya-black.jpg", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
         { id: 8, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "قميص نسائي حريري ناعم بأكمام طويلة", nameEn: "Women's Silky Satin Long-Sleeve Blouse", specAr: "ملمس حريري ناعم مقاوم للتجعد • قصة محتشمة", specEn: "Wrinkle-Free Silky Satin • Modest Fit", price: 504, oldPrice: 560, image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "ساتان حريري ناعم", "المقاسات": "S إلى 3XL" } },
         { id: 9, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان سهرة نسائي طويل بقصة راقية", nameEn: "Women's Elegant Evening Gown Dress", specAr: "قماش ناعم فاخر للمناسبات والاستقبالات", specEn: "Luxury Soft Fabric for Special Occasions", price: 810, oldPrice: 900, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الخامة": "قماش سهرة ناعم مبطن", "المقاسات": "S إلى 2XL" } },
         { id: 10, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "طقم بليزر عمل نسائي رسمي حديث", nameEn: "Women's Modern Tailored Work Blazer Set", specAr: "قماش كريب مفصل ناعم مبطن للعمل", specEn: "Soft Lined Crepe Blazer for Office", price: 675, oldPrice: 750, image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "كريب مفصل ناعم", "المقاسات": "S إلى 3XL" } },
@@ -1157,13 +1156,13 @@
         { id: 20, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي بافر شتوي مبطن ناعم", nameEn: "Women's Soft Quilted Winter Puffer Jacket", specAr: "قماش ناعم مقاوم للرياح والمطر مع قبعة دافئة", specEn: "Soft Windproof Shell with Warm Hood", price: 720, oldPrice: 900, image: "https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "مايكروفايبر ناعم" } },
         { id: 54, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت جلد طبيعي رجالي فاخر مبطن", nameEn: "Men's Genuine Soft Leather Biker Jacket", specAr: "جلد طبيعي 100% ناعم الملمس مع بطانة شتوية دافئة", specEn: "100% Supple Genuine Leather • Warm Lining", price: 1150, oldPrice: 1420, image: "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "الخامة": "جلد طبيعي 100%", "اللون": "أسود ملكي" } },
 
-        // 5. آيفون والباقة الكبرى (6 منتجات - تشمل باقة الـ 5000 ر.س)
-        { id: 55, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "🔥 باقة الآيفون الكبرى (آيفون + سماعة + إيربودز + كفر)", nameEn: "🔥 Ultimate iPhone Bundle (iPhone + Headphones + AirPods + Case)", specAr: "العرض الكبير: آيفون برو ماكس + سماعة رأس + إيربودز برو + كفر حماية (بدلاً من 6,000 ر.س)", specEn: "Mega Deal: iPhone Pro Max + Wireless Headphones + AirPods Pro + Case (Was 6,000 SAR)", price: 5000, oldPrice: 6000, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي (الباقة الكاملة)", "تيتانيوم أسود (الباقة الكاملة)"], specs: { "محتويات الباقة": "آيفون + سماعة رأس + إيربودز + كفر", "السعر قبل الخصم": "6,000 ر.س", "السعر بعد الخصم": "5,000 ر.س (توفير 1,000 ر.س)" } },
-        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
-        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
-        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
+        // 5. آيفون وعروض الجمعة البيضاء (6 منتجات)
+        { id: 55, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "🔥 عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة", nameEn: "🔥 Strong White Friday Deal: Headphones + iPhone + Case + Watch", specAr: "سماعة + آيفون + كفر + ساعة • السعر الأصلي 6,499 ر.س وبالخصم 5,999 ر.س", specEn: "Headphones + iPhone + Case + Watch • Original 6,499 SAR, Discounted 5,999 SAR", price: 5999, oldPrice: 6499, image: "mega-offer.jpeg", variants: ["تيتانيوم صحراوي (العرض الكامل)", "تيتانيوم أسود (العرض الكامل)"], specs: { "محتويات العرض": "سماعة + آيفون + كفر + ساعة", "السعر الأصلي": "6,499 ر.س", "السعر بالخصم": "5,999 ر.س" } },
+        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
+        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
+        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
 
         // 6. أجهزة الآيباد (6 منتجات)
         { id: 26, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", nameEn: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", specAr: "معالج Apple M4 • شاشة Tandem OLED 120Hz • نحافة 5.3 ملم", specEn: "Apple M4 Chip • Tandem OLED 120Hz • 5.3mm Thin", price: 3569, oldPrice: 4199, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800", variants: ["أسود فلكي 256GB", "فضي 512GB"], specs: { "المعالج": "Apple M4", "الشاشة": "11 بوصة Tandem OLED" } },
@@ -1249,7 +1248,6 @@
       const openModal = id => { $("#" + id).classList.add("active"); document.body.classList.add("modal-open"); };
       const closeModal = id => { $("#" + id).classList.remove("active"); document.body.classList.remove("modal-open"); };
 
-      // زر طلب الباقة الكبرى (آيفون + سماعة + إيربودز + كفر = 5000 ر.س) في أعلى التطبيق
       $("#orderMegaBundleBtn").addEventListener("click", () => {
         addToCart(55, true);
       });
@@ -1497,7 +1495,6 @@
         orders.unshift(orderRecord);
         write("novara-orders", orders);
 
-        // 1. إرسال الطلب تلقائياً إلى Formspree
         notifyOwnerCloud({
           _subject: `طلب شراء جديد #${orderId} - ${name} (${total} ر.س)`,
           event: "طلب شراء جديد",
@@ -1511,7 +1508,6 @@
           items: itemsSummary
         });
 
-        // 2. تجهيز رسالة الواتساب لإرسال الموقع والإضافات
         const waText = encodeURIComponent(
           `مرحباً، أتممت طلبي في متجر NOVARA:\n` +
           `• رقم الطلب: ${orderId}\n` +
@@ -1524,7 +1520,6 @@
         );
         const waUrl = `https://wa.me/${CONFIG.merchantWhatsApp}?text=${waText}`;
 
-        // 3. إظهار شاشة التواصل عبر واتساب لإرسال الموقع والإضافات
         $("#coFormWrap").hidden = true;
         $("#coDone").hidden = false;
         $("#coDone").innerHTML = `
@@ -1544,7 +1539,6 @@
         saveCart();
       });
 
-      // بوابة مالك التطبيق المخفية (5 نقرات على الشعار + الرمز 12345)
       let logoClicks = 0;
       let clickTimer = null;
       const openSecretAdmin = () => {
@@ -1703,8 +1697,8 @@
           const m = p(Math.floor(ms / 6e4) % 60);
           const s = p(Math.floor(ms / 1e3) % 60);
           $("#countdownText").textContent = lang === "ar"
-            ? `🔥 خصومات الخميس إلى الأحد سارية الآن — تنتهي بعد ${d}ي ${h}:${m}:${s}`
-            : `🔥 Thu–Sun Deals Live Now — Ends in ${d}d ${h}:${m}:${s}`;
+            ? `🔥 عروض الجمعة البيضاء سارية الآن — تنتهي بعد ${d}ي ${h}:${m}:${s}`
+            : `🔥 White Friday Deals Live Now — Ends in ${d}d ${h}:${m}:${s}`;
         } else {
           const daysToThu = (4 - day + 7) % 7;
           const nextThu = new Date(now);
@@ -1716,8 +1710,8 @@
           const m = p(Math.floor(ms / 6e4) % 60);
           const s = p(Math.floor(ms / 1e3) % 60);
           $("#countdownText").textContent = lang === "ar"
-            ? `⏳ تبدأ خصومات الخميس إلى الأحد بعد ${d}ي ${h}:${m}:${s}`
-            : `⏳ Thu–Sun Deals start in ${d}d ${h}:${m}:${s}`;
+            ? `⏳ تبدأ عروض الجمعة البيضاء والخميس بعد ${d}ي ${h}:${m}:${s}`
+            : `⏳ White Friday & Thu Deals start in ${d}d ${h}:${m}:${s}`;
         }
       }
       setInterval(updateCountdown, 1000);
