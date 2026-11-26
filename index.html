@@ -584,6 +584,14 @@
       .pay-methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0 14px; }
     .pay-method-btn { padding: 10px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--ink); font-size: 12.5px; font-weight: 600; text-align: center; transition: 0.2s; }
     .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+      .co-live-box { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 10px 0 6px; text-align: start; }
+    .co-live-title { font-size: 12.5px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .co-live-item { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--border); font-size: 12.5px; color: var(--ink); }
+    .co-live-total { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 15px; font-weight: 700; }
+    .co-live-total strong { color: var(--emerald); }
+    .pay-methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 6px 0 10px; }
+    .pay-method-btn { padding: 10px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--ink); font-size: 12.5px; font-weight: 600; text-align: center; transition: 0.2s; }
+    .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
   </style>
 </head>
 <body>
@@ -790,8 +798,8 @@
         <h3 style="margin:6px 0 4px" data-i18n="coTitle">تأكيد حسابك لإتمام الطلب</h3>
         <p id="coSummary" style="font-size:13px;color:var(--muted)"></p>
         <form id="coForm" class="form-col" novalidate>
-          <label><span data-i18n="lblName">الاسم الكامل *</span></label>
-          <input id="coName" type="text" placeholder="اكتب اسمك الكامل" required>
+          <label><span data-i18n="lblName">الاسم الثلاثي الكامل *</span></label>
+          <input id="coName" type="text" placeholder="الاسم الأول + اسم الأب + اسم العائلة" required>
 
           <label><span data-i18n="lblPhone">رقم الجوال *</span></label>
           <input id="coPhone" type="tel" dir="ltr" placeholder="05xxxxxxxx" required>
@@ -799,7 +807,24 @@
           <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span></label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
-          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">تأكيد الحساب ✓</button>
+          <div class="co-live-box" id="coLiveSummaryBox">
+            <div class="co-live-title" id="coItemsHeading">الطلبات المختارة والمبلغ:</div>
+            <div id="coLiveItemsList"></div>
+            <div class="co-live-total">
+              <span id="coLiveTotalLabel">الإجمالي المطلوب:</span>
+              <strong id="coLiveTotalVal">0 ر.س</strong>
+            </div>
+          </div>
+
+          <label><span id="coPayLabel">الدفع السريع عبر:</span></label>
+          <div class="pay-methods-grid" id="coPayMethods">
+            <button type="button" class="pay-method-btn active" data-method="Apple Pay">Apple Pay</button>
+            <button type="button" class="pay-method-btn" data-method="STC Pay">STC Pay</button>
+            <button type="button" class="pay-method-btn" data-method="مدى">مدى</button>
+            <button type="button" class="pay-method-btn" data-method="تحويل بنكي">تحويل بنكي</button>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;background:#25D366;" id="coWhatsAppSubmitBtn">تواصل معنا إلى واتساب ←</button>
         </form>
       </div>
       <div id="coDone" hidden style="text-align:center;padding:12px 0;"></div>
