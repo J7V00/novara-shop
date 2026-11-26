@@ -798,13 +798,13 @@
         <h3 style="margin:6px 0 4px" data-i18n="coTitle">تأكيد حسابك لإتمام الطلب</h3>
         <p id="coSummary" style="font-size:13px;color:var(--muted)"></p>
         <form id="coForm" class="form-col" novalidate>
-          <label><span data-i18n="lblName">الاسم الثلاثي الكامل *</span></label>
+          <label><span id="coLblName">الاسم الثلاثي الكامل *</span></label>
           <input id="coName" type="text" placeholder="الاسم الأول + اسم الأب + اسم العائلة" required>
 
-          <label><span data-i18n="lblPhone">رقم الجوال *</span></label>
+          <label><span id="coLblPhone">رقم الجوال *</span></label>
           <input id="coPhone" type="tel" dir="ltr" placeholder="05xxxxxxxx" required>
 
-          <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span></label>
+          <label><span id="coLblEmail">البريد الإلكتروني (Gmail) *</span></label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
           <div class="co-live-box" id="coLiveSummaryBox">
@@ -816,7 +816,7 @@
             </div>
           </div>
 
-          <label><span id="coPayLabel">الدفع السريع عبر:</span></label>
+          <label><span id="coPayLabel">اختر طريقة الدفع:</span></label>
           <div class="pay-methods-grid" id="coPayMethods">
             <button type="button" class="pay-method-btn active" data-method="Apple Pay">Apple Pay</button>
             <button type="button" class="pay-method-btn" data-method="STC Pay">STC Pay</button>
@@ -1272,7 +1272,7 @@
           const dept = lang === "ar" ? p.deptAr : p.deptEn;
           const spec = lang === "ar" ? p.specAr : p.specEn;
           const cb = Math.round(p.price * 0.10);
-          const discPct = p.oldPrice ? Math.min(25, Math.max(5, Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100))) : 0;
+          const discPct = (p.oldPrice && p.oldPrice > p.price) ? Math.min(50, Math.max(5, Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100))) : 0;
           const isFav = favs.has(p.id);
 
           return `
@@ -1443,6 +1443,53 @@
         openModal("productModal");
       }
 
+      let selectedFastPay = "Apple Pay";
+
+      function isThreePartName(fullName) {
+        const parts = (fullName || "").trim().replace(/\s+/g, " ").split(" ").filter(Boolean);
+        return parts.length >= 3;
+      }
+
+      function renderCheckoutLiveSummary() {
+        const listEl = $("#coLiveItemsList");
+        const totalValEl = $("#coLiveTotalVal");
+        const headingEl = $("#coItemsHeading");
+        const totalLabelEl = $("#coLiveTotalLabel");
+        const payLabelEl = $("#coPayLabel");
+        const submitBtn = $("#coWhatsAppSubmitBtn");
+        const lblNameEl = $("#coLblName");
+        const lblPhoneEl = $("#coLblPhone");
+        const lblEmailEl = $("#coLblEmail");
+
+        if (lblNameEl) lblNameEl.textContent = lang === "ar" ? "الاسم الثلاثي الكامل *" : "Full 3-Part Name *";
+        if (lblPhoneEl) lblPhoneEl.textContent = lang === "ar" ? "رقم الجوال *" : "Mobile Number *";
+        if (lblEmailEl) lblEmailEl.textContent = lang === "ar" ? "البريد الإلكتروني (Gmail) *" : "Email Address (Gmail) *";
+        if (headingEl) headingEl.textContent = lang === "ar" ? "الطلبات المختارة والمبلغ:" : "Selected Items & Amount:";
+        if (totalLabelEl) totalLabelEl.textContent = lang === "ar" ? "الإجمالي المطلوب:" : "Total Amount Due:";
+        if (payLabelEl) payLabelEl.textContent = lang === "ar" ? "اختر طريقة الدفع:" : "Choose Payment Method:";
+        if (submitBtn) submitBtn.textContent = lang === "ar" ? "تواصل معنا إلى واتساب ←" : "Contact Us on WhatsApp →";
+
+        const total = cart.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.qty) || 1), 0);
+        if (listEl) {
+          listEl.innerHTML = cart.map(i => {
+            const itemName = lang === "ar" ? (i.nameAr || i.nameEn) : (i.nameEn || i.nameAr);
+            const itemQty = Number(i.qty) || 1;
+            const lineTotal = (Number(i.price) || 0) * itemQty;
+            return `<div class="co-live-item"><span>${itemName} (${i.variant || ""}) ×${itemQty}</span><strong>${fmt(lineTotal)}</strong></div>`;
+          }).join("");
+        }
+        if (totalValEl) totalValEl.textContent = fmt(total);
+        if ($("#coSummary")) $("#coSummary").textContent = `${lang === "ar" ? "المبلغ الإجمالي المطلوب:" : "Total Amount Due:"} ${fmt(total)}`;
+      }
+
+      $$("#coPayMethods .pay-method-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          $$("#coPayMethods .pay-method-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          selectedFastPay = btn.dataset.method;
+        });
+      });
+
       function openCheckout() {
         if (!cart.length) {
           toast(lang === "ar" ? "سلتك فارغة حالياً" : "Your shopping bag is empty");
@@ -1456,8 +1503,7 @@
           $("#coPhone").value = customer.phone || "";
           $("#coEmail").value = customer.email || "";
         }
-        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-        $("#coSummary").textContent = `${lang === "ar" ? "الإجمالي المطلوب:" : "Total Amount:"} ${fmt(total)}`;
+        renderCheckoutLiveSummary();
         openModal("checkoutModal");
       }
 
@@ -1470,8 +1516,19 @@
         const email = $("#coEmail").value.trim();
         const cleanPhone = rawPhone.replace(/[\s\-()]/g, "");
 
-        if (!name || !cleanPhone || !email) {
-          toast(lang === "ar" ? "يرجى إدخال الاسم ورقم الجوال والبريد الإلكتروني" : "Please enter name, mobile number, and email");
+        if (!isThreePartName(name)) {
+          toast(lang === "ar" ? "يرجى إدخال الاسم الثلاثي الكامل (3 أسماء على الأقل)" : "Please enter your full 3-part name (at least 3 names)");
+          $("#coName").focus();
+          return;
+        }
+        if (!cleanPhone || cleanPhone.length < 8) {
+          toast(lang === "ar" ? "يرجى إدخال رقم جوال صحيح" : "Please enter a valid mobile number");
+          $("#coPhone").focus();
+          return;
+        }
+        if (!email || !email.includes("@") || !email.includes(".")) {
+          toast(lang === "ar" ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email address");
+          $("#coEmail").focus();
           return;
         }
 
@@ -1479,10 +1536,14 @@
         write("novara-customer", customer);
         if (typeof syncAccountButton === "function") syncAccountButton();
 
-        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        const total = cart.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.qty) || 1), 0);
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
         const device = detectDevice();
-        const itemsSummary = cart.map(i => `${i.nameAr} (${i.variant}) ×${i.qty} = ${i.price * i.qty} ر.س`).join("\n");
+        const itemsSummary = cart.map(i => {
+          const itemName = lang === "ar" ? (i.nameAr || i.nameEn) : (i.nameEn || i.nameAr);
+          const itemQty = Number(i.qty) || 1;
+          return `${itemName} (${i.variant || ""}) ×${itemQty} = ${fmt((Number(i.price) || 0) * itemQty)}`;
+        }).join("\n");
 
         orders.unshift({
           orderId,
@@ -1497,30 +1558,31 @@
         write("novara-orders", orders);
 
         notifyOwnerCloud({
-          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${total} ر.س)`,
-          event: "تأكيد حساب وطلب",
+          _subject: `طلب عبر واتساب #${orderId} - ${name} (${fmt(total)} - ${selectedFastPay})`,
+          event: "طلب عبر واتساب",
           order_id: orderId,
           customer_name: name,
           customer_phone: cleanPhone,
           customer_email: email,
+          payment_method: selectedFastPay,
           device: device,
-          total_amount: `${total} ر.س`,
+          total_amount: fmt(total),
           items: itemsSummary
         });
 
-        $("#coFormWrap").hidden = true;
-        $("#coDone").hidden = false;
-        $("#coDone").innerHTML = `
-          <div style="font-size:48px;color:var(--emerald);margin-bottom:8px">✓</div>
-          <h3 style="color:var(--emerald);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك بنجاح ✓" : "Your Account Is Confirmed ✓"}</h3>
-          <p style="margin:6px 0;font-size:14px;color:var(--ink);font-weight:600;">${name} • <span dir="ltr">${cleanPhone}</span></p>
-          <p style="margin:2px 0 10px;font-size:13px;color:var(--muted);" dir="ltr">${email}</p>
-          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
-          <button type="button" class="btn-primary" style="width:100%;justify-content:center" id="doneClose">${lang === "ar" ? "العودة للمتجر ✓" : "Back to Store ✓"}</button>
-        `;
-        $("#doneClose").onclick = () => closeModal("checkoutModal");
+        const waPhone = (CONFIG.merchantWhatsApp || "").replace(/[^0-9]/g, "");
+        const msg = lang === "ar"
+          ? `مرحباً NOVARA، أرغب بإتمام طلبي الآن:\n• رقم الطلب: #${orderId}\n• الاسم الثلاثي: ${name}\n• الجوال: ${cleanPhone}\n• البريد الإلكتروني: ${email}\n• طريقة الدفع: ${selectedFastPay}\n• الإجمالي: ${fmt(total)}\n\nالطلبات:\n${itemsSummary}`
+          : `Hello NOVARA, I want to complete my order now:\n• Order ID: #${orderId}\n• Full Name: ${name}\n• Phone: ${cleanPhone}\n• Email: ${email}\n• Payment Method: ${selectedFastPay}\n• Total: ${fmt(total)}\n\nItems:\n${itemsSummary}`;
+
+        const waUrl = waPhone
+          ? `https://wa.me/${waPhone}?text=${encodeURIComponent(msg)}`
+          : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
         cart = [];
         saveCart();
+        closeModal("checkoutModal");
+        window.location.href = waUrl;
       });
 
       let logoClicks = 0;
