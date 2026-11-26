@@ -1436,6 +1436,22 @@
         else { flyOneToCart(sourceEl); toast(I18N[lang].addedToast(lang === "ar" ? p.nameAr : p.nameEn)); }
       }
 
+      function isFirstOrderFree() {
+        const usedFlag = read("novara-first-order-used", false);
+        const existingOrders = read("novara-orders", []);
+        return !usedFlag && (!Array.isArray(existingOrders) || existingOrders.length === 0);
+      }
+
+      function getCartPricing() {
+        const rawTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+        const freeFirst = isFirstOrderFree();
+        return {
+          rawTotal,
+          finalTotal: freeFirst ? 0 : rawTotal,
+          isFirstOrderFree: freeFirst
+        };
+      }
+
       function saveCart() {
         write("novara-cart", cart);
         renderCart();
@@ -1550,82 +1566,14 @@
           $("#coPhone").value = customer.phone || "";
           $("#coEmail").value = customer.email || "";
         }
-        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-        $("#coSummary").textContent = `${cart.reduce((s, i) => s + i.qty, 0)} ${I18N[lang].countUnit} • ${fmt(total)}`;
-        $("#coFormWrap").hidden = false;
-        $("#coDone").hidden = true;
-        openModal("checkoutModal");
-      }
-
-      $("#checkoutBtn").addEventListener("click", openCheckout);
-      function evaluateAccountFields(showEmptyAsError = true) {
-        const name = $("#coName").value.trim().replace(/\s+/g, " ");
-        const rawPhone = $("#coPhone").value.trim();
-        const email = $("#coEmail").value.trim();
-
-        const nameParts = name.split(" ").filter(Boolean);
-        const isValidName = name.length >= 4 && nameParts.length >= 2 && !/^[0-9]+$/.test(name);
-
-        const cleanPhone = rawPhone.replace(/[\s\-()]/g, "");
-        const isValidPhone = /^(?:\+?9665|05|5)\d{8}$/.test(cleanPhone);
-
-        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-
-        const setMark = (inputEl, statusEl, ok, hasVal) => {
-          inputEl.classList.remove("is-valid", "is-invalid");
-          statusEl.classList.remove("ok", "err");
-          if (!hasVal && !showEmptyAsError) {
-            statusEl.textContent = "";
-            return;
-          }
-          if (ok) {
-            inputEl.classList.add("is-valid");
-            statusEl.classList.add("ok");
-            statusEl.textContent = lang === "ar" ? "✓ صحيح" : "✓ Valid";
-          } else {
-            inputEl.classList.add("is-invalid");
-            statusEl.classList.add("err");
-            statusEl.textContent = lang === "ar" ? "✕ غلط" : "✕ Invalid";
-          }
-        };
-
-        setMark($("#coName"), $("#coNameStatus"), isValidName, name.length > 0);
-        setMark($("#coPhone"), $("#coPhoneStatus"), isValidPhone, rawPhone.length > 0);
-        setMark($("#coEmail"), $("#coEmailStatus"), isValidEmail, email.length > 0);
-
-        return { isValidName, isValidPhone, isValidEmail, name, cleanPhone, email };
-      }
-
-      $("#coName").addEventListener("input", () => evaluateAccountFields(false));
-      $("#coPhone").addEventListener("input", () => evaluateAccountFields(false));
-      $("#coEmail").addEventListener("input", () => evaluateAccountFields(false));
-
-      $("#coForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const res = evaluateAccountFields(true);
-        const { isValidName, isValidPhone, isValidEmail, name, cleanPhone, email } = res;
-
-        if (!isValidName) {
-          toast(lang === "ar" ? "✕ الاسم غلط — أدخل اسمك الكامل (الاسم الأول واسم العائلة/الأب)" : "✕ Invalid name — enter your full name");
-          $("#coName").focus();
-          return;
-        }
-        if (!isValidPhone) {
-          toast(lang === "ar" ? "✕ رقم الجوال غلط — أدخل رقماً صحيحاً مثل 05xxxxxxxx" : "✕ Invalid mobile — enter a valid number like 05xxxxxxxx");
-          $("#coPhone").focus();
-          return;
-        }
-        if (!isValidEmail) {
-          toast(lang === "ar" ? "✕ البريد الإلكتروني غلط — أدخل إيميل صحيح مثل name@gmail.com" : "✕ Invalid email — enter a valid address like name@gmail.com");
-          $("#coEmail").focus();
-          return;
+        const pricing = getCartPricing();
+        const rawTotal = pricing.rawTotal;
+        const total = pricing.finalTotal;
+        const wasFreeFirstOrder = pricing.isFirstOrderFree;
+        if (wasFreeFirstOrder) {
+          write("novara-first-order-used", true);
         }
 
-        customer = { name, phone: cleanPhone, email };
-        write("novara-customer", customer);
-        if (typeof syncAccountButton === "function") syncAccountButton();
-
-        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
         const device = detectDevice();
         const itemsSummary = cart.map(i => `${i.nameAr} (${i.variant}) ×${i.qty} = ${i.price * i.qty} ر.س`).join("\n");
@@ -1638,22 +1586,28 @@
           email,
           device,
           total,
+          rawTotal,
+          freeFirstOrder: wasFreeFirstOrder,
           items: itemsSummary
         };
         orders.unshift(orderRecord);
         write("novara-orders", orders);
 
         notifyOwnerCloud({
-          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${total} ر.س)`,
-          event: "تأكيد حساب وطلب",
+          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${wasFreeFirstOrder ? "مجاني - أول طلب" : total + " ر.س"})`,
+          event: wasFreeFirstOrder ? "تأكيد حساب وطلب مجاني (أول طلب)" : "تأكيد حساب وطلب مدفوع",
           order_id: orderId,
           customer_name: name,
           customer_phone: cleanPhone,
           customer_email: email,
           device: device,
-          total_amount: `${total} ر.س`,
+          total_amount: wasFreeFirstOrder ? `0 ر.س (بدلاً من ${rawTotal} ر.س)` : `${total} ر.س`,
           items: itemsSummary
         });
+
+        const totalLabel = wasFreeFirstOrder
+          ? `<span style="color:var(--emerald);font-weight:700">${lang === "ar" ? "مجاني (0 ر.س — أول طلب)" : "FREE (0 SAR — First Order)"}</span>`
+          : fmt(total);
 
         $("#coFormWrap").hidden = true;
         $("#coDone").hidden = false;
@@ -1662,7 +1616,7 @@
           <h3 style="color:var(--emerald);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك بنجاح ✓" : "Your Account Is Confirmed ✓"}</h3>
           <p style="margin:6px 0;font-size:14px;color:var(--ink);font-weight:600;">${name} • <span dir="ltr">${cleanPhone}</span></p>
           <p style="margin:2px 0 10px;font-size:13px;color:var(--muted);" dir="ltr">${email}</p>
-          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
+          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${totalLabel}</p>
           <button type="button" class="btn-primary" style="width:100%;justify-content:center" id="doneClose">${lang === "ar" ? "العودة للمتجر ✓" : "Back to Store ✓"}</button>
         `;
         $("#doneClose").onclick = () => closeModal("checkoutModal");
