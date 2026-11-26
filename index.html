@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NOVARA">
   <meta name="application-name" content="NOVARA">
-  <title>NOVARA | خصومات الخميس إلى الأحد الكبرى</title>
+  <title>NOVARA | باقة الآيفون الكبرى وخصومات الخميس إلى الأحد (60 منتجاً)</title>
 
   <link id="appFavicon" rel="icon" type="image/jpeg" href="novara-icon.jpg">
   <link id="appleTouchIcon" rel="apple-touch-icon" sizes="512x512" href="novara-icon.jpg">
@@ -151,15 +151,112 @@
       place-items: center;
     }
 
+    /* العرض الكبير في أعلى التطبيق (باقة الآيفون 6000 -> 5000) */
+    .mega-bundle-banner {
+      margin: 22px 5% 0;
+      background: linear-gradient(135deg, #0F141D 0%, #1E293B 55%, #2C2112 100%);
+      border: 2px solid #D6B879;
+      border-radius: 22px;
+      padding: 28px 32px;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 18px 45px rgba(15, 20, 29, 0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .mega-tag {
+      display: inline-block;
+      background: #C0392B;
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .mega-bundle-banner h2 {
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-weight: 700;
+      color: #F3DFB9;
+      line-height: 1.32;
+      margin-bottom: 10px;
+    }
+    .mega-items-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .mega-item-chip {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(214, 184, 121, 0.45);
+      color: #F8FAFC;
+      padding: 6px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .mega-price-box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .mega-old-price {
+      font-size: 20px;
+      color: #9CA3AF;
+      text-decoration: line-through;
+    }
+    .mega-new-price {
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 700;
+      color: #34D399;
+    }
+    .mega-save-badge {
+      background: rgba(52, 211, 153, 0.16);
+      border: 1px solid #34D399;
+      color: #A7F3D0;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .mega-cta-btn {
+      background: linear-gradient(135deg, #E2C07D, #B89146);
+      color: #111827;
+      border: 0;
+      padding: 14px 30px;
+      border-radius: 14px;
+      font-size: 15.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(214, 184, 121, 0.35);
+      transition: 0.25s;
+    }
+    .mega-cta-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .mega-visual {
+      height: 250px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1.5px solid rgba(214, 184, 121, 0.5);
+      position: relative;
+    }
+    .mega-visual img { width: 100%; height: 100%; object-fit: cover; }
+
     /* الواجهة الرئيسية */
     .hero {
-      padding: 48px 5%;
+      padding: 42px 5%;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       align-items: center;
       gap: 38px;
       border-bottom: 1px solid var(--border);
-      background: linear-gradient(135deg, #FFFFFF 0%, #F5F2EB 100%);
     }
     .eyebrow {
       color: var(--accent);
@@ -172,7 +269,7 @@
       border-radius: 20px;
     }
     .hero h1 {
-      font-size: clamp(28px, 3.8vw, 45px);
+      font-size: clamp(26px, 3.6vw, 42px);
       line-height: 1.28;
       margin: 14px 0;
       font-weight: 600;
@@ -203,7 +300,7 @@
     .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
 
     .hero-visual {
-      height: 360px;
+      height: 330px;
       border-radius: 18px;
       overflow: hidden;
       position: relative;
@@ -225,7 +322,7 @@
     .hero-caption strong { font-size: 13.5px; font-weight: 600; color: var(--ink); }
 
     /* الأقسام الـ 10 */
-    .section { padding: 48px 5%; }
+    .section { padding: 44px 5%; }
     .section-head {
       display: flex;
       justify-content: space-between;
@@ -310,7 +407,7 @@
     .results-bar { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
     .sort-select { height: 36px; padding: 0 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); color: var(--ink); font-size: 13px; }
 
-    /* شبكة المنتجات الـ 50 */
+    /* شبكة المنتجات الـ 60 */
     .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
     .card {
       background: var(--bg-surface);
@@ -421,7 +518,7 @@
     .modal-wide { width: min(860px, 100%); }
     .close-btn { position: absolute; top: 14px; inset-inline-end: 14px; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: var(--ink); font-size: 16px; z-index: 5; }
 
-    /* نافذة الترحيب الكبيرة للخصومات */
+    /* نافذة الترحيب الكبيرة للعرض */
     .promo-splash-box {
       width: min(680px, 100%);
       background: linear-gradient(145deg, #161D2B 0%, #232E45 100%);
@@ -447,16 +544,16 @@
       margin-bottom: 14px;
     }
     .promo-splash-box h2 {
-      font-size: clamp(24px, 3.8vw, 36px);
+      font-size: clamp(24px, 3.8vw, 34px);
       font-weight: 700;
       color: #F3DFB9;
-      line-height: 1.3;
+      line-height: 1.35;
       margin-bottom: 12px;
     }
     .promo-splash-box p {
       font-size: 15px;
       color: #D1D5DB;
-      max-width: 520px;
+      max-width: 530px;
       margin: 0 auto 20px;
       line-height: 1.8;
     }
@@ -550,9 +647,9 @@
       .dept-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
+      .mega-bundle-banner, .hero { grid-template-columns: 1fr; text-align: center; }
+      .mega-items-pills, .mega-price-box, .hero-btns { justify-content: center; }
       .hero p { margin-inline: auto; }
-      .hero-btns { justify-content: center; }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .product-detail-grid { grid-template-columns: 1fr; }
     }
@@ -567,7 +664,7 @@
 <body>
   <!-- شريط علوي -->
   <div class="top-bar">
-    <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • خصومات الخميس إلى الأحد (5% إلى 20%) على الملابس والأجهزة</span></span>
+    <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • العرض الكبير: آيفون + سماعة + إيربودز + كفر بـ 5,000 ر.س بدلاً من 6,000 ر.س</span></span>
     <span id="countdownText"></span>
   </div>
 
@@ -579,9 +676,9 @@
     </div>
 
     <nav class="nav">
-      <a href="#home" data-i18n="navHome">الرئيسية</a>
+      <a href="#megaOffer" data-i18n="navOffer">العرض الكبير</a>
       <a href="#departments" data-i18n="navDepts">الأقسام (10)</a>
-      <a href="#products" data-i18n="navCatalog">المنتجات (50)</a>
+      <a href="#products" data-i18n="navCatalog">المنتجات (60)</a>
       <a href="#contact" data-i18n="navContact">تواصل معنا</a>
     </nav>
 
@@ -596,20 +693,43 @@
   </header>
 
   <main>
+    <!-- العرض الكبير في أعلى التطبيق -->
+    <section class="mega-bundle-banner" id="megaOffer">
+      <div>
+        <span class="mega-tag" data-i18n="megaBadge">🔥 العرض الكبير الحصري • وفّر 1,000 ر.س فوراً</span>
+        <h2 data-i18n="megaTitle">باقة الآيفون المتكاملة: آيفون + سماعة + إيربودز + كفر</h2>
+        <div class="mega-items-pills">
+          <span class="mega-item-chip" data-i18n="mItem1">📱 آيفون برو ماكس</span>
+          <span class="mega-item-chip" data-i18n="mItem2">🎧 سماعة رأس لاسلكية</span>
+          <span class="mega-item-chip" data-i18n="mItem3">🎵 إيربودز برو</span>
+          <span class="mega-item-chip" data-i18n="mItem4">🛡️ كفر حماية فاخر</span>
+        </div>
+        <div class="mega-price-box">
+          <span class="mega-old-price" data-i18n="megaOld">السعر الأصلي: 6,000 ر.س</span>
+          <span class="mega-new-price" data-i18n="megaNew">مع الخصم: 5,000 ر.س</span>
+          <span class="mega-save-badge" data-i18n="megaSave">خصم 1,000 ر.س</span>
+        </div>
+        <button type="button" class="mega-cta-btn" id="orderMegaBundleBtn" data-i18n="megaCta">اطلب الباقة الآن بـ 5,000 ر.س (متابعة) ←</button>
+      </div>
+      <div class="mega-visual" style="height: auto; background: #0B192C;">
+        <img src="mega-offer.jpg" alt="العرض الأقوى - مجموعة التميز المتكاملة" style="width: 100%; height: auto; object-fit: contain;">
+      </div>
+    </section>
+
     <!-- الواجهة الرئيسية -->
     <section class="hero" id="home">
       <div>
-        <span class="eyebrow" data-i18n="heroBadge">THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF</span>
-        <h1 data-i18n="heroTitle">خصومات الخميس إلى الأحد <span>على الملابس والكمبيوترات وسوني 5 والمطبخ</span></h1>
-        <p data-i18n="heroDesc">عروض استثنائية من الخميس إلى الأحد بخصومات من 5% إلى 20% على الملابس الرجالية والنسائية الفاخرة، أجهزة الكمبيوتر واللابتوب، سوني 5، الساعات الذكية، وأجهزة المطبخ مع كاش باك فوري 10%.</p>
+        <span class="eyebrow" data-i18n="heroBadge">THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS</span>
+        <h1 data-i18n="heroTitle">خصومات الخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span></h1>
+        <p data-i18n="heroDesc">تشكيلة جديدة وموسعة من 60 منتجاً مختلفاً في 10 أقسام متكاملة بخصومات من 5% إلى 20% وكاش باك فوري 10%.</p>
         <div class="hero-btns">
-          <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح العروض والخصومات الآن ←</a>
+          <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح الـ 60 منتجاً الآن ←</a>
         </div>
       </div>
       <div class="hero-visual">
         <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200" alt="NOVARA Collection">
         <div class="hero-caption">
-          <span data-i18n="capSub">THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS</span>
+          <span data-i18n="capSub">60 UNIQUE ITEMS • 10 DEPARTMENTS</span>
           <strong data-i18n="capTitle">خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%</strong>
         </div>
       </div>
@@ -619,22 +739,22 @@
     <section class="section" id="departments" style="padding-bottom:10px;">
       <div class="section-head">
         <div>
-          <span class="eyebrow" data-i18n="deptEyebrow">10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)</span>
-          <h2 data-i18n="deptHeading">تسوق حسب القسم (10 أماكن)</h2>
+          <span class="eyebrow" data-i18n="deptEyebrow">10 ORGANIZED DEPARTMENTS (6 UNIQUE ITEMS EACH)</span>
+          <h2 data-i18n="deptHeading">تسوق حسب القسم (10 أقسام × 6 منتجات)</h2>
         </div>
-        <p data-i18n="deptNote">اضغط على أي قسم لعرض الـ 5 منتجات الفريدة الخاصة به</p>
+        <p data-i18n="deptNote">اضغط على أي قسم لعرض الـ 6 منتجات الفريدة الخاصة به</p>
       </div>
       <div class="dept-grid" id="deptGrid">
-        <button type="button" class="dept-card" data-cat="men_wear"><img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt=""><span data-i18n="d1">1. ملابس رجالية (5)</span></button>
-        <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (5)</span></button>
-        <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (5)</span></button>
-        <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (5)</span></button>
-        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 (5)</span></button>
-        <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (5)</span></button>
-        <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (5)</span></button>
-        <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (5)</span></button>
-        <button type="button" class="dept-card" data-cat="watches"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt=""><span data-i18n="d9">9. ساعات أبل AI وساعات (5)</span></button>
-        <button type="button" class="dept-card" data-cat="kitchen"><img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=600" alt=""><span data-i18n="d10">10. أجهزة المطبخ والمنزل (5)</span></button>
+        <button type="button" class="dept-card" data-cat="men_wear"><img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt=""><span data-i18n="d1">1. ملابس رجالية (6)</span></button>
+        <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (6)</span></button>
+        <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (6)</span></button>
+        <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (6)</span></button>
+        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 والباقة (6)</span></button>
+        <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (6)</span></button>
+        <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (6)</span></button>
+        <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (6)</span></button>
+        <button type="button" class="dept-card" data-cat="watches"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt=""><span data-i18n="d9">9. ساعات أبل AI وساعات (6)</span></button>
+        <button type="button" class="dept-card" data-cat="kitchen"><img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=600" alt=""><span data-i18n="d10">10. أجهزة المطبخ والمنزل (6)</span></button>
       </div>
     </section>
 
@@ -642,14 +762,14 @@
     <section class="section" id="products">
       <div class="section-head">
         <div>
-          <span class="eyebrow" data-i18n="catEyebrow">THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF</span>
-          <h2 data-i18n="catHeading">جميع المنتجات والعروض (50 منتجاً)</h2>
+          <span class="eyebrow" data-i18n="catEyebrow">THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS</span>
+          <h2 data-i18n="catHeading">جميع المنتجات والعروض (60 منتجاً)</h2>
         </div>
-        <p data-i18n="catNote">كل منتج مختلف تماماً بصورته ومواصفاته — اضغط على أي منتج لعرض صورته الكاملة وجدول المواصفات</p>
+        <p data-i18n="catNote">60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء</p>
       </div>
 
       <div class="toolbar">
-        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث عن فستان، بنطلون، كنزة، آيفون 18، آيباد، ماك بوك، سوني 5، ساعة، ماكينة قهوة..."></label>
+        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 60 منتجاً: باقة آيفون، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة..."></label>
         <div class="price-filter">
           <span data-i18n="priceLbl">السعر:</span>
           <input type="number" id="minPrice" min="0" placeholder="Min">
@@ -658,22 +778,22 @@
       </div>
 
       <div class="filters" id="filterBar">
-        <button type="button" class="filter-btn active" data-cat="all" data-i18n="fAll">الكل (50)</button>
-        <button type="button" class="filter-btn" data-cat="men_wear" data-i18n="f1">ملابس رجالية (5)</button>
-        <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (5)</button>
-        <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (5)</button>
-        <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (5)</button>
-        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون 18 و 17 (5)</button>
-        <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (5)</button>
-        <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (5)</button>
-        <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (5)</button>
-        <button type="button" class="filter-btn" data-cat="watches" data-i18n="f9">ساعات أبل AI وساعات (5)</button>
-        <button type="button" class="filter-btn" data-cat="kitchen" data-i18n="f10">أجهزة المطبخ (5)</button>
+        <button type="button" class="filter-btn active" data-cat="all" data-i18n="fAll">الكل (60)</button>
+        <button type="button" class="filter-btn" data-cat="men_wear" data-i18n="f1">ملابس رجالية (6)</button>
+        <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (6)</button>
+        <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (6)</button>
+        <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (6)</button>
+        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون والباقة الكبرى (6)</button>
+        <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (6)</button>
+        <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (6)</button>
+        <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (6)</button>
+        <button type="button" class="filter-btn" data-cat="watches" data-i18n="f9">ساعات أبل AI وساعات (6)</button>
+        <button type="button" class="filter-btn" data-cat="kitchen" data-i18n="f10">أجهزة المطبخ (6)</button>
         <button type="button" class="filter-btn" id="favFilterBtn" data-i18n="fFav">♥ المفضلة</button>
       </div>
 
       <div class="results-bar">
-        <span id="resultsCount">50 منتج</span>
+        <span id="resultsCount">60 منتج</span>
         <select id="sortSelect" class="sort-select">
           <option value="def" data-i18n="sDef">الترتيب حسب الأقسام (الافتراضي)</option>
           <option value="asc" data-i18n="sAsc">السعر: الأقل أولاً</option>
@@ -692,25 +812,24 @@
         <img class="brand-emblem" style="width:36px;height:36px;" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
         <span>NOVARA</span>
       </div>
-      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">خصومات الخميس إلى الأحد (5% - 20%) • 50 منتجاً فريداً مرتباً في 10 أقسام.</p>
+      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">باقة الآيفون الكبرى (5,000 ر.س بدلاً من 6,000 ر.س) • 60 منتجاً فريداً في 10 أقسام.</p>
     </div>
     <div class="footer-copy">© 2026 NOVARA. All Rights Reserved.</div>
   </footer>
 
-  <!-- نافذة الترحيب الكبيرة للخصومات فور دخول المتجر -->
+  <!-- نافذة الترحيب الكبيرة بالعرض الضخم فور الدخول -->
   <div class="overlay active" id="promoSplashModal">
     <div class="promo-splash-box">
       <button type="button" class="close-btn" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.25);" data-close="promoSplashModal">✕</button>
-      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 مهرجان الخصومات الكبرى (الخميس إلى الأحد)</div>
-      <h2 data-i18n="splashTitle">خصومات ضخمة على الملابس والكمبيوترات وأجهزة سوني 5!</h2>
-      <p data-i18n="splashDesc">أهلاً بك في NOVARA — تصفح جميع المنتجات بحرية واستمتع بخصومات من 5% إلى 20% وكاش باك 10% على جميع الأقسام.</p>
+      <div class="promo-splash-badge" data-i18n="splashBadge">🔥 العرض الكبير الحصري في NOVARA</div>
+      <h2 data-i18n="splashTitle">آيفون + سماعة + إيربودز + كفر = 6,000 ر.س، ومع الخصم 5,000 ر.س فقط!</h2>
+      <p data-i18n="splashDesc">استمتع بالباقة المتكاملة مع خصم فوري 1,000 ر.س، بالإضافة إلى 60 منتجاً جديداً ومختلفاً في 10 أقسام بخصومات تصل إلى 20%.</p>
       <div class="promo-tags-row">
-        <span class="promo-pill" data-i18n="sp1">🧥 خصومات الملابس (5% - 20%)</span>
-        <span class="promo-pill" data-i18n="sp2">💻 خصومات الكمبيوترات واللابتوب</span>
-        <span class="promo-pill" data-i18n="sp3">🎮 عروض أجهزة سوني 5</span>
-        <span class="promo-pill" data-i18n="sp4">🍳 أجهزة المطبخ والساعات الذكية</span>
+        <span class="promo-pill" data-i18n="sp1">📱 آيفون + سماعة + إيربودز + كفر = 5,000 ر.س</span>
+        <span class="promo-pill" data-i18n="sp2">🧥 60 منتجاً جديداً في 10 أقسام</span>
+        <span class="promo-pill" data-i18n="sp3">💸 كاش باك فوري 10%</span>
       </div>
-      <button type="button" class="promo-enter-btn" id="enterDealsBtn" data-i18n="splashCta">ابدأ التسوق الآن ←</button>
+      <button type="button" class="promo-enter-btn" id="enterDealsBtn" data-i18n="splashCta">تصفح العروض والـ 60 منتجاً ←</button>
     </div>
   </div>
 
@@ -880,46 +999,55 @@
 
       const I18N = {
         ar: {
-          topStatus: "NOVARA • خصومات الخميس إلى الأحد (5% إلى 20%) على الملابس والأجهزة",
-          navHome: "الرئيسية",
+          topStatus: "NOVARA • العرض الكبير: آيفون + سماعة + إيربودز + كفر بـ 5,000 ر.س بدلاً من 6,000 ر.س",
+          navOffer: "العرض الكبير",
           navDepts: "الأقسام (10)",
-          navCatalog: "المنتجات (50)",
+          navCatalog: "المنتجات (60)",
           navContact: "تواصل معنا",
-          heroBadge: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
-          heroTitle: "خصومات الخميس إلى الأحد <span>على الملابس والكمبيوترات وسوني 5 والمطبخ</span>",
-          heroDesc: "عروض استثنائية من الخميس إلى الأحد بخصومات من 5% إلى 20% على الملابس الرجالية والنسائية الفاخرة، أجهزة الكمبيوتر واللابتوب، سوني 5، الساعات الذكية، وأجهزة المطبخ مع كاش باك فوري 10%.",
-          heroCta: "تصفح العروض والخصومات الآن ←",
-          capSub: "THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS",
+          megaBadge: "🔥 العرض الكبير الحصري • وفّر 1,000 ر.س فوراً",
+          megaTitle: "باقة الآيفون المتكاملة: آيفون + سماعة + إيربودز + كفر",
+          mItem1: "📱 آيفون برو ماكس",
+          mItem2: "🎧 سماعة رأس لاسلكية",
+          mItem3: "🎵 إيربودز برو",
+          mItem4: "🛡️ كفر حماية فاخر",
+          megaOld: "السعر الأصلي: 6,000 ر.س",
+          megaNew: "مع الخصم: 5,000 ر.س",
+          megaSave: "خصم 1,000 ر.س",
+          megaCta: "اطلب الباقة الآن بـ 5,000 ر.س (متابعة) ←",
+          heroBadge: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS",
+          heroTitle: "خصومات الخميس إلى الأحد <span>على 60 منتجاً في الملابس والأجهزة وسوني 5 والمطبخ</span>",
+          heroDesc: "تشكيلة جديدة وموسعة من 60 منتجاً مختلفاً في 10 أقسام متكاملة بخصومات من 5% إلى 20% وكاش باك فوري 10%.",
+          heroCta: "تصفح الـ 60 منتجاً الآن ←",
+          capSub: "60 UNIQUE ITEMS • 10 DEPARTMENTS",
           capTitle: "خصومات الخميس إلى الأحد (5% - 20%) + كاش باك 10%",
-          splashBadge: "🔥 مهرجان الخصومات الكبرى (الخميس إلى الأحد)",
-          splashTitle: "خصومات ضخمة على الملابس والكمبيوترات وأجهزة سوني 5!",
-          splashDesc: "أهلاً بك في NOVARA — تصفح جميع المنتجات بحرية واستمتع بخصومات من 5% إلى 20% وكاش باك 10% على جميع الأقسام.",
-          sp1: "🧥 خصومات الملابس (5% - 20%)",
-          sp2: "💻 خصومات الكمبيوترات واللابتوب",
-          sp3: "🎮 عروض أجهزة سوني 5",
-          sp4: "🍳 أجهزة المطبخ والساعات الذكية",
-          splashCta: "ابدأ التسوق الآن ←",
-          deptEyebrow: "10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)",
-          deptHeading: "تسوق حسب القسم (10 أماكن)",
-          deptNote: "اضغط على أي قسم لعرض الـ 5 منتجات الفريدة الخاصة به",
-          d1: "1. ملابس رجالية (5)", d2: "2. ملابس نسائية وفساتين (5)",
-          d3: "3. بناطيل رجالية ونسائية (5)", d4: "4. كنزات وجواكيت (5)",
-          d5: "5. آيفون 18 و 17 (5)", d6: "6. أجهزة الآيباد (5)",
-          d7: "7. ماك بوك ولابتوب وبي سي (5)", d8: "8. أجهزة سوني 5 (5)",
-          d9: "9. ساعات أبل AI وساعات (5)", d10: "10. أجهزة المطبخ والمنزل (5)",
-          catEyebrow: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
-          catHeading: "جميع المنتجات والعروض (50 منتجاً)",
-          catNote: "كل منتج مختلف تماماً بصورته ومواصفاته — اضغط على أي منتج لعرض صورته الكاملة وجدول المواصفات",
-          searchPh: "ابحث عن فستان، بنطلون، كنزة، آيفون 18، آيباد، ماك بوك، سوني 5، ساعة، ماكينة قهوة...",
+          splashBadge: "🔥 العرض الكبير الحصري في NOVARA",
+          splashTitle: "آيفون + سماعة + إيربودز + كفر = 6,000 ر.س، ومع الخصم 5,000 ر.س فقط!",
+          splashDesc: "استمتع بالباقة المتكاملة مع خصم فوري 1,000 ر.س، بالإضافة إلى 60 منتجاً جديداً ومختلفاً في 10 أقسام بخصومات تصل إلى 20%.",
+          sp1: "📱 آيفون + سماعة + إيربودز + كفر = 5,000 ر.س",
+          sp2: "🧥 60 منتجاً جديداً في 10 أقسام",
+          sp3: "💸 كاش باك فوري 10%",
+          splashCta: "تصفح العروض والـ 60 منتجاً ←",
+          deptEyebrow: "10 ORGANIZED DEPARTMENTS (6 UNIQUE ITEMS EACH)",
+          deptHeading: "تسوق حسب القسم (10 أقسام × 6 منتجات)",
+          deptNote: "اضغط على أي قسم لعرض الـ 6 منتجات الفريدة الخاصة به",
+          d1: "1. ملابس رجالية (6)", d2: "2. ملابس نسائية وفساتين (6)",
+          d3: "3. بناطيل رجالية ونسائية (6)", d4: "4. كنزات وجواكيت (6)",
+          d5: "5. آيفون 18 و 17 والباقة (6)", d6: "6. أجهزة الآيباد (6)",
+          d7: "7. ماك بوك ولابتوب وبي سي (6)", d8: "8. أجهزة سوني 5 (6)",
+          d9: "9. ساعات أبل AI وساعات (6)", d10: "10. أجهزة المطبخ والمنزل (6)",
+          catEyebrow: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS",
+          catHeading: "جميع المنتجات والعروض (60 منتجاً)",
+          catNote: "60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء",
+          searchPh: "ابحث في 60 منتجاً: باقة آيفون، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة...",
           priceLbl: "السعر:",
-          fAll: "الكل (50)", f1: "ملابس رجالية (5)", f2: "ملابس نسائية وفساتين (5)",
-          f3: "بناطيل رجالية ونسائية (5)", f4: "كنزات وجواكيت (5)", f5: "آيفون 18 و 17 (5)",
-          f6: "الآيباد (5)", f7: "ماك بوك ولابتوب وبي سي (5)", f8: "سوني 5 (5)",
-          f9: "ساعات أبل AI وساعات (5)", f10: "أجهزة المطبخ (5)",
+          fAll: "الكل (60)", f1: "ملابس رجالية (6)", f2: "ملابس نسائية وفساتين (6)",
+          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "آيفون والباقة الكبرى (6)",
+          f6: "الآيباد (6)", f7: "ماك بوك ولابتوب وبي سي (6)", f8: "سوني 5 (6)",
+          f9: "ساعات أبل AI وساعات (6)", f10: "أجهزة المطبخ (6)",
           fFav: "♥ المفضلة",
           sDef: "الترتيب حسب الأقسام (الافتراضي)", sAsc: "السعر: الأقل أولاً", sDesc: "السعر: الأعلى أولاً",
           noProd: "لا توجد منتجات تطابق بحثك.",
-          footerTag: "خصومات الخميس إلى الأحد (5% - 20%) • 50 منتجاً فريداً مرتباً في 10 أقسام.",
+          footerTag: "باقة الآيفون الكبرى (5,000 ر.س بدلاً من 6,000 ر.س) • 60 منتجاً فريداً في 10 أقسام.",
           cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
           cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
           coTitle: "تسجيل الدخول وإتمام الدفع السريع", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
@@ -933,46 +1061,55 @@
           addedToast: name => `تمت إضافة «${name}» للسلة ✓`
         },
         en: {
-          topStatus: "NOVARA • Thursday to Sunday Deals (5% to 20% Off) on Fashion & Appliances",
-          navHome: "Home",
+          topStatus: "NOVARA • Mega Offer: iPhone + Headphones + AirPods + Case for 5,000 SAR (was 6,000 SAR)",
+          navOffer: "Mega Offer",
           navDepts: "Departments (10)",
-          navCatalog: "Products (50)",
+          navCatalog: "Products (60)",
           navContact: "Contact",
-          heroBadge: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
-          heroTitle: "Thursday to Sunday Deals <span>Across Fashion, Computers, PS5 & Kitchen</span>",
-          heroDesc: "Massive weekend discounts from Thursday to Sunday (5% to 20% Off) across luxury men's & women's clothing, laptops & PCs, PlayStation 5, smart watches, and kitchen appliances with 10% instant cashback.",
-          heroCta: "Browse Deals & Discounts Now →",
-          capSub: "THURSDAY TO SUNDAY SPECIALS • VERIFIED SPECS",
+          megaBadge: "🔥 Exclusive Mega Bundle • Save 1,000 SAR Instantly",
+          megaTitle: "Ultimate iPhone Bundle: iPhone + Headphones + AirPods + Case",
+          mItem1: "📱 iPhone Pro Max",
+          mItem2: "🎧 Wireless Headphones",
+          mItem3: "🎵 AirPods Pro",
+          mItem4: "🛡️ Protective Case",
+          megaOld: "Original Price: 6,000 SAR",
+          megaNew: "Discount Price: 5,000 SAR",
+          megaSave: "Save 1,000 SAR",
+          megaCta: "Order Bundle Now for 5,000 SAR (Continue) →",
+          heroBadge: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE ITEMS",
+          heroTitle: "Thursday to Sunday Deals <span>Across 60 Unique Fashion, Tech, PS5 & Kitchen Items</span>",
+          heroDesc: "Expanded collection of 60 distinct items organized across 10 departments with 5% to 20% discounts and 10% instant cashback.",
+          heroCta: "Browse All 60 Products Now →",
+          capSub: "60 UNIQUE ITEMS • 10 DEPARTMENTS",
           capTitle: "Thursday to Sunday Deals (5% - 20%) + 10% Instant Cashback",
-          splashBadge: "🔥 Mega Discount Event (Thursday to Sunday)",
-          splashTitle: "Huge Discounts on Clothing, Computers & PlayStation 5!",
-          splashDesc: "Welcome to NOVARA — Browse freely and enjoy 5% to 20% discounts and 10% cashback across all departments.",
-          sp1: "🧥 Clothing Deals (5% - 20% Off)",
-          sp2: "💻 Computers & Laptops Deals",
-          sp3: "🎮 PlayStation 5 Special Offers",
-          sp4: "🍳 Kitchen & Smart Watches Offers",
-          splashCta: "Start Shopping Now →",
-          deptEyebrow: "10 ORGANIZED DEPARTMENTS (5 UNIQUE ITEMS EACH)",
-          deptHeading: "Shop by Department (10 Places)",
-          deptNote: "Click any department to view its 5 unique items",
-          d1: "1. Men's Wear (5)", d2: "2. Women's Wear & Dresses (5)",
-          d3: "3. Men's & Women's Pants (5)", d4: "4. Sweaters & Jackets (5)",
-          d5: "5. iPhone 18 & 17 (5)", d6: "6. iPads (5)",
-          d7: "7. MacBook, Laptop & PC (5)", d8: "8. Sony PS5 (5)",
-          d9: "9. AI Apple & Modern Watches (5)", d10: "10. Kitchen & Home (5)",
-          catEyebrow: "THURSDAY TO SUNDAY DEALS • 5% TO 20% OFF",
-          catHeading: "All Unique Products & Offers (50 Items)",
-          catNote: "Every single product is distinct in photo and specs — click any item for full details",
-          searchPh: "Search dress, pants, sweater, iPhone 18, iPad, MacBook, PS5, watch, coffee machine...",
+          splashBadge: "🔥 NOVARA Mega Bundle Offer",
+          splashTitle: "iPhone + Headphones + AirPods + Case = 6,000 SAR, Now 5,000 SAR Only!",
+          splashDesc: "Grab the complete bundle with 1,000 SAR off, plus 60 unique products across 10 departments.",
+          sp1: "📱 iPhone + Headphones + AirPods + Case = 5,000 SAR",
+          sp2: "🧥 60 Unique Products in 10 Departments",
+          sp3: "💸 10% Instant Cashback",
+          splashCta: "Explore Deals & 60 Products →",
+          deptEyebrow: "10 ORGANIZED DEPARTMENTS (6 UNIQUE ITEMS EACH)",
+          deptHeading: "Shop by Department (10 Depts × 6 Items)",
+          deptNote: "Click any department to view its 6 unique items",
+          d1: "1. Men's Wear (6)", d2: "2. Women's Wear & Dresses (6)",
+          d3: "3. Men's & Women's Pants (6)", d4: "4. Sweaters & Jackets (6)",
+          d5: "5. iPhone & Mega Bundle (6)", d6: "6. iPads (6)",
+          d7: "7. MacBook, Laptop & PC (6)", d8: "8. Sony PS5 (6)",
+          d9: "9. AI Apple & Modern Watches (6)", d10: "10. Kitchen & Home (6)",
+          catEyebrow: "THURSDAY TO SUNDAY DEALS • 60 UNIQUE PRODUCTS",
+          catHeading: "All Unique Products & Offers (60 Items)",
+          catNote: "60 completely distinct items — click 'Continue' on any product to buy",
+          searchPh: "Search 60 items: iPhone bundle, dress, pants, jacket, iPad, MacBook, PS5, watch, coffee...",
           priceLbl: "Price:",
-          fAll: "All (50)", f1: "Men's Wear (5)", f2: "Women's Wear & Dresses (5)",
-          f3: "Pants (5)", f4: "Sweaters & Jackets (5)", f5: "iPhone 18 & 17 (5)",
-          f6: "iPads (5)", f7: "MacBook & PC (5)", f8: "Sony PS5 (5)",
-          f9: "AI Watches (5)", f10: "Kitchen (5)",
+          fAll: "All (60)", f1: "Men's Wear (6)", f2: "Women's Wear & Dresses (6)",
+          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhone & Bundle (6)",
+          f6: "iPads (6)", f7: "MacBook & PC (6)", f8: "Sony PS5 (6)",
+          f9: "AI Watches (6)", f10: "Kitchen (6)",
           fFav: "♥ Favorites",
           sDef: "Ordered by Department (Default)", sAsc: "Price: Low to High", sDesc: "Price: High to Low",
           noProd: "No products match your search.",
-          footerTag: "Thursday to Sunday Deals (5% - 20%) • 50 Unique Products in 10 Departments.",
+          footerTag: "Mega iPhone Bundle (5,000 SAR instead of 6,000 SAR) • 60 Unique Products in 10 Departments.",
           cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
           cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
           coTitle: "Sign In & Express Payment", lblName: "Full Name *", lblPhone: "Mobile Number *",
@@ -988,75 +1125,85 @@
       };
 
       const products = [
-        // 1. ملابس رجالية
+        // 1. ملابس رجالية (6 منتجات)
         { id: 1, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "ثوب رجالي ملكي قماش ياباني أبيض", nameEn: "Men's Royal Japanese White Thobe", specAr: "قماش ياباني ناعم مقاوم للتجعد • تفصيل سعودي متقن", specEn: "Wrinkle-Resistant Soft Japanese Fabric • Tailored Fit", price: 400, oldPrice: 500, image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800", variants: ["54 M", "56 L", "58 XL", "60 2XL"], specs: { "القماش": "ياباني فاخر نص وقفة", "المقاسات": "54M إلى 60 2XL" } },
         { id: 2, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "قميص رجالي قطن أكسفورد ناعم", nameEn: "Men's Soft Oxford Cotton Dress Shirt", specAr: "قطن 100% يسمح بالتنفس وسهل الكي", specEn: "100% Breathable Easy-Iron Cotton", price: 340, oldPrice: 400, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن أكسفورد 100%", "المقاسات": "M إلى 3XL" } },
         { id: 3, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "تيشيرت بولو رجالي قطن مصري فاخر", nameEn: "Men's Egyptian Cotton Polo Shirt", specAr: "قطن بيكيه ناعم بارد للحر • ألوان ثابتة", specEn: "Cooling Soft Cotton Piqué • Fade-Resistant", price: 304, oldPrice: 320, image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن مصري 100%", "المقاسات": "M إلى 3XL" } },
         { id: 4, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بدلة عمل رجالية رسمية حديثة", nameEn: "Men's Modern Tailored Work Suit", specAr: "قماش صوف وفيسكوز ناعم مبطن للدوام والاجتماعات", specEn: "Soft Wool-Viscose Lined Office Suit", price: 810, oldPrice: 900, image: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "صوف ناعم وفيسكوز", "المقاسات": "M إلى 3XL" } },
         { id: 5, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "طقم لينن رجالي صيفي كاجوال ناعم", nameEn: "Men's Casual Soft Summer Linen Set", specAr: "كتان طبيعي بارد ومريح للرحلات والإطلالات اليومية", specEn: "Cooling Natural Linen for Casual Days", price: 495, oldPrice: 550, image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "القماش": "كتان وقطن طبيعي", "الموسم": "صيفي بارد" } },
+        { id: 51, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بشت رجالي ملكي خفيف للمناسبات", nameEn: "Men's Lightweight Royal Occasion Bisht", specAr: "حياكة يدوية فاخرة بخيوط ذهبية • قماش صيفي خفيف", specEn: "Handcrafted Gold-Thread Embroidery • Light Fabric", price: 1120, oldPrice: 1400, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800", variants: ["وسط", "كبير", "ملكي"], specs: { "التطريز": "زري ذهبي فاخر", "المناسبات": "أعراس وأعياد" } },
 
-        // 2. ملابس نسائية وفساتين
+        // 2. ملابس نسائية وفساتين (6 منتجات)
         { id: 6, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان نسائي طويل شيفون ناعم محتشم", nameEn: "Women's Modest Long Soft Chiffon Dress", specAr: "قماش شيفون ناعم مبطن بالكامل • تصميم محتشم راقٍ", specEn: "Fully Lined Soft Chiffon • Elegant Modest Cut", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "شيفون فاخر + بطانة قطنية", "المقاسات": "S إلى 3XL" } },
         { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
         { id: 8, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "قميص نسائي حريري ناعم بأكمام طويلة", nameEn: "Women's Silky Satin Long-Sleeve Blouse", specAr: "ملمس حريري ناعم مقاوم للتجعد • قصة محتشمة", specEn: "Wrinkle-Free Silky Satin • Modest Fit", price: 504, oldPrice: 560, image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "ساتان حريري ناعم", "المقاسات": "S إلى 3XL" } },
         { id: 9, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان سهرة نسائي طويل بقصة راقية", nameEn: "Women's Elegant Evening Gown Dress", specAr: "قماش ناعم فاخر للمناسبات والاستقبالات", specEn: "Luxury Soft Fabric for Special Occasions", price: 810, oldPrice: 900, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الخامة": "قماش سهرة ناعم مبطن", "المقاسات": "S إلى 2XL" } },
         { id: 10, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "طقم بليزر عمل نسائي رسمي حديث", nameEn: "Women's Modern Tailored Work Blazer Set", specAr: "قماش كريب مفصل ناعم مبطن للعمل", specEn: "Soft Lined Crepe Blazer for Office", price: 675, oldPrice: 750, image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "كريب مفصل ناعم", "المقاسات": "S إلى 3XL" } },
+        { id: 52, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "جلابية استقبال نسائية مطرزة قماش لينن ناعم", nameEn: "Women's Embroidered Soft Linen Reception Dress", specAr: "تطريز ذهبي راقٍ على لينن طبيعي ناعم ومريح", specEn: "Gold Embroidery on Breathable Soft Linen", price: 590, oldPrice: 720, image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "القماش": "لينن طبيعي ناعم", "التطريز": "يدوي فاخر" } },
 
-        // 3. بناطيل رجالية ونسائية
+        // 3. بناطيل رجالية ونسائية (6 منتجات)
         { id: 11, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون تشينو رجالي قطن سوبريما مرن", nameEn: "Men's Stretch Supima Cotton Chino Pants", specAr: "98% قطن سوبريما ناعم + 2% مطاط لراحة الحركة", specEn: "98% Supima Soft Cotton + 2% Elastane", price: 330, oldPrice: 380, image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800", variants: ["32", "34", "36", "38", "40", "42"], specs: { "الفئة": "رجالي", "القماش": "قطن سوبريما ناعم" } },
         { id: 12, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون صوف رجالي شتوي رسمي دافئ", nameEn: "Men's Winter Soft Wool Formal Pants", specAr: "صوف ميرينو ناعم دافئ للبرد والدوام", specEn: "Soft Merino Wool Blend for Winter", price: 425, oldPrice: 500, image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800", variants: ["32", "34", "36", "38", "40", "42"], specs: { "الفئة": "رجالي", "القماش": "صوف ميرينو ناعم" } },
         { id: 13, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون نسائي واسع الأرجل كريب ناعم", nameEn: "Women's High-Waist Soft Crepe Wide Pants", specAr: "قماش كريب ناعم وانسيابي مريح للعمل", specEn: "Flowing Soft Crepe Fabric", price: 544, oldPrice: 640, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "نسائي", "القماش": "كريب إسباني ناعم" } },
         { id: 14, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون نسائي قماش رسمي بقصة مستقيمة", nameEn: "Women's Tailored Straight-Leg Soft Pants", specAr: "قماش ناعم مرن بخصر عالٍ مريح", specEn: "Soft Stretch Tailored Fabric", price: 513, oldPrice: 570, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "فيسكوز ناعم مرن" } },
         { id: 15, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون كارجو رجالي قطن تويل ناعم", nameEn: "Men's Soft Twill Cotton Cargo Pants", specAr: "قطن تويل ناعم بجيوب جانبية أنيقة", specEn: "Soft Cotton Twill with Side Pockets", price: 360, oldPrice: 400, image: "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=800", variants: ["32", "34", "36", "38", "40"], specs: { "الفئة": "رجالي", "القماش": "قطن تويل ناعم" } },
+        { id: 53, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بنطلون جينز ياباني سيلفيدج مرن (رجالي ونسائي)", nameEn: "Japanese Stretch Selvedge Denim Jeans", specAr: "دنيم ياباني ناعم الملمس لا يبهت مع الغسيل", specEn: "Soft Japanese Selvedge Denim • Fade-Proof", price: 390, oldPrice: 460, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800", variants: ["30", "32", "34", "36", "38", "40"], specs: { "الخامة": "دنيم ياباني فاخر", "اللون": "أزرق نيلي كلاسيكي" } },
 
-        // 4. كنزات وجواكيت
+        // 4. كنزات وجواكيت (6 منتجات)
         { id: 16, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت رجالي صوف ميرينو مبطن ناعم", nameEn: "Men's Soft Merino Wool Lined Jacket", specAr: "صوف ميرينو ناعم الملمس • بطانة حرارية للبرد", specEn: "Ultra-Soft Merino Wool • Thermal Lining", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "رجالي", "القماش": "صوف ميرينو ناعم" } },
         { id: 17, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي طويل ترينش كوت كشمير ناعم", nameEn: "Women's Long Soft Cashmere Trench Coat", specAr: "مزيج الكشمير والصوف الناعم مع حزام خصر", specEn: "Cashmere-Wool Blend with Waist Belt", price: 840, oldPrice: 980, image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "نسائي", "الخامة": "كشمير وصوف ناعم" } },
         { id: 18, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "كنزة رجالية صوف كشمير شتوية ناعمة", nameEn: "Men's Soft Cashmere Winter Knit Sweater", specAr: "صوف كشمير ناعم ودافئ للبرد • لا يسبب حكة", specEn: "Ultra-Soft Cashmere Blend • Itch-Free", price: 380, oldPrice: 450, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الفئة": "رجالي", "الخامة": "صوف كشمير ناعم" } },
         { id: 19, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "كنزة نسائية تريكو ناعمة للشتاء", nameEn: "Women's Cozy Soft Knit Winter Sweater", specAr: "خيوط قطن وصوف ناعمة دافئة وخفيفة", specEn: "Soft Cotton-Wool Warm Knitwear", price: 522, oldPrice: 580, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "الخامة": "تريكو قطن وصوف ناعم" } },
         { id: 20, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي بافر شتوي مبطن ناعم", nameEn: "Women's Soft Quilted Winter Puffer Jacket", specAr: "قماش ناعم مقاوم للرياح والمطر مع قبعة دافئة", specEn: "Soft Windproof Shell with Warm Hood", price: 720, oldPrice: 900, image: "https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "مايكروفايبر ناعم" } },
+        { id: 54, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت جلد طبيعي رجالي فاخر مبطن", nameEn: "Men's Genuine Soft Leather Biker Jacket", specAr: "جلد طبيعي 100% ناعم الملمس مع بطانة شتوية دافئة", specEn: "100% Supple Genuine Leather • Warm Lining", price: 1150, oldPrice: 1420, image: "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "الخامة": "جلد طبيعي 100%", "اللون": "أسود ملكي" } },
 
-        // 5. آيفون 18 و 17
-        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
-        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
-        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17", deptEn: "5. iPhone 18 & 17", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
+        // 5. آيفون والباقة الكبرى (6 منتجات - تشمل باقة الـ 5000 ر.س)
+        { id: 55, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "🔥 باقة الآيفون الكبرى (آيفون + سماعة + إيربودز + كفر)", nameEn: "🔥 Ultimate iPhone Bundle (iPhone + Headphones + AirPods + Case)", specAr: "العرض الكبير: آيفون برو ماكس + سماعة رأس + إيربودز برو + كفر حماية (بدلاً من 6,000 ر.س)", specEn: "Mega Deal: iPhone Pro Max + Wireless Headphones + AirPods Pro + Case (Was 6,000 SAR)", price: 5000, oldPrice: 6000, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي (الباقة الكاملة)", "تيتانيوم أسود (الباقة الكاملة)"], specs: { "محتويات الباقة": "آيفون + سماعة رأس + إيربودز + كفر", "السعر قبل الخصم": "6,000 ر.س", "السعر بعد الخصم": "5,000 ر.س (توفير 1,000 ر.س)" } },
+        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
+        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
+        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17 والباقة", deptEn: "5. iPhone & Mega Bundle", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
 
-        // 6. أجهزة الآيباد
+        // 6. أجهزة الآيباد (6 منتجات)
         { id: 26, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", nameEn: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", specAr: "معالج Apple M4 • شاشة Tandem OLED 120Hz • نحافة 5.3 ملم", specEn: "Apple M4 Chip • Tandem OLED 120Hz • 5.3mm Thin", price: 3569, oldPrice: 4199, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800", variants: ["أسود فلكي 256GB", "فضي 512GB"], specs: { "المعالج": "Apple M4", "الشاشة": "11 بوصة Tandem OLED" } },
         { id: 27, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 13 M4 (512GB Wi-Fi)", nameEn: "Apple iPad Pro 13 M4 (512GB Wi-Fi)", specAr: "شاشة عملاقة 13 بوصة OLED • معالج M4 الخارق", specEn: "13\" Ultra Retina OLED • Apple M4 Chip", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=800", variants: ["أسود فلكي 512GB", "فضي 1TB"], specs: { "المعالج": "Apple M4", "الشاشة": "13 بوصة OLED" } },
         { id: 28, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Air 13 M2 (256GB)", nameEn: "Apple iPad Air 13 M2 (256GB)", specAr: "شاشة كبيرة 13 بوصة • معالج Apple M2 • مثالي للدراسة", specEn: "13\" Liquid Retina Display • Apple M2 Chip", price: 2889, oldPrice: 3399, image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800", variants: ["أزرق 256GB", "رمادي فلكي 256GB", "ذهبي نجمي 256GB"], specs: { "المعالج": "Apple M2", "الشاشة": "13 بوصة Liquid Retina" } },
         { id: 29, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Air 11 M2 مع لوحة مفاتيح Magic Keyboard", nameEn: "Apple iPad Air 11 M2 with Magic Keyboard", specAr: "معالج Apple M2 • متكامل مع لوحة المفاتيح والقلم للعمل", specEn: "Apple M2 Chip • Complete with Magic Keyboard", price: 2719, oldPrice: 3199, image: "https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800", variants: ["أزرق 256GB", "بنفسجي 256GB"], specs: { "المعالج": "Apple M2", "الشاشة": "11 بوصة" } },
         { id: 30, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad mini 7 (A17 Pro - 256GB)", nameEn: "Apple iPad mini 7 (A17 Pro - 256GB)", specAr: "حجم مدمج 8.3 بوصة • شريحة A17 Pro • خفيف جداً", specEn: "Compact 8.3\" Display • A17 Pro Chip", price: 2124, oldPrice: 2499, image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=800", variants: ["رمادي فلكي 256GB", "بنفسجي 256GB"], specs: { "المعالج": "Apple A17 Pro", "الشاشة": "8.3 بوصة" } },
+        { id: 56, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad 11th Gen (256GB + قلم Apple Pencil)", nameEn: "Apple iPad 11th Gen (256GB + Apple Pencil)", specAr: "شاشة 10.9 بوصة Liquid Retina • شامل قلم أبل للرسم والكتابة", specEn: "10.9\" Liquid Retina • Includes Apple Pencil", price: 1850, oldPrice: 2250, image: "https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=800", variants: ["أزرق 256GB", "فضي 256GB", "أصفر 256GB"], specs: { "الملحقات": "شامل قلم Apple Pencil", "الشاشة": "10.9 بوصة" } },
 
-        // 7. ماك بوك ولابتوب وبي سي
+        // 7. ماك بوك ولابتوب وبي سي (6 منتجات)
         { id: 31, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب Apple MacBook Pro 14 (M3 Pro)", nameEn: "Apple MacBook Pro 14 (M3 Pro)", specAr: "معالج M3 Pro • رام 18GB • تخزين 512GB SSD • شاشة 120Hz", specEn: "M3 Pro Chip • 18GB RAM • 512GB SSD • 120Hz XDR", price: 6159, oldPrice: 7699, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800", variants: ["18GB / 512GB SSD", "36GB / 1TB SSD"], specs: { "المعالج": "Apple M3 Pro", "البطارية": "18 ساعة" } },
         { id: 32, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب Apple MacBook Air 15 M3 (16GB / 512GB)", nameEn: "Apple MacBook Air 15 M3 (16GB / 512GB)", specAr: "شاشة 15.3 بوصة • خفيف ونحيف جداً • بطارية 18 ساعة", specEn: "15.3\" Liquid Retina • Silent Fanless Design", price: 4719, oldPrice: 5899, image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800", variants: ["سماء الليل 512GB", "ذهبي نجمي 512GB"], specs: { "المعالج": "Apple M3", "الرام": "16GB" } },
         { id: 33, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "لابتوب ASUS ROG Strix G16 (RTX 4070)", nameEn: "ASUS ROG Strix G16 Gaming Laptop (RTX 4070)", specAr: "Core i9-14900HX • كرت RTX 4070 8GB • شاشة 16 إنش 240Hz", specEn: "Core i9-14900HX • RTX 4070 8GB • 16\" 240Hz", price: 4959, oldPrice: 6199, image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800", variants: ["16GB / 1TB SSD", "32GB / 1TB SSD"], specs: { "المعالج": "Core i9-14900HX", "كرت الشاشة": "RTX 4070 8GB" } },
         { id: 34, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "كمبيوتر مكتبي Apple iMac 24 M3 (الكل في واحد)", nameEn: "Apple iMac 24-inch M3 All-in-One Desktop", specAr: "شاشة 4.5K Retina 24 بوصة • معالج M3 • شامل الكيبورد والماوس", specEn: "24\" 4.5K Retina • M3 Chip • Keyboard & Mouse", price: 4959, oldPrice: 6199, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=800", variants: ["فضي 256GB", "أزرق 512GB"], specs: { "الشاشة": "24 بوصة 4.5K Retina", "المعالج": "Apple M3" } },
         { id: 35, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "كمبيوتر PC Gaming متكامل (RTX 4070 Super)", nameEn: "Custom PC Gaming Tower (RTX 4070 Super)", specAr: "Core i7-14700KF • كرت RTX 4070 Super 12GB • رام 32GB DDR5", specEn: "Core i7-14700KF • RTX 4070 Super 12GB • 32GB DDR5", price: 5439, oldPrice: 6799, image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800", variants: ["PC Tower Only", "Full Bundle + 240Hz Monitor"], specs: { "المعالج": "Core i7-14700KF", "كرت الشاشة": "RTX 4070 SUPER 12GB" } },
+        { id: 57, cat: "mac_pc", deptAr: "7. ماك بوك ولابتوب وبي سي", deptEn: "7. MacBook, Laptop & PC", nameAr: "شاشة ألعاب وتصميم Samsung Odyssey OLED G8 (34 إنش)", nameEn: "Samsung Odyssey OLED G8 34\" Curved Ultrawide Monitor", specAr: "شاشة منحنية 34 بوصة OLED • تردد 175Hz • استجابة 0.03ms", specEn: "34\" Curved OLED • 175Hz • 0.03ms Response", price: 3199, oldPrice: 3999, image: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?w=800", variants: ["34 بوصة OLED 175Hz"], specs: { "الدقة": "UWQHD 3440×1440", "التردد": "175Hz OLED" } },
 
-        // 8. أجهزة سوني 5
+        // 8. أجهزة سوني 5 (6 منتجات)
         { id: 36, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "جهاز سوني PlayStation 5 Pro (2TB SSD)", nameEn: "Sony PlayStation 5 Pro Console (2TB SSD)", specAr: "جهاز سوني 5 برو الكامل • سعة 2TB SSD • دقة 4K 120Hz • ضمان سنتين", specEn: "Full PS5 Pro Console • 2TB SSD • 4K 120Hz • 2-Yr Warranty", price: 2719, oldPrice: 3399, image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800", variants: ["نسخة 2TB الرسمية"], specs: { "التخزين": "2TB SSD فائق السرعة", "الدقة": "4K 120Hz / 8K", "الضمان": "سنتين الوكيل الرسمي" } },
         { id: 37, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "جهاز سوني PlayStation 5 Slim (نسخة الأقراص 1TB)", nameEn: "Sony PlayStation 5 Slim Disc Edition (1TB)", specAr: "تصميم سليم نحيف مع قارئ أقراص 4K Blu-ray وسعة 1TB", specEn: "Slim Design with 4K Blu-ray Disc Drive & 1TB SSD", price: 1919, oldPrice: 2399, image: "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?w=800", variants: ["نسخة الأقراص 1TB"], specs: { "التخزين": "1TB SSD", "المشغل": "4K UHD Blu-ray" } },
         { id: 38, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "نظارة الواقع الافتراضي Sony PlayStation VR2", nameEn: "Sony PlayStation VR2 Headset", specAr: "شاشات 4K HDR OLED • تتبع حركة العين • تجربة واقع افتراضي مذهلة", specEn: "4K HDR OLED Displays • Eye Tracking • PS5 Compatible", price: 1999, oldPrice: 2499, image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800", variants: ["PS VR2 Standard"], specs: { "الشاشة": "OLED 2000×2040 لكل عين", "التوافق": "PlayStation 5" } },
         { id: 39, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "سماعة الرأس اللاسلكية Sony PULSE Elite لـ PS5", nameEn: "Sony PULSE Elite Wireless Headset for PS5", specAr: "صوت ثلاثي الأبعاد فائق النقاء مع ميكروفون عازل للضوضاء", specEn: "Planar Magnetic Drivers • 3D Audio for PS5", price: 639, oldPrice: 799, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800", variants: ["أبيض وأسود"], specs: { "التقنية": "Tempest 3D AudioTech", "البطارية": "30 ساعة" } },
         { id: 40, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "قرص تخزين فائق السرعة WD_BLACK 2TB SSD لـ PS5", nameEn: "WD_BLACK 2TB NVMe SSD with Heatsink for PS5", specAr: "توسعة رسمية لسوني 5 بسرعة 7300MB/s مع مشتت حراري", specEn: "Official PS5 Expansion • 7300MB/s with Heatsink", price: 719, oldPrice: 899, image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=800", variants: ["سعة 2TB", "سعة 4TB"], specs: { "السرعة": "7300MB/s", "التوافق": "PlayStation 5 / Pro" } },
+        { id: 58, cat: "sony", deptAr: "8. أجهزة سوني 5", deptEn: "8. Sony PS5 Consoles", nameAr: "جهاز تحكم محمول Sony PlayStation Portal Remote Player", nameEn: "Sony PlayStation Portal Remote Player for PS5", specAr: "العب ألعاب سوني 5 في أي مكان بالمنزل على شاشة 8 إنش Full HD", specEn: "8\" Full HD LCD Screen • DualSense Haptics for PS5", price: 849, oldPrice: 999, image: "https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=800", variants: ["أبيض رسمي", "أسود منتصف الليل"], specs: { "الشاشة": "8 بوصة 1080p 60fps", "التوافق": "PlayStation 5" } },
 
-        // 9. ساعات أبل AI وساعات حديثة
+        // 9. ساعات أبل AI وساعات حديثة (6 منتجات)
         { id: 41, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة ذكية حديثة للرجال والنساء (AMOLED AI)", nameEn: "Modern AI AMOLED Smart Watch for Men & Women", specAr: "تصميم عصري للرجال والنساء • شاشة AMOLED ذكية وبطارية 14 يوماً", specEn: "For Men & Women • AMOLED AI Display • 14-Day Battery", price: 1596, oldPrice: 1995, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800", variants: ["فضي (للرجال والنساء)", "ذهبي وردي (للرجال والنساء)", "أسود ملكي"], specs: { "الفئة": "للرجال والنساء معاً", "الذكاء الاصطناعي": "مساعد ذكي AI مدمج", "البطارية": "14 يوماً" } },
         { id: 42, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة Apple Watch Ultra 3 بالذكاء الاصطناعي (AI)", nameEn: "Apple Watch Ultra 3 with Apple Intelligence (AI)", specAr: "مدعومة بالذكاء الاصطناعي AI • هيكل تيتانيوم 49mm • بطارية 72 ساعة", specEn: "AI-Powered Health & Siri • 49mm Titanium • 72h Battery", price: 2889, oldPrice: 3399, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800", variants: ["تيتانيوم طبيعي", "تيتانيوم أسود"], specs: { "الذكاء الاصطناعي": "Apple Intelligence مدمج", "الهيكل": "تيتانيوم 49 ملم" } },
         { id: 43, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة Apple Watch Series 11 بالذكاء الاصطناعي (AI)", nameEn: "Apple Watch Series 11 AI Smart Watch (46mm)", specAr: "مساعد ذكي بالذكاء الاصطناعي • تحليل صحي متقدم • شحن سريع", specEn: "AI Health Insights • Wide OLED • Fast Charge", price: 1784, oldPrice: 2099, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800", variants: ["أسود فاحم", "ذهبي وردي", "فضي"], specs: { "الذكاء الاصطناعي": "تحليل صحي ومساعد ذكي AI", "المقاس": "46 ملم" } },
         { id: 44, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة رجالية حديثة كرونوغراف ستانلس ستيل", nameEn: "Men's Modern Stainless Chronograph Watch", specAr: "ساعة رجالية حديثة • زجاج ياقوتي ضد الخدش • مقاومة للماء", specEn: "Men's Modern Design • Sapphire Crystal • Water Resistant", price: 697, oldPrice: 820, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800", variants: ["ميناء كحلي", "ميناء أسود"], specs: { "الفئة": "ساعة رجالية حديثة", "الزجاج": "ياقوتي" } },
         { id: 45, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة رجالية حديثة بسير جلد إيطالي فاخر", nameEn: "Men's Modern Italian Leather Dress Watch", specAr: "ساعة رجالية أنيقة • تصميم نحيف 6.5 ملم • مقاومة للماء", specEn: "Men's Slim Modern Watch • Genuine Italian Leather", price: 594, oldPrice: 699, image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=800", variants: ["بني / ذهبي", "أسود / فضي"], specs: { "الفئة": "ساعة رجالية حديثة", "السير": "جلد إيطالي طبيعي" } },
+        { id: 59, cat: "watches", deptAr: "9. ساعات أبل AI وساعات", deptEn: "9. AI Apple & Modern Watches", nameAr: "ساعة نسائية حديثة مرصعة بالكريستال (ذهب وردي)", nameEn: "Women's Modern Rose-Gold Crystal Dress Watch", specAr: "تصميم نسائي فاخر • سوار شبكي ناعم • مقاومة للماء", specEn: "Luxury Women's Design • Rose-Gold Mesh • Water Resistant", price: 640, oldPrice: 780, image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800", variants: ["ذهب وردي", "فضي وذهبي"], specs: { "الفئة": "نسائي فاخر", "المقاومة": "مقاومة للماء 50م" } },
 
-        // 10. أجهزة المطبخ والمنزل
+        // 10. أجهزة المطبخ والمنزل (6 منتجات)
         { id: 46, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "ثلاجة مطبخ ذكية بابين (18 قدم - شاشة لمس)", nameEn: "Smart Double-Door Kitchen Refrigerator (18 Cu.Ft)", specAr: "تبريد بالبخار No-Frost • شاشة لمس • ضمان 5 سنوات كمبروسر", specEn: "No-Frost Inverter • Touch Panel • 5-Yr Warranty", price: 9000, oldPrice: 11250, image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800", variants: ["فضي ستانلس ستيل", "أسود مطفي"], specs: { "السعة": "18 قدم (510 لتر)", "الضمان": "5 سنوات كمبروسر" } },
         { id: 47, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "فرن ميكروويف وشواية ديجيتال للمطبخ (30 لتر)", nameEn: "Digital Kitchen Microwave & Grill Oven (30L)", specAr: "سعة 30 لتر • تسخين وشواء احترافي • قفل أمان", specEn: "30L Capacity • Grill Function • Safety Lock", price: 3295, oldPrice: 3876, image: "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=800", variants: ["فضي", "أسود"], specs: { "القدرة": "1000 واط", "السعة": "30 لتر" } },
         { id: 48, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "مكنسة كهربائية روبوت ذكية (كنس ومسح بالليزر)", nameEn: "Smart LiDAR Robot Vacuum & Mop (5000Pa)", specAr: "قوة شفط 5000Pa • خريطة ليزر للبيت • تحكم بالجوال", specEn: "5000Pa Suction • Laser Mapping • App Control", price: 2725, oldPrice: 3406, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800", variants: ["أسود ملكي", "أبيض لؤلؤي"], specs: { "الشفط": "5000Pa", "البطارية": "150 دقيقة" } },
         { id: 49, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "قلاية هوائية كهربائية ديجيتال للمطبخ (8 لتر)", nameEn: "Digital Kitchen Air Fryer XL (8L Window)", specAr: "سعة عائلية 8 لتر • شاشة لمس 12 برنامج • طهي صحي بدون زيت", specEn: "8L Family Size • 12 Touch Presets • Oil-Free", price: 1700, oldPrice: 2125, image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=800", variants: ["أسود وذهبي", "فضي"], specs: { "السعة": "8 لتر (1800 واط)" } },
-        { id: 50, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "ماكينة قهوة إسبريسو وكابتشينو احترافية (20 بار)", nameEn: "Professional Espresso & Cappuccino Machine (20 Bar)", specAr: "ماكينة قهوة ستانلس ستيل • ضغط 20 بار • عصا تبخير للحليب", specEn: "Stainless Steel Coffee Machine • 20-Bar Pump • Steam Wand", price: 1200, oldPrice: 1500, image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=800", variants: ["فضي ستانلس ستيل", "أسود"], specs: { "الجهاز": "ماكينة قهوة إسبريسو احترافية", "الضغط": "20 بار", "الخزان": "1.5 لتر" } }
+        { id: 50, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "ماكينة قهوة إسبريسو وكابتشينو احترافية (20 بار)", nameEn: "Professional Espresso & Cappuccino Machine (20 Bar)", specAr: "ماكينة قهوة ستانلس ستيل • ضغط 20 بار • عصا تبخير للحليب", specEn: "Stainless Steel Coffee Machine • 20-Bar Pump • Steam Wand", price: 1200, oldPrice: 1500, image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=800", variants: ["فضي ستانلس ستيل", "أسود"], specs: { "الجهاز": "ماكينة قهوة إسبريسو احترافية", "الضغط": "20 بار", "الخزان": "1.5 لتر" } },
+        { id: 60, cat: "kitchen", deptAr: "10. أجهزة المطبخ والمنزل", deptEn: "10. Kitchen & Home Appliances", nameAr: "عجانة كهربائية احترافية للمطبخ (1500 واط - 6.5 لتر)", nameEn: "Professional Stand Kitchen Mixer (1500W - 6.5L Bowl)", specAr: "وعاء ستانلس ستيل 6.5 لتر • 6 سرعات • 3 رؤوس للعجن والخفق", specEn: "6.5L Stainless Bowl • 6 Speeds • 3 Attachments", price: 1450, oldPrice: 1800, image: "https://images.unsplash.com/photo-1594385208974-2e75f8d7bb48?w=800", variants: ["فضي", "أحمر ملكي", "أسود"], specs: { "القدرة": "1500 واط", "السعة": "6.5 لتر ستانلس ستيل" } }
       ];
 
       const $ = (s, r = document) => r.querySelector(s);
@@ -1102,6 +1249,11 @@
       const openModal = id => { $("#" + id).classList.add("active"); document.body.classList.add("modal-open"); };
       const closeModal = id => { $("#" + id).classList.remove("active"); document.body.classList.remove("modal-open"); };
 
+      // زر طلب الباقة الكبرى (آيفون + سماعة + إيربودز + كفر = 5000 ر.س) في أعلى التطبيق
+      $("#orderMegaBundleBtn").addEventListener("click", () => {
+        addToCart(55, true);
+      });
+
       function applyLanguage() {
         const t = I18N[lang];
         document.documentElement.lang = lang;
@@ -1146,7 +1298,6 @@
 
         if (sort === "asc") list.sort((a, b) => a.price - b.price);
         else if (sort === "desc") list.sort((a, b) => b.price - a.price);
-        else list.sort((a, b) => a.id - b.id);
 
         $("#resultsCount").textContent = `${list.length} ${t.countUnit}`;
         $("#noProducts").hidden = list.length !== 0;
@@ -1156,7 +1307,7 @@
           const dept = lang === "ar" ? p.deptAr : p.deptEn;
           const spec = lang === "ar" ? p.specAr : p.specEn;
           const cb = Math.round(p.price * 0.10);
-          const discPct = p.oldPrice ? Math.min(20, Math.max(5, Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100))) : 0;
+          const discPct = p.oldPrice ? Math.min(25, Math.max(5, Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100))) : 0;
           const isFav = favs.has(p.id);
 
           return `
@@ -1301,7 +1452,6 @@
         selectedPayMethod = btn.dataset.method;
       }));
 
-      // تظهر شاشة تسجيل الدخول والدفع السريع عند الضغط على "متابعة" أو "متابعة للدفع السريع"
       function openCheckout() {
         if (!cart.length) return;
         closeModal("cartOverlay");
@@ -1489,7 +1639,6 @@
 
       $("#enterDealsBtn").addEventListener("click", () => {
         closeModal("promoSplashModal");
-        $("#products").scrollIntoView({ behavior: "smooth" });
       });
 
       $("#cartBtn").addEventListener("click", () => openModal("cartOverlay"));
