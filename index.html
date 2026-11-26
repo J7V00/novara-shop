@@ -641,18 +641,6 @@
     .form-col label { font-size: 12.5px; font-weight: 600; color: var(--ink); }
     .form-col input { height: 44px; border: 1px solid var(--border); border-radius: 10px; padding: 0 12px; background: var(--bg-main); }
     .form-col input:focus { outline: none; border-color: var(--accent); background: #fff; }
-    .field-check {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      margin-inline-start: 8px;
-    }
-    .field-check.ok { color: var(--emerald); }
-    .field-check.err { color: var(--danger); }
-    .form-col input.is-valid { border-color: var(--emerald); background: #F4FBF7; }
-    .form-col input.is-invalid { border-color: var(--danger); background: #FDF5F4; }
 
     .whatsapp-cta {
       display: flex;
@@ -912,13 +900,13 @@
         <h3 style="margin:6px 0 4px" data-i18n="coTitle">تسجيل الدخول وإتمام الدفع السريع</h3>
         <p id="coSummary" style="font-size:13px;color:var(--muted)"></p>
         <form id="coForm" class="form-col" novalidate>
-          <label><span data-i18n="lblName">الاسم الكامل *</span><span id="coNameStatus" class="field-check"></span></label>
+          <label><span data-i18n="lblName">الاسم الكامل *</span></label>
           <input id="coName" type="text" placeholder="اكتب اسمك الكامل" required>
 
-          <label><span data-i18n="lblPhone">رقم الجوال *</span><span id="coPhoneStatus" class="field-check"></span></label>
+          <label><span data-i18n="lblPhone">رقم الجوال *</span></label>
           <input id="coPhone" type="tel" dir="ltr" placeholder="05xxxxxxxx" required>
 
-          <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span><span id="coEmailStatus" class="field-check"></span></label>
+          <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span></label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">دفع الآن والمتابعة عبر واتساب ←</button>
