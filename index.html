@@ -641,6 +641,18 @@
     .form-col label { font-size: 12.5px; font-weight: 600; color: var(--ink); }
     .form-col input { height: 44px; border: 1px solid var(--border); border-radius: 10px; padding: 0 12px; background: var(--bg-main); }
     .form-col input:focus { outline: none; border-color: var(--accent); background: #fff; }
+    .field-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-inline-start: 8px;
+    }
+    .field-check.ok { color: var(--emerald); }
+    .field-check.err { color: var(--danger); }
+    .form-col input.is-valid { border-color: var(--emerald); background: #F4FBF7; }
+    .form-col input.is-invalid { border-color: var(--danger); background: #FDF5F4; }
 
     .whatsapp-cta {
       display: flex;
@@ -897,13 +909,13 @@
         <h3 style="margin:6px 0 4px" data-i18n="coTitle">تسجيل الدخول وإتمام الدفع السريع</h3>
         <p id="coSummary" style="font-size:13px;color:var(--muted)"></p>
         <form id="coForm" class="form-col" novalidate>
-          <label data-i18n="lblName">الاسم الكامل *</label>
+          <label><span data-i18n="lblName">الاسم الكامل *</span><span id="coNameStatus" class="field-check"></span></label>
           <input id="coName" type="text" placeholder="اكتب اسمك الكامل" required>
 
-          <label data-i18n="lblPhone">رقم الجوال *</label>
+          <label><span data-i18n="lblPhone">رقم الجوال *</span><span id="coPhoneStatus" class="field-check"></span></label>
           <input id="coPhone" type="tel" dir="ltr" placeholder="05xxxxxxxx" required>
 
-          <label data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</label>
+          <label><span data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</span><span id="coEmailStatus" class="field-check"></span></label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">دفع الآن والمتابعة عبر واتساب ←</button>
@@ -1073,9 +1085,9 @@
           footerTag: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 66 منتجاً في 11 قسماً.",
           cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
           cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
-          coTitle: "أدخل حسابك للمتابعة عبر واتساب", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
+          coTitle: "تأكيد حسابك لإتمام الطلب", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
           lblEmail: "البريد الإلكتروني (Gmail) *",
-          lblPayMethod: "اختر وسيلة الدفع السريع *", confirmBtn: "تأكيد الحساب والمتابعة عبر واتساب ←",
+          lblPayMethod: "اختر وسيلة الدفع السريع *", confirmBtn: "تأكيد الحساب ✓",
           accTitle: "بيانات حسابك", saveAcc: "حفظ البيانات ✓",
           addBtn: "أضف للسلة +", specBtn: "المواصفات", buyBtn: "متابعة",
           free: "مجاني", currency: "ر.س", countUnit: "منتج",
@@ -1136,9 +1148,9 @@
           footerTag: "Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR) • 66 Items.",
           cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
           cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
-          coTitle: "Enter Your Account to Continue via WhatsApp", lblName: "Full Name *", lblPhone: "Mobile Number *",
+          coTitle: "Confirm Your Account to Complete Order", lblName: "Full Name *", lblPhone: "Mobile Number *",
           lblEmail: "Email Address (Gmail) *",
-          lblPayMethod: "Choose Fast Payment Method *", confirmBtn: "Confirm Account & Continue via WhatsApp →",
+          lblPayMethod: "Choose Fast Payment Method *", confirmBtn: "Confirm Account ✓",
           accTitle: "Your Account Details", saveAcc: "Save Details ✓",
           addBtn: "Add to Bag +", specBtn: "Specs", buyBtn: "Continue",
           free: "Free", currency: "SAR", countUnit: "items",
@@ -1546,8 +1558,7 @@
       }
 
       $("#checkoutBtn").addEventListener("click", openCheckout);
-      $("#coForm").addEventListener("submit", e => {
-        e.preventDefault();
+      function evaluateAccountFields(showEmptyAsError = true) {
         const name = $("#coName").value.trim().replace(/\s+/g, " ");
         const rawPhone = $("#coPhone").value.trim();
         const email = $("#coEmail").value.trim();
@@ -1560,23 +1571,55 @@
 
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
+        const setMark = (inputEl, statusEl, ok, hasVal) => {
+          inputEl.classList.remove("is-valid", "is-invalid");
+          statusEl.classList.remove("ok", "err");
+          if (!hasVal && !showEmptyAsError) {
+            statusEl.textContent = "";
+            return;
+          }
+          if (ok) {
+            inputEl.classList.add("is-valid");
+            statusEl.classList.add("ok");
+            statusEl.textContent = lang === "ar" ? "✓ صحيح" : "✓ Valid";
+          } else {
+            inputEl.classList.add("is-invalid");
+            statusEl.classList.add("err");
+            statusEl.textContent = lang === "ar" ? "✕ غلط" : "✕ Invalid";
+          }
+        };
+
+        setMark($("#coName"), $("#coNameStatus"), isValidName, name.length > 0);
+        setMark($("#coPhone"), $("#coPhoneStatus"), isValidPhone, rawPhone.length > 0);
+        setMark($("#coEmail"), $("#coEmailStatus"), isValidEmail, email.length > 0);
+
+        return { isValidName, isValidPhone, isValidEmail, name, cleanPhone, email };
+      }
+
+      $("#coName").addEventListener("input", () => evaluateAccountFields(false));
+      $("#coPhone").addEventListener("input", () => evaluateAccountFields(false));
+      $("#coEmail").addEventListener("input", () => evaluateAccountFields(false));
+
+      $("#coForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const res = evaluateAccountFields(true);
+        const { isValidName, isValidPhone, isValidEmail, name, cleanPhone, email } = res;
+
         if (!isValidName) {
-          toast(lang === "ar" ? "⚠️ أدخل اسمك الكامل الصحيح (الاسم الأول واسم العائلة/الأب)" : "⚠️ Please enter your full name (first & last/family name)");
+          toast(lang === "ar" ? "✕ الاسم غلط — أدخل اسمك الكامل (الاسم الأول واسم العائلة/الأب)" : "✕ Invalid name — enter your full name");
           $("#coName").focus();
           return;
         }
         if (!isValidPhone) {
-          toast(lang === "ar" ? "⚠️ أدخل رقم جوال صحيح (مثال: 05xxxxxxxx)" : "⚠️ Please enter a valid mobile number (e.g. 05xxxxxxxx)");
+          toast(lang === "ar" ? "✕ رقم الجوال غلط — أدخل رقماً صحيحاً مثل 05xxxxxxxx" : "✕ Invalid mobile — enter a valid number like 05xxxxxxxx");
           $("#coPhone").focus();
           return;
         }
         if (!isValidEmail) {
-          toast(lang === "ar" ? "⚠️ أدخل بريدك الإلكتروني الصحيح (مثال: name@gmail.com)" : "⚠️ Please enter a valid email address");
+          toast(lang === "ar" ? "✕ البريد الإلكتروني غلط — أدخل إيميل صحيح مثل name@gmail.com" : "✕ Invalid email — enter a valid address like name@gmail.com");
           $("#coEmail").focus();
           return;
         }
-
-        const normalizedPhone = cleanPhone.startsWith("+") ? cleanPhone.slice(1) : (cleanPhone.startsWith("05") ? "966" + cleanPhone.slice(1) : (cleanPhone.startsWith("5") && cleanPhone.length === 9 ? "966" + cleanPhone : cleanPhone));
 
         customer = { name, phone: cleanPhone, email };
         write("novara-customer", customer);
@@ -1601,42 +1644,26 @@
         write("novara-orders", orders);
 
         notifyOwnerCloud({
-          _subject: `طلب جديد #${orderId} - ${name} (${total} ر.س)`,
-          event: "متابعة طلب عبر واتساب",
+          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${total} ر.س)`,
+          event: "تأكيد حساب وطلب",
           order_id: orderId,
           customer_name: name,
-          customer_phone: normalizedPhone,
+          customer_phone: cleanPhone,
           customer_email: email,
           device: device,
           total_amount: `${total} ر.س`,
           items: itemsSummary
         });
 
-        const waText = encodeURIComponent(
-          `مرحباً، أود متابعة طلبي في متجر NOVARA:\n` +
-          `• رقم الطلب: ${orderId}\n` +
-          `• الاسم: ${name}\n` +
-          `• الجوال: ${cleanPhone}\n` +
-          `• البريد: ${email}\n` +
-          `• الإجمالي: ${total} ر.س\n\n` +
-          `المنتجات المختارة:\n${itemsSummary}\n\n` +
-          `📍 سأرسل لك موقعي الآن وأي إضافات أو ملاحظات أرغب بها:`
-        );
-        const waUrl = `https://wa.me/${CONFIG.merchantWhatsApp}?text=${waText}`;
-
         $("#coFormWrap").hidden = true;
         $("#coDone").hidden = false;
         $("#coDone").innerHTML = `
-          <div style="font-size:44px;margin-bottom:8px">📍💬</div>
-          <h3 style="color:var(--ink);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك — تابع الآن عبر واتساب" : "Account Confirmed — Continue via WhatsApp"}</h3>
-          <p style="margin:6px 0;font-size:14px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">
-            ${lang === "ar"
-              ? "اضغط على الزر بالأسفل لفتح الواتساب ومراسلتنا لإرسال موقعك وتأكيد أي إضافات أو ملاحظات تريدها مع طلبك:"
-              : "Tap below to open WhatsApp and send us your location along with any extra items or notes:"}
-          </p>
-          <a href="${waUrl}" target="_blank" class="whatsapp-cta">💬 ${lang === "ar" ? "متابعة عبر واتساب وإرسال الموقع ←" : "Continue via WhatsApp & Send Location →"}</a>
-          <button type="button" class="btn-add" style="width:100%" id="doneClose">${lang === "ar" ? "العودة للمتجر" : "Back to Store"}</button>
+          <div style="font-size:48px;color:var(--emerald);margin-bottom:8px">✓</div>
+          <h3 style="color:var(--emerald);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك بنجاح ✓" : "Your Account Is Confirmed ✓"}</h3>
+          <p style="margin:6px 0;font-size:14px;color:var(--ink);font-weight:600;">${name} • <span dir="ltr">${cleanPhone}</span></p>
+          <p style="margin:2px 0 10px;font-size:13px;color:var(--muted);" dir="ltr">${email}</p>
+          <p style="margin:6px 0 16px;font-size:13.5px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
+          <button type="button" class="btn-primary" style="width:100%;justify-content:center" id="doneClose">${lang === "ar" ? "العودة للمتجر ✓" : "Back to Store ✓"}</button>
         `;
         $("#doneClose").onclick = () => closeModal("checkoutModal");
         cart = [];
