@@ -151,7 +151,7 @@
       place-items: center;
     }
 
-    /* اللوحة الكبيرة في أعلى التطبيق (عروض قوية للجمعة البيضاء) */
+    /* اللوحة الكبيرة في أعلى التطبيق (عروض قوية للجمعة البيضاء - حصرية هنا فقط) */
     .mega-bundle-banner {
       margin: 22px 5% 0;
       background: linear-gradient(135deg, #0F141D 0%, #1E293B 55%, #2C2112 100%);
@@ -517,7 +517,7 @@
     .modal-wide { width: min(860px, 100%); }
     .close-btn { position: absolute; top: 14px; inset-inline-end: 14px; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: var(--ink); font-size: 16px; z-index: 5; }
 
-    /* نافذة الترحيب الكبيرة بالعرض */
+    /* نافذة الترحيب الكبيرة بعروض الجمعة البيضاء */
     .promo-splash-box {
       width: min(680px, 100%);
       background: linear-gradient(145deg, #161D2B 0%, #232E45 100%);
@@ -692,7 +692,7 @@
   </header>
 
   <main>
-    <!-- اللوحة الكبيرة في أعلى التطبيق: عروض قوية للجمعة البيضاء -->
+    <!-- اللوحة الكبيرة الحصرية في أعلى التطبيق فقط: عروض قوية للجمعة البيضاء -->
     <section class="mega-bundle-banner" id="megaOffer">
       <div>
         <span class="mega-tag" data-i18n="megaBadge">🔥 عروض قوية للجمعة البيضاء • وفّر 500 ر.س</span>
@@ -748,7 +748,7 @@
         <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (6)</span></button>
         <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (6)</span></button>
         <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (6)</span></button>
-        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. آيفون 18 و 17 وعروض الجمعة (6)</span></button>
+        <button type="button" class="dept-card" data-cat="iphones"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600" alt=""><span data-i18n="d5">5. أجهزة آيفون 18 و 17 و 16 (6)</span></button>
         <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (6)</span></button>
         <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (6)</span></button>
         <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (6)</span></button>
@@ -757,18 +757,18 @@
       </div>
     </section>
 
-    <!-- الكتالوج الكامل -->
+    <!-- الكتالوج الكامل (60 منتجاً مستقلاً فقط) -->
     <section class="section" id="products">
       <div class="section-head">
         <div>
           <span class="eyebrow" data-i18n="catEyebrow">WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS</span>
-          <h2 data-i18n="catHeading">جميع المنتجات والعروض (60 منتجاً)</h2>
+          <h2 data-i18n="catHeading">جميع المنتجات (60 منتجاً)</h2>
         </div>
         <p data-i18n="catNote">60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء</p>
       </div>
 
       <div class="toolbar">
-        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 60 منتجاً: الجمعة البيضاء، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة..."></label>
+        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 60 منتجاً: آيفون، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة..."></label>
         <div class="price-filter">
           <span data-i18n="priceLbl">السعر:</span>
           <input type="number" id="minPrice" min="0" placeholder="Min">
@@ -782,7 +782,7 @@
         <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (6)</button>
         <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (6)</button>
         <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (6)</button>
-        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">آيفون وعروض الجمعة (6)</button>
+        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">أجهزة آيفون (6)</button>
         <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (6)</button>
         <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (6)</button>
         <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (6)</button>
@@ -1031,16 +1031,16 @@
           deptNote: "اضغط على أي قسم لعرض الـ 6 منتجات الفريدة الخاصة به",
           d1: "1. ملابس رجالية (6)", d2: "2. ملابس نسائية وفساتين (6)",
           d3: "3. بناطيل رجالية ونسائية (6)", d4: "4. كنزات وجواكيت (6)",
-          d5: "5. آيفون 18 و 17 وعروض الجمعة (6)", d6: "6. أجهزة الآيباد (6)",
+          d5: "5. أجهزة آيفون 18 و 17 و 16 (6)", d6: "6. أجهزة الآيباد (6)",
           d7: "7. ماك بوك ولابتوب وبي سي (6)", d8: "8. أجهزة سوني 5 (6)",
           d9: "9. ساعات أبل AI وساعات (6)", d10: "10. أجهزة المطبخ والمنزل (6)",
           catEyebrow: "WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS",
-          catHeading: "جميع المنتجات والعروض (60 منتجاً)",
+          catHeading: "جميع المنتجات (60 منتجاً)",
           catNote: "60 منتجاً مختلفاً بالكامل — اضغط «متابعة» على أي منتج لإتمام الشراء",
-          searchPh: "ابحث في 60 منتجاً: الجمعة البيضاء، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة...",
+          searchPh: "ابحث في 60 منتجاً: آيفون، عباية، فستان، بنطلون، جاكيت، آيباد، ماك بوك، سوني 5، ساعة، قهوة...",
           priceLbl: "السعر:",
           fAll: "الكل (60)", f1: "ملابس رجالية (6)", f2: "ملابس نسائية وفساتين (6)",
-          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "آيفون وعروض الجمعة (6)",
+          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "أجهزة آيفون (6)",
           f6: "الآيباد (6)", f7: "ماك بوك ولابتوب وبي سي (6)", f8: "سوني 5 (6)",
           f9: "ساعات أبل AI وساعات (6)", f10: "أجهزة المطبخ (6)",
           fFav: "♥ المفضلة",
@@ -1093,16 +1093,16 @@
           deptNote: "Click any department to view its 6 unique items",
           d1: "1. Men's Wear (6)", d2: "2. Women's Wear & Dresses (6)",
           d3: "3. Men's & Women's Pants (6)", d4: "4. Sweaters & Jackets (6)",
-          d5: "5. iPhone & White Friday Deals (6)", d6: "6. iPads (6)",
+          d5: "5. Apple iPhones (6)", d6: "6. iPads (6)",
           d7: "7. MacBook, Laptop & PC (6)", d8: "8. Sony PS5 (6)",
           d9: "9. AI Apple & Modern Watches (6)", d10: "10. Kitchen & Home (6)",
           catEyebrow: "WHITE FRIDAY DEALS • 60 UNIQUE PRODUCTS",
-          catHeading: "All Unique Products & Offers (60 Items)",
+          catHeading: "All Unique Products (60 Items)",
           catNote: "60 completely distinct items — click 'Continue' on any product to buy",
-          searchPh: "Search 60 items: White Friday, abaya, dress, pants, jacket, iPad, MacBook, PS5, watch, coffee...",
+          searchPh: "Search 60 items: iPhone, abaya, dress, pants, jacket, iPad, MacBook, PS5, watch, coffee...",
           priceLbl: "Price:",
           fAll: "All (60)", f1: "Men's Wear (6)", f2: "Women's Wear & Dresses (6)",
-          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhone & White Friday (6)",
+          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhones (6)",
           f6: "iPads (6)", f7: "MacBook & PC (6)", f8: "Sony PS5 (6)",
           f9: "AI Watches (6)", f10: "Kitchen (6)",
           fFav: "♥ Favorites",
@@ -1123,6 +1123,16 @@
         }
       };
 
+      // عرض الجمعة البيضاء الحصري للوحة العلوية فقط (خارج قائمة الـ 60 منتجاً)
+      const EXCLUSIVE_BANNER_OFFER = {
+        id: "WF-MEGA-5999",
+        nameAr: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة",
+        nameEn: "Strong White Friday Deal: Headphones + iPhone + Case + Watch",
+        variant: "تيتانيوم (العرض الكامل: سماعة + آيفون + كفر + ساعة)",
+        price: 5999,
+        image: "mega-offer.jpeg"
+      };
+
       const products = [
         // 1. ملابس رجالية (6 منتجات)
         { id: 1, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "ثوب رجالي ملكي قماش ياباني أبيض", nameEn: "Men's Royal Japanese White Thobe", specAr: "قماش ياباني ناعم مقاوم للتجعد • تفصيل سعودي متقن", specEn: "Wrinkle-Resistant Soft Japanese Fabric • Tailored Fit", price: 400, oldPrice: 500, image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800", variants: ["54 M", "56 L", "58 XL", "60 2XL"], specs: { "القماش": "ياباني فاخر نص وقفة", "المقاسات": "54M إلى 60 2XL" } },
@@ -1132,7 +1142,7 @@
         { id: 5, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "طقم لينن رجالي صيفي كاجوال ناعم", nameEn: "Men's Casual Soft Summer Linen Set", specAr: "كتان طبيعي بارد ومريح للرحلات والإطلالات اليومية", specEn: "Cooling Natural Linen for Casual Days", price: 495, oldPrice: 550, image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "القماش": "كتان وقطن طبيعي", "الموسم": "صيفي بارد" } },
         { id: 51, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بشت رجالي ملكي خفيف للمناسبات", nameEn: "Men's Lightweight Royal Occasion Bisht", specAr: "حياكة يدوية فاخرة بخيوط ذهبية • قماش صيفي خفيف", specEn: "Handcrafted Gold-Thread Embroidery • Light Fabric", price: 1120, oldPrice: 1400, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800", variants: ["وسط", "كبير", "ملكي"], specs: { "التطريز": "زري ذهبي فاخر", "المناسبات": "أعراس وأعياد" } },
 
-        // 2. ملابس نسائية وفساتين (6 منتجات - شامل صورة العباية السوداء المرسلة)
+        // 2. ملابس نسائية وفساتين (6 منتجات)
         { id: 6, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان نسائي طويل شيفون ناعم محتشم", nameEn: "Women's Modest Long Soft Chiffon Dress", specAr: "قماش شيفون ناعم مبطن بالكامل • تصميم محتشم راقٍ", specEn: "Fully Lined Soft Chiffon • Elegant Modest Cut", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "شيفون فاخر + بطانة قطنية", "المقاسات": "S إلى 3XL" } },
         { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "abaya-black.jpg", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
         { id: 8, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "قميص نسائي حريري ناعم بأكمام طويلة", nameEn: "Women's Silky Satin Long-Sleeve Blouse", specAr: "ملمس حريري ناعم مقاوم للتجعد • قصة محتشمة", specEn: "Wrinkle-Free Silky Satin • Modest Fit", price: 504, oldPrice: 560, image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "ساتان حريري ناعم", "المقاسات": "S إلى 3XL" } },
@@ -1156,13 +1166,13 @@
         { id: 20, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت نسائي بافر شتوي مبطن ناعم", nameEn: "Women's Soft Quilted Winter Puffer Jacket", specAr: "قماش ناعم مقاوم للرياح والمطر مع قبعة دافئة", specEn: "Soft Windproof Shell with Warm Hood", price: 720, oldPrice: 900, image: "https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=800", variants: ["S", "M", "L", "XL", "2XL"], specs: { "الفئة": "نسائي", "القماش": "مايكروفايبر ناعم" } },
         { id: 54, cat: "sweaters_jackets", deptAr: "4. كنزات وجواكيت", deptEn: "4. Sweaters & Jackets", nameAr: "جاكيت جلد طبيعي رجالي فاخر مبطن", nameEn: "Men's Genuine Soft Leather Biker Jacket", specAr: "جلد طبيعي 100% ناعم الملمس مع بطانة شتوية دافئة", specEn: "100% Supple Genuine Leather • Warm Lining", price: 1150, oldPrice: 1420, image: "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800", variants: ["M", "L", "XL", "2XL"], specs: { "الخامة": "جلد طبيعي 100%", "اللون": "أسود ملكي" } },
 
-        // 5. آيفون وعروض الجمعة البيضاء (6 منتجات)
-        { id: 55, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "🔥 عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة", nameEn: "🔥 Strong White Friday Deal: Headphones + iPhone + Case + Watch", specAr: "سماعة + آيفون + كفر + ساعة • السعر الأصلي 6,499 ر.س وبالخصم 5,999 ر.س", specEn: "Headphones + iPhone + Case + Watch • Original 6,499 SAR, Discounted 5,999 SAR", price: 5999, oldPrice: 6499, image: "mega-offer.jpeg", variants: ["تيتانيوم صحراوي (العرض الكامل)", "تيتانيوم أسود (العرض الكامل)"], specs: { "محتويات العرض": "سماعة + آيفون + كفر + ساعة", "السعر الأصلي": "6,499 ر.س", "السعر بالخصم": "5,999 ر.س" } },
-        { id: 21, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
-        { id: 22, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 23, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
-        { id: 24, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
-        { id: 25, cat: "iphones", deptAr: "5. آيفون 18 و 17 وعروض الجمعة", deptEn: "5. iPhone & White Friday Deals", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
+        // 5. أجهزة آيفون (6 أجهزة فردية مستقلة — بدون لوحة عرض الجمعة البيضاء)
+        { id: 21, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 18 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 18 Pro Max (256GB / 512GB)", specAr: "شريحة A20 Pro (2nm) • شاشة 6.9 إنش 120Hz • كاميرا 48MP", specEn: "A20 Pro (2nm) • 6.9\" 120Hz OLED • 48MP Pro Camera", price: 5269, oldPrice: 6199, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", variants: ["تيتانيوم صحراوي 256GB", "تيتانيوم أسود 256GB", "تيتانيوم فضي 512GB"], specs: { "المعالج": "Apple A20 Pro", "الشاشة": "6.9 بوصة OLED 120Hz", "الضمان": "سنتين حاسبات العرب" } },
+        { id: 22, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 18 (256GB - ألوان عصرية)", nameEn: "Apple iPhone 18 (256GB - Modern Colors)", specAr: "شريحة A20 • شاشة 6.3 إنش ProMotion • كاميرا مزدوجة 48MP", specEn: "A20 Chip • 6.3\" ProMotion • 48MP Dual Camera", price: 3739, oldPrice: 4399, image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", variants: ["سماوي 256GB", "وردي ناعم 256GB", "أسود 256GB"], specs: { "المعالج": "Apple A20", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 23, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 17 Pro Max (256GB / 512GB)", nameEn: "Apple iPhone 17 Pro Max (256GB / 512GB)", specAr: "شريحة A19 Pro • رام 12GB • شاشة 6.9 إنش OLED", specEn: "A19 Pro Chip • 12GB RAM • 6.9\" OLED Display", price: 4674, oldPrice: 5499, image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800", variants: ["Black Titanium 256GB", "White Titanium 256GB", "Blue Titanium 512GB"], specs: { "المعالج": "Apple A19 Pro", "الرام": "12GB RAM" } },
+        { id: 24, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 17 (128GB / 256GB)", nameEn: "Apple iPhone 17 (128GB / 256GB)", specAr: "شريحة A19 • شاشة 6.3 إنش OLED • كاميرا 48MP", specEn: "A19 Chip • 6.3\" OLED • 48MP Camera", price: 3314, oldPrice: 3899, image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800", variants: ["أسود 128GB", "أبيض 256GB", "أخضر نعناعي 256GB"], specs: { "المعالج": "Apple A19", "الشاشة": "6.3 بوصة OLED" } },
+        { id: 25, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 16 Pro (256GB - تيتانيوم)", nameEn: "Apple iPhone 16 Pro (256GB - Titanium)", specAr: "شريحة A18 Pro • شاشة 6.3 إنش 120Hz • تصوير سينمائي 4K", specEn: "A18 Pro Chip • 6.3\" 120Hz • 4K ProRes Video", price: 3994, oldPrice: 4699, image: "https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?w=800", variants: ["Desert Titanium", "Black Titanium", "Natural Titanium"], specs: { "المعالج": "Apple A18 Pro", "الشاشة": "6.3 بوصة 120Hz" } },
+        { id: 55, cat: "iphones", deptAr: "5. أجهزة آيفون 18 و 17 و 16", deptEn: "5. Apple iPhones", nameAr: "Apple iPhone 16 Plus (256GB - شاشة 6.7 إنش)", nameEn: "Apple iPhone 16 Plus (256GB - 6.7\" Display)", specAr: "شريحة A18 • شاشة كبيرة 6.7 إنش Super Retina • بطارية تدوم طويلاً", specEn: "A18 Chip • Large 6.7\" Super Retina • All-Day Battery", price: 3299, oldPrice: 3899, image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800", variants: ["أزرق لازوردي 256GB", "أسود 256GB", "أبيض 256GB"], specs: { "المعالج": "Apple A18", "الشاشة": "6.7 بوصة Super Retina XDR" } },
 
         // 6. أجهزة الآيباد (6 منتجات)
         { id: 26, cat: "ipads", deptAr: "6. أجهزة الآيباد", deptEn: "6. iPads", nameAr: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", nameEn: "Apple iPad Pro 11 M4 (256GB Wi-Fi)", specAr: "معالج Apple M4 • شاشة Tandem OLED 120Hz • نحافة 5.3 ملم", specEn: "Apple M4 Chip • Tandem OLED 120Hz • 5.3mm Thin", price: 3569, oldPrice: 4199, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800", variants: ["أسود فلكي 256GB", "فضي 512GB"], specs: { "المعالج": "Apple M4", "الشاشة": "11 بوصة Tandem OLED" } },
@@ -1248,8 +1258,13 @@
       const openModal = id => { $("#" + id).classList.add("active"); document.body.classList.add("modal-open"); };
       const closeModal = id => { $("#" + id).classList.remove("active"); document.body.classList.remove("modal-open"); };
 
+      // زر طلب عرض الجمعة البيضاء الحصري في أعلى التطبيق
       $("#orderMegaBundleBtn").addEventListener("click", () => {
-        addToCart(55, true);
+        const existing = cart.find(x => x.id === EXCLUSIVE_BANNER_OFFER.id);
+        if (existing) existing.qty++;
+        else cart.push({ ...EXCLUSIVE_BANNER_OFFER, qty: 1 });
+        saveCart();
+        openCheckout();
       });
 
       function applyLanguage() {
