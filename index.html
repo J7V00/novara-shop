@@ -1496,7 +1496,6 @@
             <div class="chips" style="margin-top:14px;">${chips}</div>
             <div style="display:grid;grid-template-columns:1fr;gap:8px">
               <button type="button" class="btn-add" id="mAdd">${t.addBtn}</button>
-              
             </div>
           </div>
         `;
@@ -1747,9 +1746,7 @@
 
       syncAccountButton();
 
-      $("#enterDealsBtn").addEventListener("click", () => {
-        closeModal("promoSplashModal");
-      });
+      
 
       $("#cartBtn").addEventListener("click", () => openModal("cartOverlay"));
       $("#closeCart").addEventListener("click", () => closeModal("cartOverlay"));
