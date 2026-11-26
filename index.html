@@ -906,13 +906,6 @@
           <label data-i18n="lblEmail">البريد الإلكتروني (Gmail) *</label>
           <input id="coEmail" type="email" dir="ltr" placeholder="yourname@gmail.com" required>
 
-          <label data-i18n="lblPayMethod">اختر وسيلة الدفع السريع *</label>
-          <div class="pay-methods-grid" id="payMethodsGrid">
-            <button type="button" class="pay-method-btn active" data-method="Apple Pay"> Apple Pay</button>
-            <button type="button" class="pay-method-btn stc" data-method="stc pay">stc pay</button>
-            <button type="button" class="pay-method-btn" data-method="Fast Pay (مدى/فيزا)">⚡ Pay سريع</button>
-          </div>
-
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;" data-i18n="confirmBtn">دفع الآن والمتابعة عبر واتساب ←</button>
         </form>
       </div>
@@ -1080,9 +1073,9 @@
           footerTag: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 66 منتجاً في 11 قسماً.",
           cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
           cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
-          coTitle: "تسجيل الدخول وإتمام الدفع السريع", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
+          coTitle: "أدخل حسابك للمتابعة عبر واتساب", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
           lblEmail: "البريد الإلكتروني (Gmail) *",
-          lblPayMethod: "اختر وسيلة الدفع السريع *", confirmBtn: "دفع الآن والمتابعة عبر واتساب ←",
+          lblPayMethod: "اختر وسيلة الدفع السريع *", confirmBtn: "تأكيد الحساب والمتابعة عبر واتساب ←",
           accTitle: "بيانات حسابك", saveAcc: "حفظ البيانات ✓",
           addBtn: "أضف للسلة +", specBtn: "المواصفات", buyBtn: "متابعة",
           free: "مجاني", currency: "ر.س", countUnit: "منتج",
@@ -1143,9 +1136,9 @@
           footerTag: "Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR) • 66 Items.",
           cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
           cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
-          coTitle: "Sign In & Express Payment", lblName: "Full Name *", lblPhone: "Mobile Number *",
+          coTitle: "Enter Your Account to Continue via WhatsApp", lblName: "Full Name *", lblPhone: "Mobile Number *",
           lblEmail: "Email Address (Gmail) *",
-          lblPayMethod: "Choose Fast Payment Method *", confirmBtn: "Pay Now & Message on WhatsApp →",
+          lblPayMethod: "Choose Fast Payment Method *", confirmBtn: "Confirm Account & Continue via WhatsApp →",
           accTitle: "Your Account Details", saveAcc: "Save Details ✓",
           addBtn: "Add to Bag +", specBtn: "Specs", buyBtn: "Continue",
           free: "Free", currency: "SAR", countUnit: "items",
@@ -1555,15 +1548,39 @@
       $("#checkoutBtn").addEventListener("click", openCheckout);
       $("#coForm").addEventListener("submit", e => {
         e.preventDefault();
-        const name = $("#coName").value.trim();
-        const phone = $("#coPhone").value.trim();
+        const name = $("#coName").value.trim().replace(/\s+/g, " ");
+        const rawPhone = $("#coPhone").value.trim();
         const email = $("#coEmail").value.trim();
-        if (name.length < 2 || phone.length < 8 || !email.includes("@")) {
-          toast(lang === "ar" ? "يرجى إدخال الاسم الكامل ورقم الجوال والبريد الإلكتروني" : "Please enter full name, mobile, and Gmail");
+
+        const nameParts = name.split(" ").filter(Boolean);
+        const isValidName = name.length >= 4 && nameParts.length >= 2 && !/^[0-9]+$/.test(name);
+
+        const cleanPhone = rawPhone.replace(/[\s\-()]/g, "");
+        const isValidPhone = /^(?:\+?9665|05|5)\d{8}$/.test(cleanPhone);
+
+        const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
+        if (!isValidName) {
+          toast(lang === "ar" ? "⚠️ أدخل اسمك الكامل الصحيح (الاسم الأول واسم العائلة/الأب)" : "⚠️ Please enter your full name (first & last/family name)");
+          $("#coName").focus();
           return;
         }
-        customer = { name, phone, email };
+        if (!isValidPhone) {
+          toast(lang === "ar" ? "⚠️ أدخل رقم جوال صحيح (مثال: 05xxxxxxxx)" : "⚠️ Please enter a valid mobile number (e.g. 05xxxxxxxx)");
+          $("#coPhone").focus();
+          return;
+        }
+        if (!isValidEmail) {
+          toast(lang === "ar" ? "⚠️ أدخل بريدك الإلكتروني الصحيح (مثال: name@gmail.com)" : "⚠️ Please enter a valid email address");
+          $("#coEmail").focus();
+          return;
+        }
+
+        const normalizedPhone = cleanPhone.startsWith("+") ? cleanPhone.slice(1) : (cleanPhone.startsWith("05") ? "966" + cleanPhone.slice(1) : (cleanPhone.startsWith("5") && cleanPhone.length === 9 ? "966" + cleanPhone : cleanPhone));
+
+        customer = { name, phone: cleanPhone, email };
         write("novara-customer", customer);
+        if (typeof syncAccountButton === "function") syncAccountButton();
 
         const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
@@ -1573,9 +1590,10 @@
         const orderRecord = {
           orderId,
           date: new Date().toLocaleString("ar-SA"),
-          name, phone, email,
+          name,
+          phone: cleanPhone,
+          email,
           device,
-          payMethod: selectedPayMethod,
           total,
           items: itemsSummary
         };
@@ -1583,24 +1601,23 @@
         write("novara-orders", orders);
 
         notifyOwnerCloud({
-          _subject: `طلب شراء جديد #${orderId} - ${name} (${total} ر.س)`,
-          event: "طلب شراء جديد",
+          _subject: `طلب جديد #${orderId} - ${name} (${total} ر.س)`,
+          event: "متابعة طلب عبر واتساب",
           order_id: orderId,
           customer_name: name,
-          customer_phone: phone,
+          customer_phone: normalizedPhone,
           customer_email: email,
           device: device,
-          payment_method: selectedPayMethod,
-          total_paid: `${total} ر.س`,
+          total_amount: `${total} ر.س`,
           items: itemsSummary
         });
 
         const waText = encodeURIComponent(
-          `مرحباً، أتممت طلبي في متجر NOVARA:\n` +
+          `مرحباً، أود متابعة طلبي في متجر NOVARA:\n` +
           `• رقم الطلب: ${orderId}\n` +
           `• الاسم: ${name}\n` +
-          `• الجوال: ${phone}\n` +
-          `• وسيلة الدفع: ${selectedPayMethod}\n` +
+          `• الجوال: ${cleanPhone}\n` +
+          `• البريد: ${email}\n` +
           `• الإجمالي: ${total} ر.س\n\n` +
           `المنتجات المختارة:\n${itemsSummary}\n\n` +
           `📍 سأرسل لك موقعي الآن وأي إضافات أو ملاحظات أرغب بها:`
@@ -1611,14 +1628,14 @@
         $("#coDone").hidden = false;
         $("#coDone").innerHTML = `
           <div style="font-size:44px;margin-bottom:8px">📍💬</div>
-          <h3 style="color:var(--ink);margin-bottom:6px;">${lang === "ar" ? "تواصل عبر واتساب لإرسال الموقع والإضافات" : "Message on WhatsApp to Send Your Location & Extras"}</h3>
+          <h3 style="color:var(--ink);margin-bottom:6px;">${lang === "ar" ? "تم تأكيد حسابك — تابع الآن عبر واتساب" : "Account Confirmed — Continue via WhatsApp"}</h3>
           <p style="margin:6px 0;font-size:14px;color:var(--accent);font-weight:600;">${lang === "ar" ? "رقم الطلب:" : "Order ID:"} #${orderId} • ${fmt(total)}</p>
           <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">
             ${lang === "ar"
               ? "اضغط على الزر بالأسفل لفتح الواتساب ومراسلتنا لإرسال موقعك وتأكيد أي إضافات أو ملاحظات تريدها مع طلبك:"
               : "Tap below to open WhatsApp and send us your location along with any extra items or notes:"}
           </p>
-          <a href="${waUrl}" target="_blank" class="whatsapp-cta">💬 ${lang === "ar" ? "تواصل مع واتساب لإرسال الموقع ←" : "Contact WhatsApp to Send Location →"}</a>
+          <a href="${waUrl}" target="_blank" class="whatsapp-cta">💬 ${lang === "ar" ? "متابعة عبر واتساب وإرسال الموقع ←" : "Continue via WhatsApp & Send Location →"}</a>
           <button type="button" class="btn-add" style="width:100%" id="doneClose">${lang === "ar" ? "العودة للمتجر" : "Back to Store"}</button>
         `;
         $("#doneClose").onclick = () => closeModal("checkoutModal");
@@ -1664,7 +1681,7 @@
             <div style="border:1px solid var(--border);border-radius:12px;padding:14px;font-size:13px;background:var(--bg-main);">
               <div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
                 <span>#${o.orderId} — ${o.name}</span>
-                <span style="color:var(--emerald)">مدفوع: ${o.total} ر.س (${o.payMethod})</span>
+                <span style="color:var(--emerald)">الإجمالي: ${o.total} ر.س</span>
               </div>
               <div style="color:var(--muted);font-size:12px;line-height:1.7;">
                 <div>📱 الجوال: <strong dir="ltr">${o.phone}</strong> | 📧 البريد: <strong dir="ltr">${o.email}</strong></div>
@@ -1698,7 +1715,7 @@
       $("#exportCsvBtn").addEventListener("click", () => {
         if (!orders.length) return;
         const headers = ["رقم الطلب", "التاريخ", "الاسم", "الجوال", "البريد الإلكتروني", "الجهاز", "وسيلة الدفع", "المنتجات", "الإجمالي"];
-        const orderRows = orders.map(o => [o.orderId, `"${o.date}"`, `"${o.name}"`, `"${o.phone}"`, `"${o.email}"`, `"${o.device}"`, `"${o.payMethod}"`, `"${o.items.replace(/\n/g, " | ")}"`, o.total]);
+        const orderRows = orders.map(o => [o.orderId, `"${o.date}"`, `"${o.name}"`, `"${o.phone}"`, `"${o.email}"`, `"${o.device}"`, `"${o.items.replace(/\n/g, " | ")}"`, o.total]);
         const csv = "\uFEFF" + [headers.join(","), ...orderRows.map(r => r.join(","))].join("\n");
         const a = document.createElement("a");
         a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
