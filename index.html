@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NOVARA">
   <meta name="application-name" content="NOVARA">
-  <title>NOVARA | عروض قوية للجمعة البيضاء (72 منتجاً في 13 قسماً)</title>
+  <title>NOVARA | متجر نوفارا</title>
 
   <link id="appFavicon" rel="icon" type="image/jpeg" href="novara-icon.jpg">
   <link id="appleTouchIcon" rel="apple-touch-icon" sizes="512x512" href="novara-icon.jpg">
@@ -49,7 +49,6 @@
     button { cursor: pointer; }
     img { display: block; max-width: 100%; }
 
-    /* شريط علوي */
     .top-bar {
       background: #1C2331;
       color: #EAD8BE;
@@ -64,7 +63,6 @@
     .status-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #A7F3D0; }
     .dot { width: 7px; height: 7px; border-radius: 50%; background: #34D399; }
 
-    /* الهيدر */
     .header {
       min-height: 76px;
       padding: 10px 5%;
@@ -172,7 +170,6 @@
       place-items: center;
     }
 
-    /* اللوحة الكبيرة الحصرية في أعلى التطبيق فقط */
     .mega-bundle-banner {
       margin: 22px 5% 0;
       background: linear-gradient(135deg, #0F141D 0%, #1E293B 55%, #2C2112 100%);
@@ -269,7 +266,6 @@
     }
     .mega-visual img { width: 100%; height: auto; object-fit: contain; }
 
-    /* الواجهة الرئيسية */
     .hero {
       padding: 42px 5%;
       display: grid;
@@ -341,7 +337,6 @@
     .hero-caption span { font-size: 11px; color: var(--accent); font-weight: 600; display: block; }
     .hero-caption strong { font-size: 13.5px; font-weight: 600; color: var(--ink); }
 
-    /* الأقسام */
     .section { padding: 44px 5%; }
     .section-head {
       display: flex;
@@ -385,7 +380,6 @@
       font-weight: 600;
     }
 
-    /* أدوات التصفية والبحث */
     .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
     .search-wrap {
       display: flex;
@@ -427,7 +421,6 @@
     .results-bar { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
     .sort-select { height: 36px; padding: 0 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface); color: var(--ink); font-size: 13px; }
 
-    /* شبكة المنتجات */
     .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
     .card {
       background: var(--bg-surface);
@@ -509,27 +502,14 @@
       color: var(--ink);
       font-size: 12px;
     }
-    .btn-buy {
-      padding: 0 12px;
-      border-radius: 9px;
-      border: 0;
-      background: var(--accent);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-buy:hover { background: var(--ink); }
 
     #noProducts { text-align: center; padding: 40px; color: var(--muted); font-size: 15px; }
 
-    /* الفوتر */
     .footer { background: #1C2331; color: #E5E7EB; padding: 38px 5% 20px; margin-top: 30px; }
     .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
     .footer .logo { color: #fff; }
     .footer-copy { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 22px; padding-top: 14px; text-align: center; font-size: 12px; color: #9CA3AF; }
 
-    /* السلة والنوافذ */
     .overlay { position: fixed; inset: 0; background: rgba(28, 35, 49, 0.72); backdrop-filter: blur(7px); z-index: 45; display: none; }
     .overlay.active { display: flex; justify-content: center; align-items: center; padding: 14px; }
     .cart-overlay.active { justify-content: flex-end; padding: 0; }
@@ -563,9 +543,16 @@
     .toasts { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 99; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
     .toast { background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 25px; font-size: 13px; box-shadow: var(--shadow); }
 
-    @media (max-width: 1050px) {
-      .dept-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    .co-live-box { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 10px 0 6px; text-align: start; }
+    .co-live-title { font-size: 12.5px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .co-live-item { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--border); font-size: 12.5px; color: var(--ink); }
+    .co-live-total { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 15px; font-weight: 700; }
+    .co-live-total strong { color: var(--emerald); }
+    .pay-methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 6px 0 10px; }
+    .pay-method-btn { padding: 10px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--ink); font-size: 12.5px; font-weight: 600; text-align: center; transition: 0.2s; }
+    .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+
+    @media (max-width: 1050px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 960px) {
       .mega-bundle-banner, .hero { grid-template-columns: 1fr; text-align: center; }
       .mega-items-pills, .mega-price-box, .hero-btns { justify-content: center; }
@@ -579,29 +566,14 @@
       .card-img { height: 185px; }
       .card-btns { grid-template-columns: 1fr; }
     }
-
-    #welcomeModal, .welcome-modal, [data-welcome-modal] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
-      .pay-methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 10px 0 14px; }
-    .pay-method-btn { padding: 10px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--ink); font-size: 12.5px; font-weight: 600; text-align: center; transition: 0.2s; }
-    .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
-      .co-live-box { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 10px 0 6px; text-align: start; }
-    .co-live-title { font-size: 12.5px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
-    .co-live-item { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--border); font-size: 12.5px; color: var(--ink); }
-    .co-live-total { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 15px; font-weight: 700; }
-    .co-live-total strong { color: var(--emerald); }
-    .pay-methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 6px 0 10px; }
-    .pay-method-btn { padding: 10px 8px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--ink); font-size: 12.5px; font-weight: 600; text-align: center; transition: 0.2s; }
-    .pay-method-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
   </style>
 </head>
 <body>
-  <!-- شريط علوي -->
   <div class="top-bar">
     <span class="status-pill"><i class="dot"></i> <span data-i18n="topStatus">NOVARA • عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س</span></span>
     <span id="countdownText"></span>
   </div>
 
-  <!-- الهيدر -->
   <header class="header">
     <div class="logo" id="secretLogoTrigger" title="NOVARA">
       <img class="brand-emblem" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M256 76 L266 102 L292 112 L266 122 L256 148 L246 122 L220 112 L246 102 Z%27 fill=%27%23D6B879%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
@@ -610,8 +582,8 @@
 
     <nav class="nav">
       <a href="#megaOffer" data-i18n="navOffer">عروض الجمعة البيضاء</a>
-      <a href="#departments" data-i18n="navDepts">الأقسام (13)</a>
-      <a href="#products" data-i18n="navCatalog">المنتجات (72)</a>
+      <a href="#departments" data-i18n="navDepts">الأقسام</a>
+      <a href="#products" data-i18n="navCatalog">المنتجات</a>
       <a href="#contact" data-i18n="navContact">تواصل معنا</a>
     </nav>
 
@@ -633,7 +605,6 @@
   </header>
 
   <main>
-    <!-- اللوحة الكبيرة الحصرية في أعلى التطبيق فقط -->
     <section class="mega-bundle-banner" id="megaOffer">
       <div>
         <span class="mega-tag" data-i18n="megaBadge">🔥 عروض قوية للجمعة البيضاء • وفّر 500 ر.س</span>
@@ -656,63 +627,50 @@
       </div>
     </section>
 
-    <!-- الواجهة الرئيسية -->
     <section class="hero" id="home">
       <div>
-        <span class="eyebrow" data-i18n="heroBadge">WHITE FRIDAY DEALS • 72 UNIQUE ITEMS</span>
-        <h1 data-i18n="heroTitle">عروض الجمعة البيضاء والخميس إلى الأحد <span>على 72 منتجاً في الملابس والأجهزة واللوحات الجدارية والأحذية وسوني 5 والمطبخ</span></h1>
-        <p data-i18n="heroDesc">تشكيلة جديدة وموسعة من 72 منتجاً مختلفاً في 13 قسماً متكاملاً بخصومات من 5% إلى 20% وكاش باك فوري 10%.</p>
+        <span class="eyebrow" data-i18n="heroBadge">NOVARA STOREFRONT</span>
+        <h1 data-i18n="heroTitle">تشكيلة مختارة بعناية <span>في الأزياء الرجالية والنسائية والبناطيل</span></h1>
+        <p data-i18n="heroDesc">تصفح المنتجات المتاحة مباشرة، أضفها إلى السلة، واطلبها بكل سهولة وسرعة.</p>
         <div class="hero-btns">
-          <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح الـ 72 منتجاً الآن ←</a>
+          <a href="#products" class="btn-primary" data-i18n="heroCta">تصفح المنتجات الآن ←</a>
         </div>
       </div>
       <div class="hero-visual">
         <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200" alt="NOVARA Collection">
         <div class="hero-caption">
-          <span data-i18n="capSub">72 UNIQUE ITEMS • 13 DEPARTMENTS</span>
-          <strong data-i18n="capTitle">عروض الجمعة البيضاء + خصومات 5% - 20% + كاش باك 10%</strong>
+          <span data-i18n="capSub">NOVARA • QUALITY & STYLE</span>
+          <strong data-i18n="capTitle">خصومات مميزة + كاش باك فوري 10%</strong>
         </div>
       </div>
     </section>
 
-    <!-- الأقسام -->
     <section class="section" id="departments" style="padding-bottom:10px;">
       <div class="section-head">
         <div>
-          <span class="eyebrow" data-i18n="deptEyebrow">13 ORGANIZED DEPARTMENTS</span>
-          <h2 data-i18n="deptHeading">تسوق حسب القسم (13 قسماً)</h2>
+          <span class="eyebrow" data-i18n="deptEyebrow">DEPARTMENTS</span>
+          <h2 data-i18n="deptHeading">تسوق حسب القسم</h2>
         </div>
         <p data-i18n="deptNote">اضغط على أي قسم لعرض المنتجات الخاصة به</p>
       </div>
       <div class="dept-grid" id="deptGrid">
-        <button type="button" class="dept-card" data-cat="men_wear"><img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600" alt=""><span data-i18n="d1">1. ملابس رجالية (6)</span></button>
-        <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين (6)</span></button>
-        <button type="button" class="dept-card" data-cat="pants"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية (6)</span></button>
-        <button type="button" class="dept-card" data-cat="sweaters_jackets"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt=""><span data-i18n="d4">4. كنزات وجواكيت (6)</span></button>
-        <button type="button" class="dept-card" data-cat="iphones"><img src="iphone-18-promax.jpeg" alt=""><span data-i18n="d5">5. أجهزة آيفون 18 و 17 و 16 (6)</span></button>
-        <button type="button" class="dept-card" data-cat="ipads"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600" alt=""><span data-i18n="d6">6. أجهزة الآيباد (6)</span></button>
-        <button type="button" class="dept-card" data-cat="mac_pc"><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" alt=""><span data-i18n="d7">7. ماك بوك ولابتوب وبي سي (6)</span></button>
-        <button type="button" class="dept-card" data-cat="sony"><img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=600" alt=""><span data-i18n="d8">8. أجهزة سوني 5 (6)</span></button>
-        <button type="button" class="dept-card" data-cat="watches"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt=""><span data-i18n="d9">9. ساعات أبل AI وساعات (6)</span></button>
-        <button type="button" class="dept-card" data-cat="kitchen"><img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=600" alt=""><span data-i18n="d10">10. أجهزة المطبخ والمنزل (6)</span></button>
-        <button type="button" class="dept-card" data-cat="wall_art"><img src="art-2.jpg" alt=""><span data-i18n="d11">11. لوحات جدارية فنية (6)</span></button>
-        <button type="button" class="dept-card" data-cat="women_shoes"><img src="m c.jpg" alt=""><span data-i18n="d12">12. أحذية نسائية (3)</span></button>
-        <button type="button" class="dept-card" data-cat="men_shoes"><img src="llllll.jpg" alt=""><span data-i18n="d13">13. أحذية رجالية (3)</span></button>
+        <button type="button" class="dept-card" data-cat="men_wear"><img src="cvbn.jpg" alt=""><span data-i18n="d1">1. ملابس رجالية</span></button>
+        <button type="button" class="dept-card" data-cat="women_wear"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt=""><span data-i18n="d2">2. ملابس نسائية وفساتين</span></button>
+        <button type="button" class="dept-card" data-cat="pants"><img src="nnmbvvnb.jpg" alt=""><span data-i18n="d3">3. بناطيل رجالية ونسائية</span></button>
       </div>
     </section>
 
-    <!-- الكتالوج الكامل (72 منتجاً) -->
     <section class="section" id="products">
       <div class="section-head">
         <div>
-          <span class="eyebrow" data-i18n="catEyebrow">WHITE FRIDAY DEALS • 72 UNIQUE PRODUCTS</span>
-          <h2 data-i18n="catHeading">جميع المنتجات (72 منتجاً)</h2>
+          <span class="eyebrow" data-i18n="catEyebrow">AVAILABLE CATALOG</span>
+          <h2 data-i18n="catHeading">جميع المنتجات</h2>
         </div>
-        <p data-i18n="catNote">72 منتجاً مختلفاً بالكامل — اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة</p>
+        <p data-i18n="catNote">اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة</p>
       </div>
 
       <div class="toolbar">
-        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في 72 منتجاً: أحذية نسائية، أحذية رجالية، لوحات جدارية، آيفون، عباية، فستان، بنطلون، جاكيت..."></label>
+        <label class="search-wrap"><span>⌕</span><input type="search" id="searchInput" data-i18n-placeholder="searchPh" placeholder="ابحث في المنتجات: ثوب، بشت، قميص، فستان، جلابية، بنطلون..."></label>
         <div class="price-filter">
           <span data-i18n="priceLbl">السعر:</span>
           <input type="number" id="minPrice" min="0" placeholder="Min">
@@ -721,25 +679,15 @@
       </div>
 
       <div class="filters" id="filterBar">
-        <button type="button" class="filter-btn active" data-cat="all" data-i18n="fAll">الكل (12)</button>
-        <button type="button" class="filter-btn" data-cat="men_wear" data-i18n="f1">ملابس رجالية (6)</button>
-        <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين (6)</button>
-        <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية (6)</button>
-        <button type="button" class="filter-btn" data-cat="sweaters_jackets" data-i18n="f4">كنزات وجواكيت (6)</button>
-        <button type="button" class="filter-btn" data-cat="iphones" data-i18n="f5">أجهزة آيفون (6)</button>
-        <button type="button" class="filter-btn" data-cat="ipads" data-i18n="f6">الآيباد (6)</button>
-        <button type="button" class="filter-btn" data-cat="mac_pc" data-i18n="f7">ماك بوك ولابتوب وبي سي (6)</button>
-        <button type="button" class="filter-btn" data-cat="sony" data-i18n="f8">سوني 5 (6)</button>
-        <button type="button" class="filter-btn" data-cat="watches" data-i18n="f9">ساعات أبل AI وساعات (6)</button>
-        <button type="button" class="filter-btn" data-cat="kitchen" data-i18n="f10">أجهزة المطبخ (6)</button>
-        <button type="button" class="filter-btn" data-cat="wall_art" data-i18n="f11">لوحات جدارية فنية (6)</button>
-        <button type="button" class="filter-btn" data-cat="women_shoes" data-i18n="f12">أحذية نسائية (3)</button>
-        <button type="button" class="filter-btn" data-cat="men_shoes" data-i18n="f13">أحذية رجالية (3)</button>
+        <button type="button" class="filter-btn active" data-cat="all" data-i18n="fAll">الكل</button>
+        <button type="button" class="filter-btn" data-cat="men_wear" data-i18n="f1">ملابس رجالية</button>
+        <button type="button" class="filter-btn" data-cat="women_wear" data-i18n="f2">ملابس نسائية وفساتين</button>
+        <button type="button" class="filter-btn" data-cat="pants" data-i18n="f3">بناطيل رجالية ونسائية</button>
         <button type="button" class="filter-btn" id="favFilterBtn" data-i18n="fFav">♥ المفضلة</button>
       </div>
 
       <div class="results-bar">
-        <span id="resultsCount">72 منتج</span>
+        <span id="resultsCount">0 منتج</span>
         <select id="sortSelect" class="sort-select">
           <option value="def" data-i18n="sDef">الترتيب حسب الأقسام (الافتراضي)</option>
           <option value="asc" data-i18n="sAsc">السعر: الأقل أولاً</option>
@@ -758,12 +706,11 @@
         <img class="brand-emblem" style="width:36px;height:36px;" src="novara-icon.jpg" alt="NOVARA" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Crect width=%27512%27 height=%27512%27 rx=%27112%27 fill=%27%230F141D%27/%3E%3Cpath d=%27M168 370 V175 H204 L308 312 V175 H344 V370 H308 L204 233 V370 Z%27 fill=%27%23D6B879%27/%3E%3C/svg%3E'">
         <span>NOVARA</span>
       </div>
-      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 72 منتجاً في 13 قسماً.</p>
+      <p style="font-size:13px;color:#9CA3AF" data-i18n="footerTag">NOVARA • متجر الأزياء والمنتجات المختارة.</p>
     </div>
     <div class="footer-copy">© 2026 NOVARA. All Rights Reserved.</div>
   </footer>
 
-  <!-- السلة الجانبية -->
   <div class="overlay cart-overlay" id="cartOverlay">
     <div class="cart-drawer">
       <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;">
@@ -781,7 +728,6 @@
     </div>
   </div>
 
-  <!-- نافذة تفاصيل المنتج -->
   <div class="overlay" id="productModal">
     <div class="modal-box modal-wide">
       <button type="button" class="close-btn" data-close="productModal">✕</button>
@@ -789,7 +735,6 @@
     </div>
   </div>
 
-  <!-- نافذة تسجيل الدخول والدفع السريع -->
   <div class="overlay" id="checkoutModal">
     <div class="modal-box">
       <button type="button" class="close-btn" data-close="checkoutModal">✕</button>
@@ -831,7 +776,6 @@
     </div>
   </div>
 
-  <!-- نافذة الحساب -->
   <div class="overlay" id="accountModal">
     <div class="modal-box">
       <button type="button" class="close-btn" data-close="accountModal">✕</button>
@@ -848,7 +792,6 @@
     </div>
   </div>
 
-  <!-- نافذة المالك/المدير المخفية (5 نقرات على الشعار + الرمز 12345) -->
   <div class="overlay" id="adminModal">
     <div class="modal-box modal-wide">
       <button type="button" class="close-btn" data-close="adminModal">✕</button>
@@ -881,6 +824,19 @@
     document.addEventListener("DOMContentLoaded", () => {
       "use strict";
 
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+      const read = (k, fallback) => {
+        try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; }
+        catch { return fallback; }
+      };
+      const write = (k, v) => {
+        try { localStorage.setItem(k, JSON.stringify(v)); } catch {}
+      };
+
+      let lang = localStorage.getItem("novara-lang") || "ar";
+      const fmt = n => `${Number(n || 0).toLocaleString("en-US")} ${lang === "ar" ? "ر.س" : "SAR"}`;
+
       const CONFIG = {
         ownerWebhookUrl: "https://formspree.io/f/meagnzqj",
         merchantWhatsApp: "966500000000",
@@ -898,51 +854,12 @@
         } catch {}
       }
 
-      (function setupExternalAppIcon() {
-        try {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = 512;
-            canvas.height = 512;
-            const ctx = canvas.getContext("2d");
-            const minSide = Math.min(img.width, img.height);
-            const sx = (img.width - minSide) / 2;
-            const sy = (img.height - minSide) / 2;
-            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, 512, 512);
-            const pngUrl = canvas.toDataURL("image/png");
-
-            const fav = document.getElementById("appFavicon");
-            const apple = document.getElementById("appleTouchIcon");
-            if (fav) { fav.type = "image/png"; fav.href = pngUrl; }
-            if (apple) apple.href = pngUrl;
-
-            const manifest = {
-              name: "NOVARA Shop",
-              short_name: "NOVARA",
-              start_url: ".",
-              display: "standalone",
-              background_color: "#0F141D",
-              theme_color: "#0F141D",
-              icons: [{ src: pngUrl, sizes: "512x512", type: "image/png", purpose: "any maskable" }]
-            };
-            const mLink = document.createElement("link");
-            mLink.rel = "manifest";
-            mLink.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: "application/json" }));
-            document.head.appendChild(mLink);
-          };
-          img.src = "novara-icon.jpg";
-        } catch {}
-      })();
-
-      let lang = localStorage.getItem("novara-lang") || "ar";
-
       const I18N = {
         ar: {
           topStatus: "NOVARA • عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س",
           navOffer: "عروض الجمعة البيضاء",
-          navDepts: "الأقسام (13)",
-          navCatalog: "المنتجات (72)",
+          navDepts: "الأقسام",
+          navCatalog: "المنتجات",
           navContact: "تواصل معنا",
           megaBadge: "🔥 عروض قوية للجمعة البيضاء • وفّر 500 ر.س",
           megaTitle: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة",
@@ -954,38 +871,33 @@
           megaNew: "بالخصم: 5,999 ر.س",
           megaSave: "خصم الجمعة البيضاء",
           megaCta: "اطلب العرض الآن بـ 5,999 ر.س (متابعة) ←",
-          heroBadge: "WHITE FRIDAY DEALS • 72 UNIQUE ITEMS",
-          heroTitle: "عروض الجمعة البيضاء والخميس إلى الأحد <span>على 72 منتجاً في الملابس والأجهزة واللوحات الجدارية والأحذية وسوني 5 والمطبخ</span>",
-          heroDesc: "تشكيلة جديدة وموسعة من 72 منتجاً مختلفاً في 13 قسماً متكاملاً بخصومات من 5% إلى 20% وكاش باك فوري 10%.",
-          heroCta: "تصفح الـ 72 منتجاً الآن ←",
-          capSub: "72 UNIQUE ITEMS • 13 DEPARTMENTS",
-          capTitle: "عروض الجمعة البيضاء + خصومات 5% - 20% + كاش باك 10%",
-          deptEyebrow: "13 ORGANIZED DEPARTMENTS",
-          deptHeading: "تسوق حسب القسم (13 قسماً)",
+          heroBadge: "NOVARA STOREFRONT",
+          heroTitle: "تشكيلة مختارة بعناية <span>في الأزياء الرجالية والنسائية والبناطيل</span>",
+          heroDesc: "تصفح المنتجات المتاحة مباشرة، أضفها إلى السلة، واطلبها بكل سهولة وسرعة.",
+          heroCta: "تصفح المنتجات الآن ←",
+          capSub: "NOVARA • QUALITY & STYLE",
+          capTitle: "خصومات مميزة + كاش باك فوري 10%",
+          deptEyebrow: "DEPARTMENTS",
+          deptHeading: "تسوق حسب القسم",
           deptNote: "اضغط على أي قسم لعرض المنتجات الخاصة به",
-          d1: "1. ملابس رجالية (6)", d2: "2. ملابس نسائية وفساتين (6)",
-          d3: "3. بناطيل رجالية ونسائية (6)", d4: "4. كنزات وجواكيت (6)",
-          d5: "5. أجهزة آيفون 18 و 17 و 16 (6)", d6: "6. أجهزة الآيباد (6)",
-          d7: "7. ماك بوك ولابتوب وبي سي (6)", d8: "8. أجهزة سوني 5 (6)",
-          d9: "9. ساعات أبل AI وساعات (6)", d10: "10. أجهزة المطبخ والمنزل (6)",
-          d11: "11. لوحات جدارية فنية (6)",
-          d12: "12. أحذية نسائية (3)",
-          d13: "13. أحذية رجالية (3)",
-          catEyebrow: "WHITE FRIDAY DEALS • 72 UNIQUE PRODUCTS",
-          catHeading: "جميع المنتجات (72 منتجاً)",
-          catNote: "72 منتجاً مختلفاً بالكامل — اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة",
-          searchPh: "ابحث في 72 منتجاً: أحذية نسائية، أحذية رجالية، لوحات جدارية، آيفون، عباية، فستان، بنطلون، جاكيت...",
+          d1: "1. ملابس رجالية",
+          d2: "2. ملابس نسائية وفساتين",
+          d3: "3. بناطيل رجالية ونسائية",
+          catEyebrow: "AVAILABLE CATALOG",
+          catHeading: "جميع المنتجات",
+          catNote: "اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة",
+          searchPh: "ابحث في المنتجات: ثوب، بشت، قميص، فستان، جلابية، بنطلون...",
           priceLbl: "السعر:",
-          fAll: "الكل (12)", f1: "ملابس رجالية (6)", f2: "ملابس نسائية وفساتين (6)",
-          f3: "بناطيل رجالية ونسائية (6)", f4: "كنزات وجواكيت (6)", f5: "أجهزة آيفون (6)",
-          f6: "الآيباد (6)", f7: "ماك بوك ولابتوب وبي سي (6)", f8: "سوني 5 (6)",
-          f9: "ساعات أبل AI وساعات (6)", f10: "أجهزة المطبخ (6)", f11: "لوحات جدارية (6)",
-          f12: "أحذية نسائية (3)",
-          f13: "أحذية رجالية (3)",
+          fAll: "الكل",
+          f1: "ملابس رجالية",
+          f2: "ملابس نسائية وفساتين",
+          f3: "بناطيل رجالية ونسائية",
           fFav: "♥ المفضلة",
-          sDef: "الترتيب حسب الأقسام (الافتراضي)", sAsc: "السعر: الأقل أولاً", sDesc: "السعر: الأعلى أولاً",
+          sDef: "الترتيب حسب الأقسام (الافتراضي)",
+          sAsc: "السعر: الأقل أولاً",
+          sDesc: "السعر: الأعلى أولاً",
           noProd: "لا توجد منتجات تطابق بحثك.",
-          footerTag: "عروض قوية للجمعة البيضاء: سماعة + آيفون + كفر + ساعة بـ 5,999 ر.س بدلاً من 6,499 ر.س • 72 منتجاً في 13 قسماً.",
+          footerTag: "NOVARA • متجر الأزياء والمنتجات المختارة.",
           cartTitle: "سلة المشتريات", subLbl: "المجموع الفرعي", shipLbl: "الشحن",
           cbLbl: "كاش باك فوري (10%)", totLbl: "الإجمالي", checkoutCta: "متابعة للدفع السريع ⚡",
           coTitle: "تأكيد حسابك لإتمام الطلب", lblName: "الاسم الكامل *", lblPhone: "رقم الجوال *",
@@ -1001,8 +913,8 @@
         en: {
           topStatus: "NOVARA • Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR)",
           navOffer: "White Friday Deals",
-          navDepts: "Departments (13)",
-          navCatalog: "Products (72)",
+          navDepts: "Departments",
+          navCatalog: "Products",
           navContact: "Contact",
           megaBadge: "🔥 Strong White Friday Deals • Save 500 SAR",
           megaTitle: "Strong White Friday Deals: Headphones + iPhone + Case + Watch",
@@ -1014,38 +926,33 @@
           megaNew: "With Discount: 5,999 SAR",
           megaSave: "White Friday Discount",
           megaCta: "Order Deal Now for 5,999 SAR (Continue) →",
-          heroBadge: "WHITE FRIDAY DEALS • 72 UNIQUE ITEMS",
-          heroTitle: "White Friday & Weekend Deals <span>Across 72 Unique Fashion, Tech, Wall Art, Shoes, PS5 & Kitchen Items</span>",
-          heroDesc: "Expanded collection of 72 distinct items organized across 13 departments with 5% to 20% discounts and 10% instant cashback.",
-          heroCta: "Browse All 72 Products Now →",
-          capSub: "72 UNIQUE ITEMS • 13 DEPARTMENTS",
-          capTitle: "White Friday Deals + 5% - 20% Off + 10% Instant Cashback",
-          deptEyebrow: "13 ORGANIZED DEPARTMENTS",
-          deptHeading: "Shop by Department (13 Depts)",
+          heroBadge: "NOVARA STOREFRONT",
+          heroTitle: "Curated Collection <span>Across Men's, Women's & Pants</span>",
+          heroDesc: "Browse available items directly, add them to your bag, and order effortlessly.",
+          heroCta: "Browse Products Now →",
+          capSub: "NOVARA • QUALITY & STYLE",
+          capTitle: "Special Offers + 10% Instant Cashback",
+          deptEyebrow: "DEPARTMENTS",
+          deptHeading: "Shop by Department",
           deptNote: "Click any department to view its items",
-          d1: "1. Men's Wear (6)", d2: "2. Women's Wear & Dresses (6)",
-          d3: "3. Men's & Women's Pants (6)", d4: "4. Sweaters & Jackets (6)",
-          d5: "5. Apple iPhones (6)", d6: "6. iPads (6)",
-          d7: "7. MacBook, Laptop & PC (6)", d8: "8. Sony PS5 (6)",
-          d9: "9. AI Apple & Modern Watches (6)", d10: "10. Kitchen & Home (6)",
-          d11: "11. Fine Wall Art Paintings (6)",
-          d12: "12. Women's Shoes (3)",
-          d13: "13. Men's Shoes (3)",
-          catEyebrow: "WHITE FRIDAY DEALS • 72 UNIQUE PRODUCTS",
-          catHeading: "All Unique Products (72 Items)",
-          catNote: "72 completely distinct items — click any product to view specs or add to bag",
-          searchPh: "Search 72 items: women shoes, men shoes, wall art, iPhone, abaya, dress, pants, jacket...",
+          d1: "1. Men's Apparel",
+          d2: "2. Women's Wear & Dresses",
+          d3: "3. Men's & Women's Pants",
+          catEyebrow: "AVAILABLE CATALOG",
+          catHeading: "All Products",
+          catNote: "Click any product to view specs or add to bag",
+          searchPh: "Search products: thobe, bisht, shirt, dress, jalabiya, pants...",
           priceLbl: "Price:",
-          fAll: "All (12)", f1: "Men's Wear (6)", f2: "Women's Wear & Dresses (6)",
-          f3: "Pants (6)", f4: "Sweaters & Jackets (6)", f5: "iPhones (6)",
-          f6: "iPads (6)", f7: "MacBook & PC (6)", f8: "Sony PS5 (6)",
-          f9: "AI Watches (6)", f10: "Kitchen (6)", f11: "Wall Art (6)",
-          f12: "Women's Shoes (3)",
-          f13: "Men's Shoes (3)",
+          fAll: "All",
+          f1: "Men's Apparel",
+          f2: "Women's Wear & Dresses",
+          f3: "Pants",
           fFav: "♥ Favorites",
-          sDef: "Ordered by Department (Default)", sAsc: "Price: Low to High", sDesc: "Price: High to Low",
+          sDef: "Ordered by Department (Default)",
+          sAsc: "Price: Low to High",
+          sDesc: "Price: High to Low",
           noProd: "No products match your search.",
-          footerTag: "Strong White Friday Deals: Headphones + iPhone + Case + Watch for 5,999 SAR (was 6,499 SAR) • 72 Items.",
+          footerTag: "NOVARA • Curated Storefront.",
           cartTitle: "Shopping Bag", subLbl: "Subtotal", shipLbl: "Shipping",
           cbLbl: "Instant Cashback (10%)", totLbl: "Total", checkoutCta: "Continue to Fast Pay ⚡",
           coTitle: "Confirm Your Account to Complete Order", lblName: "Full Name *", lblPhone: "Mobile Number *",
@@ -1070,7 +977,6 @@
       };
 
       const products = [
-        // 1. ملابس رجالية (6 منتجات)
         { id: 1, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "ثوب رجالي ملكي قماش ياباني أبيض", nameEn: "Men's Royal Japanese White Thobe", specAr: "قماش ياباني ناعم مقاوم للتجعد • تفصيل سعودي متقن", specEn: "Wrinkle-Resistant Soft Japanese Fabric • Tailored Fit", price: 400, oldPrice: 500, image: "cvbn.jpg", variants: ["54 M", "56 L", "58 XL", "60 2XL"], specs: { "القماش": "ياباني فاخر نص وقفة", "المقاسات": "54M إلى 60 2XL" } },
         { id: 2, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "قميص رجالي قطن أكسفورد ناعم", nameEn: "Men's Soft Oxford Cotton Dress Shirt", specAr: "قطن 100% يسمح بالتنفس وسهل الكي", specEn: "100% Breathable Easy-Iron Cotton", price: 340, oldPrice: 400, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن أكسفورد 100%", "المقاسات": "M إلى 3XL" } },
         { id: 3, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "تيشيرت بولو رجالي قطن مصري فاخر", nameEn: "Men's Egyptian Cotton Polo Shirt", specAr: "قطن بيكيه ناعم بارد للحر • ألوان ثابتة", specEn: "Cooling Soft Cotton Piqué • Fade-Resistant", price: 304, oldPrice: 320, image: "dfghj.jpg", variants: ["M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "قطن مصري 100%", "المقاسات": "M إلى 3XL" } },
@@ -1078,7 +984,6 @@
         { id: 5, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "طقم لينن رجالي صيفي كاجوال ناعم", nameEn: "Men's Casual Soft Summer Linen Set", specAr: "كتان طبيعي بارد ومريح للرحلات والإطلالات اليومية", specEn: "Cooling Natural Linen for Casual Days", price: 495, oldPrice: 550, image: "linen-set-men.jpg", variants: ["M", "L", "XL", "2XL"], specs: { "القماش": "كتان وقطن طبيعي", "الموسم": "صيفي بارد" } },
         { id: 51, cat: "men_wear", deptAr: "1. ملابس رجالية", deptEn: "1. Men's Apparel", nameAr: "بشت رجالي ملكي خفيف للمناسبات", nameEn: "Men's Lightweight Royal Occasion Bisht", specAr: "حياكة يدوية فاخرة بخيوط ذهبية • قماش صيفي خفيف", specEn: "Handcrafted Gold-Thread Embroidery • Light Fabric", price: 1120, oldPrice: 1400, image: "bisht-royal.jpg", variants: ["وسط", "كبير", "ملكي"], specs: { "التطريز": "زري ذهبي فاخر", "المناسبات": "أعراس وأعياد" } },
 
-        // 2. ملابس نسائية وفساتين (6 منتجات)
         { id: 6, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "فستان نسائي طويل شيفون ناعم محتشم", nameEn: "Women's Modest Long Soft Chiffon Dress", specAr: "قماش شيفون ناعم مبطن بالكامل • تصميم محتشم راقٍ", specEn: "Fully Lined Soft Chiffon • Elegant Modest Cut", price: 680, oldPrice: 850, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "شيفون فاخر + بطانة قطنية", "المقاسات": "S إلى 3XL" } },
         { id: 7, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "عباية كريب ملكي أسود ناعم مع طرحة", nameEn: "Women's Royal Soft Crepe Black Abaya", specAr: "كريب كوري ناعم فاحم السواد • شاملة الطرحة", specEn: "Korean Soft Crepe with Matching Scarf", price: 540, oldPrice: 600, image: "abaya-black.jpg", variants: ["52", "54", "56", "58", "60"], specs: { "القماش": "كريب كوري درجة أولى", "المقاسات": "52 إلى 60" } },
         { id: 8, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "قميص نسائي حريري ناعم بأكمام طويلة", nameEn: "Women's Silky Satin Long-Sleeve Blouse", specAr: "ملمس حريري ناعم مقاوم للتجعد • قصة محتشمة", specEn: "Wrinkle-Free Silky Satin • Modest Fit", price: 504, oldPrice: 560, image: "jiiooioioioi.jpg", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "ساتان حريري ناعم", "المقاسات": "S إلى 3XL" } },
@@ -1086,7 +991,8 @@
         { id: 10, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "طقم بليزر عمل نسائي رسمي حديث", nameEn: "Women's Modern Tailored Work Blazer Set", specAr: "قماش كريب مفصل ناعم مبطن للعمل", specEn: "Soft Lined Crepe Blazer for Office", price: 675, oldPrice: 750, image: "wdwsedwsse_2.png", variants: ["S", "M", "L", "XL", "2XL", "3XL"], specs: { "الخامة": "كريب مفصل ناعم", "المقاسات": "S إلى 3XL" } },
         { id: 52, cat: "women_wear", deptAr: "2. ملابس نسائية وفساتين", deptEn: "2. Women's Wear & Dresses", nameAr: "جلابية استقبال نسائية مطرزة قماش لينن ناعم", nameEn: "Women's Embroidered Soft Linen Reception Dress", specAr: "تطريز ذهبي راقٍ على لينن طبيعي ناعم ومريح", specEn: "Gold Embroidery on Breathable Soft Linen", price: 590, oldPrice: 720, image: "hhyhyutu.jpg", variants: ["S", "M", "L", "XL", "2XL"], specs: { "القماش": "لينن طبيعي ناعم", "التطريز": "يدوي فاخر" } },
 
-        // 3. بناطيل رجالية ونسائية (6 منتجات), true);
+        { id: 11, cat: "pants", deptAr: "3. بناطيل رجالية ونسائية", deptEn: "3. Men's & Women's Pants", nameAr: "بناطيل تشينو رجالية قطنية سوبر يانو ماريون", nameEn: "Men's Super Yano Marion Cotton Chino Pants", specAr: "قماش قطني ناعم ومريح للدوام والإطلالات اليومية", specEn: "Soft Cotton Chino for Daily & Office Wear", price: 330, oldPrice: 380, image: "nnmbvvnb.jpg", variants: ["32", "34", "36", "38"], specs: { "الخامة": "قطن ناعم مريح", "المقاسات": "32 إلى 38" } }
+      ];
 
       const toastHost = document.createElement("div");
       toastHost.className = "toasts";
@@ -1440,7 +1346,7 @@
 
         customer = { name, phone: cleanPhone, email };
         write("novara-customer", customer);
-        if (typeof syncAccountButton === "function") syncAccountButton();
+        syncAccountButton();
 
         const total = cart.reduce((s, i) => s + (Number(i.price) || 0) * (Number(i.qty) || 1), 0);
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
