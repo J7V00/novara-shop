@@ -1435,21 +1435,7 @@
         if (openCo) openCheckout();
         else { flyOneToCart(sourceEl); toast(I18N[lang].addedToast(lang === "ar" ? p.nameAr : p.nameEn)); }
       }
-
-      function isFirstOrderFree() {
-        const usedFlag = read("novara-first-order-used", false);
-        const existingOrders = read("novara-orders", []);
-        return !usedFlag && (!Array.isArray(existingOrders) || existingOrders.length === 0);
-      }
-
-      function getCartPricing() {
-        const rawTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-        const freeFirst = isFirstOrderFree();
-        return {
-          rawTotal,
-          finalTotal: freeFirst ? 0 : rawTotal,
-          isFirstOrderFree: freeFirst
-        };
+;
       }
 
       function saveCart() {
@@ -1566,13 +1552,7 @@
           $("#coPhone").value = customer.phone || "";
           $("#coEmail").value = customer.email || "";
         }
-        const pricing = getCartPricing();
-        const rawTotal = pricing.rawTotal;
-        const total = pricing.finalTotal;
-        const wasFreeFirstOrder = pricing.isFirstOrderFree;
-        if (wasFreeFirstOrder) {
-          write("novara-first-order-used", true);
-        }
+        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
         const orderId = "NV-" + Math.floor(100000 + Math.random() * 900000);
         const device = detectDevice();
@@ -1586,28 +1566,24 @@
           email,
           device,
           total,
-          rawTotal,
-          freeFirstOrder: wasFreeFirstOrder,
           items: itemsSummary
         };
         orders.unshift(orderRecord);
         write("novara-orders", orders);
 
         notifyOwnerCloud({
-          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${wasFreeFirstOrder ? "مجاني - أول طلب" : total + " ر.س"})`,
-          event: wasFreeFirstOrder ? "تأكيد حساب وطلب مجاني (أول طلب)" : "تأكيد حساب وطلب مدفوع",
+          _subject: `تأكيد حساب وطلب #${orderId} - ${name} (${total} ر.س)`,
+          event: "تأكيد حساب وطلب",
           order_id: orderId,
           customer_name: name,
           customer_phone: cleanPhone,
           customer_email: email,
           device: device,
-          total_amount: wasFreeFirstOrder ? `0 ر.س (بدلاً من ${rawTotal} ر.س)` : `${total} ر.س`,
+          total_amount: `${total} ر.س`,
           items: itemsSummary
         });
 
-        const totalLabel = wasFreeFirstOrder
-          ? `<span style="color:var(--emerald);font-weight:700">${lang === "ar" ? "مجاني (0 ر.س — أول طلب)" : "FREE (0 SAR — First Order)"}</span>`
-          : fmt(total);
+        const totalLabel = fmt(total);
 
         $("#coFormWrap").hidden = true;
         $("#coDone").hidden = false;
