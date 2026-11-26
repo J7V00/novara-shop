@@ -468,7 +468,7 @@
     .card-price del { font-size: 12.5px; color: var(--muted); }
     .card-cb { font-size: 11px; color: var(--emerald); background: rgba(31, 122, 84, 0.08); padding: 3px 8px; border-radius: 6px; width: fit-content; }
 
-    .card-btns { display: grid; grid-template-columns: 1fr auto auto; gap: 6px; margin-top: auto; padding-top: 10px; }
+    .card-btns { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: auto; padding-top: 10px; }
     .btn-add {
       padding: 9px 8px;
       border-radius: 9px;
@@ -1354,7 +1354,7 @@
                 <div class="card-btns">
                   <button type="button" class="btn-add">${t.addBtn}</button>
                   <button type="button" class="btn-spec">${t.specBtn}</button>
-                  <button type="button" class="btn-buy">${t.buyBtn}</button>
+                  
                 </div>
               </div>
             </article>
@@ -1452,9 +1452,9 @@
             <div class="card-cb" style="margin-bottom:10px">${t.cbTag(Math.round(p.price * 0.10))}</div>
             <table class="specs-table"><tbody>${rows}</tbody></table>
             <div class="chips" style="margin-top:14px;">${chips}</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="display:grid;grid-template-columns:1fr;gap:8px">
               <button type="button" class="btn-add" id="mAdd">${t.addBtn}</button>
-              <button type="button" class="btn-primary" style="justify-content:center" id="mBuy">${t.buyBtn}</button>
+              
             </div>
           </div>
         `;
@@ -1465,7 +1465,7 @@
           chosen = c.dataset.v;
         }));
         $("#mAdd").onclick = () => { addToCart(id, false, chosen); closeModal("productModal"); };
-        $("#mBuy").onclick = () => { closeModal("productModal"); addToCart(id, true, chosen); };
+        
         openModal("productModal");
       }
 
@@ -1679,7 +1679,7 @@
           e.target.closest(".fav-btn").textContent = on ? "♥" : "♡";
           if (favOnly) renderFilteredProducts();
         } else if (e.target.closest(".btn-add")) addToCart(id, false);
-        else if (e.target.closest(".btn-buy")) addToCart(id, true);
+        
         else openDetail(id);
       });
 
