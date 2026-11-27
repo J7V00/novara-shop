@@ -567,6 +567,7 @@
       .card-btns { grid-template-columns: 1fr; }
     }
   </style>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
   <div class="top-bar">
@@ -1701,5 +1702,33 @@
       applyLanguage();
     });
   </script>
+
+<div id="novara-3d-box" style="margin:12px 0;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fafafa;">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+    <button type="button" onclick="toggleNovara3D(true)" style="padding:6px 12px;border-radius:8px;border:none;background:#111827;color:#fff;cursor:pointer;">عرض 3D تفاعلي (اسحب للف)</button>
+    <button type="button" onclick="toggleNovara3D(false)" style="padding:6px 12px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#111827;cursor:pointer;">عرض الصورة العادية</button>
+  </div>
+  <model-viewer
+    id="novara-3d-viewer"
+    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+    alt="3D Product View"
+    camera-controls
+    auto-rotate
+    ar
+    style="width:100%;height:320px;border-radius:10px;background:#fff;">
+  </model-viewer>
+  <p style="margin:8px 0 0;font-size:13px;color:#4b5563;">اسحب بالماوس أو بإصبعك لتدوير المنتج 360 درجة من كل الجهات.</p>
+</div>
+<script>
+function toggleNovara3D(show3D) {
+  const v = document.getElementById("novara-3d-viewer");
+  if (v) v.style.display = show3D ? "block" : "none";
+}
+window.setProduct3DModel = function(glbUrl) {
+  const v = document.getElementById("novara-3d-viewer");
+  if (v && glbUrl) v.setAttribute("src", glbUrl);
+};
+</script>
+
 </body>
 </html>
