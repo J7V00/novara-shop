@@ -567,6 +567,8 @@
       .card-btns { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
   <div class="top-bar">
@@ -1701,5 +1703,267 @@
       applyLanguage();
     });
   </script>
+
+<!-- NOVARA Quick Checkout Map & Owner Delivery View -->
+<div id="novara-quick-map-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#fff;color:#111827;width:100%;max-width:540px;border-radius:16px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,0.25);max-height:92vh;overflow-y:auto;" dir="rtl">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 style="margin:0;font-size:18px;font-weight:700;">الدفع السريع وتحديد الموقع</h3>
+      <button type="button" onclick="novaraCloseMapModal()" style="border:none;background:#f3f4f6;color:#111827;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+    </div>
+
+    <div id="novara-qc-step1">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <label style="font-size:13px;font-weight:600;">الاسم الثلاثي
+          <input id="novara-qc-name" type="text" placeholder="اكتب الاسم الثلاثي" style="width:100%;box-sizing:border-box;margin-top:4px;padding:10px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;" />
+        </label>
+        <label style="font-size:13px;font-weight:600;">رقم الجوال
+          <input id="novara-qc-phone" type="tel" placeholder="05xxxxxxxx" style="width:100%;box-sizing:border-box;margin-top:4px;padding:10px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;" />
+        </label>
+        <label style="font-size:13px;font-weight:600;">البريد الإلكتروني
+          <input id="novara-qc-email" type="email" placeholder="name@example.com" style="width:100%;box-sizing:border-box;margin-top:4px;padding:10px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;" />
+        </label>
+      </div>
+      <p id="novara-qc-err" style="display:none;color:#dc2626;font-size:13px;margin:8px 0 0;"></p>
+      <button type="button" onclick="novaraGoToMapStep()" style="width:100%;margin-top:14px;padding:11px;border:none;border-radius:10px;background:#111827;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">
+        متابعة لتحديد الموقع على الخريطة
+      </button>
+    </div>
+
+    <div id="novara-qc-step2" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+        <span style="font-size:13px;font-weight:600;">اضغط على الخريطة أو اسحب المؤشر لتحديد موقعك:</span>
+        <button type="button" onclick="novaraUseCurrentGPS()" style="padding:6px 10px;border:1px solid #d1d5db;border-radius:8px;background:#f9fafb;color:#111827;font-size:12px;cursor:pointer;">موقعي الحالي (GPS)</button>
+      </div>
+      <div id="novara-leaflet-map" style="width:100%;height:270px;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;"></div>
+      <p id="novara-selected-coords" style="font-size:12px;color:#374151;margin:8px 0 0;">لم يتم تحديد نقطة بعد (اضغط على الخريطة أو استخدم موقعي الحالي).</p>
+      <button type="button" onclick="novaraSubmitOrderWithLocation()" style="width:100%;margin-top:12px;padding:11px;border:none;border-radius:10px;background:#059669;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">
+        إرسال الموقع والطلب إلى المالك وإنهاء العملية
+      </button>
+    </div>
+
+    <div id="novara-qc-done" style="display:none;text-align:center;padding:14px 4px;">
+      <div style="font-size:16px;font-weight:700;color:#059669;margin-bottom:8px;">تم إرسال موقعك وطلبك إلى المالك بنجاح.</div>
+      <p style="font-size:13px;color:#4b5563;margin:0 0 14px;">تم إتمام الإرسال، ويمكنك إغلاق النافذة الآن.</p>
+      <button type="button" onclick="novaraCloseMapModal()" style="padding:9px 18px;border:none;border-radius:10px;background:#111827;color:#fff;font-size:14px;cursor:pointer;">إغلاق وخلاص</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة عرض المواقع والطلبات المرسلة لمالك التطبيق NOVARA -->
+<div id="novara-owner-locations-modal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.65);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#fff;color:#111827;width:100%;max-width:640px;border-radius:16px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,0.3);max-height:90vh;overflow-y:auto;" dir="rtl">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h3 style="margin:0;font-size:17px;font-weight:700;">المواقع والطلبات المرسلة للمالك (NOVARA)</h3>
+      <button type="button" onclick="document.getElementById('novara-owner-locations-modal').style.display='none'" style="border:none;background:#f3f4f6;color:#111827;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;">✕</button>
+    </div>
+    <div id="novara-owner-locations-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const OWNER_STORAGE_KEY = "novara_owner_location_orders_v1";
+  let novaraMap = null;
+  let novaraMarker = null;
+  let novaraPickedLatLng = null;
+
+  function novaraGetCartSummary() {
+    try {
+      const keys = Object.keys(localStorage);
+      for (const k of keys) {
+        if (/cart/i.test(k)) {
+          const raw = localStorage.getItem(k);
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.map(it => {
+              const title = it.nameAr || it.name || it.title || "منتج";
+              const qty = it.qty || it.quantity || 1;
+              return `${title} (×${qty})`;
+            }).join("، ");
+          }
+        }
+      }
+    } catch (e) {}
+    return "المنتجات المحددة في السلة";
+  }
+
+  window.novaraOpenQuickCheckout = function(ev) {
+    if (ev) ev.preventDefault();
+    novaraPickedLatLng = null;
+    document.getElementById("novara-qc-step1").style.display = "block";
+    document.getElementById("novara-qc-step2").style.display = "none";
+    document.getElementById("novara-qc-done").style.display = "none";
+    document.getElementById("novara-qc-err").style.display = "none";
+    document.getElementById("novara-selected-coords").textContent = "لم يتم تحديد نقطة بعد (اضغط على الخريطة أو استخدم موقعي الحالي).";
+    const modal = document.getElementById("novara-quick-map-modal");
+    if (modal) modal.style.display = "flex";
+  };
+
+  window.novaraCloseMapModal = function() {
+    const modal = document.getElementById("novara-quick-map-modal");
+    if (modal) modal.style.display = "none";
+  };
+
+  window.novaraGoToMapStep = function() {
+    const name = (document.getElementById("novara-qc-name").value || "").trim();
+    const phone = (document.getElementById("novara-qc-phone").value || "").trim();
+    const email = (document.getElementById("novara-qc-email").value || "").trim();
+    const errEl = document.getElementById("novara-qc-err");
+
+    if (!name || !phone || !email) {
+      errEl.textContent = "يرجى إدخال الاسم الثلاثي ورقم الجوال والبريد الإلكتروني أولاً.";
+      errEl.style.display = "block";
+      return;
+    }
+    errEl.style.display = "none";
+    // إخفاء الطلب المختار والمبلغ والانتقال مباشرة للخريطة
+    document.getElementById("novara-qc-step1").style.display = "none";
+    document.getElementById("novara-qc-step2").style.display = "block";
+    novaraInitMap(24.7136, 46.6753);
+  };
+
+  function novaraSetPin(lat, lng) {
+    novaraPickedLatLng = { lat: Number(lat.toFixed(6)), lng: Number(lng.toFixed(6)) };
+    if (novaraMap && typeof L !== "undefined") {
+      if (!novaraMarker) {
+        novaraMarker = L.marker([novaraPickedLatLng.lat, novaraPickedLatLng.lng], { draggable: true }).addTo(novaraMap);
+        novaraMarker.on("dragend", function(e) {
+          const p = e.target.getLatLng();
+          novaraPickedLatLng = { lat: Number(p.lat.toFixed(6)), lng: Number(p.lng.toFixed(6)) };
+          novaraUpdateCoordsText();
+        });
+      } else {
+        novaraMarker.setLatLng([novaraPickedLatLng.lat, novaraPickedLatLng.lng]);
+      }
+      novaraMap.setView([novaraPickedLatLng.lat, novaraPickedLatLng.lng], 15);
+    }
+    novaraUpdateCoordsText();
+  }
+
+  function novaraUpdateCoordsText() {
+    if (!novaraPickedLatLng) return;
+    const mapUrl = `https://maps.google.com/?q=${novaraPickedLatLng.lat},${novaraPickedLatLng.lng}`;
+    document.getElementById("novara-selected-coords").innerHTML =
+      `الموقع المحدد: <strong>${novaraPickedLatLng.lat}, ${novaraPickedLatLng.lng}</strong> — <a href="${mapUrl}" target="_blank" rel="noopener">فتح الخريطة</a>`;
+  }
+
+  function novaraInitMap(lat, lng) {
+    setTimeout(() => {
+      if (typeof L === "undefined") return;
+      if (!novaraMap) {
+        novaraMap = L.map("novara-leaflet-map").setView([lat, lng], 12);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "© OpenStreetMap"
+        }).addTo(novaraMap);
+        novaraMap.on("click", function(e) {
+          novaraSetPin(e.latlng.lat, e.latlng.lng);
+        });
+      }
+      novaraMap.invalidateSize();
+    }, 80);
+  }
+
+  window.novaraUseCurrentGPS = function() {
+    if (!navigator.geolocation) {
+      alert("المتصفح لا يدعم تحديد الموقع تلقائياً؛ اضغط على الخريطة لتحديد موقعك.");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      pos => novaraSetPin(pos.coords.latitude, pos.coords.longitude),
+      () => alert("تعذر الوصول للموقع تلقائياً؛ يمكنك الضغط مباشرة على الخريطة لتحديد موقعك.")
+    );
+  };
+
+  window.novaraSubmitOrderWithLocation = function() {
+    if (!novaraPickedLatLng) {
+      alert("يرجى تحديد موقعك على الخريطة أولاً.");
+      return;
+    }
+    const record = {
+      id: "ORD-" + Date.now().toString().slice(-6),
+      time: new Date().toLocaleString("ar-SA"),
+      customerName: (document.getElementById("novara-qc-name").value || "").trim(),
+      phone: (document.getElementById("novara-qc-phone").value || "").trim(),
+      email: (document.getElementById("novara-qc-email").value || "").trim(),
+      items: novaraGetCartSummary(),
+      lat: novaraPickedLatLng.lat,
+      lng: novaraPickedLatLng.lng,
+      googleMapsUrl: `https://maps.google.com/?q=${novaraPickedLatLng.lat},${novaraPickedLatLng.lng}`
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem(OWNER_STORAGE_KEY) || "[]");
+      existing.unshift(record);
+      localStorage.setItem(OWNER_STORAGE_KEY, JSON.stringify(existing));
+    } catch (e) {}
+
+    // إظهار شاشة الانتهاء فوراً بعد الإرسال
+    document.getElementById("novara-qc-step2").style.display = "none";
+    document.getElementById("novara-qc-done").style.display = "block";
+  };
+
+  window.novaraShowOwnerLocations = function() {
+    const listEl = document.getElementById("novara-owner-locations-list");
+    let rows = [];
+    try {
+      rows = JSON.parse(localStorage.getItem(OWNER_STORAGE_KEY) || "[]");
+    } catch (e) {}
+
+    if (!rows.length) {
+      listEl.innerHTML = '<p style="font-size:14px;color:#4b5563;margin:0;">لا توجد مواقع أو طلبات مرسلة حتى الآن.</p>';
+    } else {
+      listEl.innerHTML = rows.map(r => `
+        <div style="border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#f9fafb;">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px;">${r.customerName} — ${r.phone}</div>
+          <div style="font-size:12px;color:#4b5563;margin-bottom:4px;">البريد: ${r.email} | الوقت: ${r.time}</div>
+          <div style="font-size:13px;margin-bottom:6px;">المنتجات المطلوبة: <strong>${r.items}</strong></div>
+          <div style="font-size:12px;color:#111827;">
+            الخريطة والموقع: <strong>${r.lat}, ${r.lng}</strong> —
+            <a href="${r.googleMapsUrl}" target="_blank" rel="noopener" style="color:#2563eb;font-weight:700;">فتح موقع العميل على الخريطة</a>
+          </div>
+        </div>
+      `).join("");
+    }
+    document.getElementById("novara-owner-locations-modal").style.display = "flex";
+  };
+
+  // ربط أزرار الدفع السريع وإخفاء ملخص الطلب والمبلغ في سياق الدفع السريع
+  function novaraAttachQuickCheckoutHooks() {
+    document.querySelectorAll("button, a").forEach(el => {
+      if (el.dataset.novaraBound) return;
+      const txt = (el.textContent || "").trim();
+      if (/متابعة\s*للدفع\s*السريع|الدفع\s*السريع|Quick\s*Checkout/i.test(txt)) {
+        el.dataset.novaraBound = "1";
+        el.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.novaraOpenQuickCheckout(e);
+        }, true);
+      }
+    });
+
+    // زر مختصر للمالك في أسفل الصفحة للاطلاع على المواقع المحددة والطلبات المرسلة
+    if (!document.getElementById("novara-owner-inbox-btn")) {
+      const btn = document.createElement("button");
+      btn.id = "novara-owner-inbox-btn";
+      btn.type = "button";
+      btn.textContent = "مواقع العملاء المرسلة للمالك";
+      btn.onclick = window.novaraShowOwnerLocations;
+      btn.style.cssText = "position:fixed;bottom:14px;left:14px;z-index:9990;padding:8px 12px;border-radius:10px;border:1px solid #d1d5db;background:#111827;color:#fff;font-size:12px;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);";
+      document.body.appendChild(btn);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", novaraAttachQuickCheckoutHooks);
+  } else {
+    novaraAttachQuickCheckoutHooks();
+  }
+  const obs = new MutationObserver(novaraAttachQuickCheckoutHooks);
+  obs.observe(document.body || document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
 </body>
 </html>
