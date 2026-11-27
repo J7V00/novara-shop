@@ -1737,15 +1737,10 @@
       </div>
       <div id="novara-leaflet-map" style="width:100%;height:270px;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;"></div>
       <p id="novara-selected-coords" style="font-size:12px;color:#374151;margin:8px 0 0;">لم يتم تحديد نقطة بعد (اضغط على الخريطة أو استخدم موقعي الحالي).</p>
-      <button type="button" onclick="novaraSubmitOrderWithLocation()" style="width:100%;margin-top:12px;padding:11px;border:none;border-radius:10px;background:#059669;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">
+      <button id="novara-qc-submit-btn" type="button" onclick="novaraSubmitOrderWithLocation()" style="width:100%;margin-top:12px;padding:11px;border:none;border-radius:10px;background:#059669;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">
         إرسال الموقع وطلب إلى المالك
       </button>
-    </div>
-
-    <div id="novara-qc-done" style="display:none;text-align:center;padding:14px 4px;">
-      <div style="font-size:16px;font-weight:700;color:#059669;margin-bottom:8px;">تم إرسال موقعك وطلبك إلى المالك بنجاح.</div>
-      <p style="font-size:13px;color:#4b5563;margin:0 0 14px;">تم إتمام الإرسال، ويمكنك إغلاق النافذة الآن.</p>
-      <button type="button" onclick="novaraCloseMapModal()" style="padding:9px 18px;border:none;border-radius:10px;background:#111827;color:#fff;font-size:14px;cursor:pointer;">إغلاق وخلاص</button>
+      <div id="novara-qc-sent-banner" style="display:none;margin-top:10px;padding:12px;border-radius:10px;background:#ecfdf5;border:1px solid #10b981;color:#065f46;font-size:13px;line-height:1.6;"></div>
     </div>
   </div>
 </div>
@@ -1764,6 +1759,7 @@
 <script>
 (function() {
   const OWNER_STORAGE_KEY = "novara_owner_location_orders_v1";
+  const FORMSPREE_URL = "https://formspree.io/f/meagnzqj";
   let novaraMap = null;
   let novaraMarker = null;
   let novaraPickedLatLng = null;
@@ -1793,8 +1789,12 @@
     novaraPickedLatLng = null;
     document.getElementById("novara-qc-step1").style.display = "block";
     document.getElementById("novara-qc-step2").style.display = "none";
-    document.getElementById("novara-qc-done").style.display = "none";
     document.getElementById("novara-qc-err").style.display = "none";
+    const banner = document.getElementById("novara-qc-sent-banner");
+    if (banner) {
+      banner.style.display = "none";
+      banner.innerHTML = "";
+    }
     document.getElementById("novara-selected-coords").textContent = "لم يتم تحديد نقطة بعد (اضغط على الخريطة أو استخدم موقعي الحالي).";
     const modal = document.getElementById("novara-quick-map-modal");
     if (modal) modal.style.display = "flex";
@@ -1817,7 +1817,6 @@
       return;
     }
     errEl.style.display = "none";
-    // إخفاء الطلب المختار والمبلغ والانتقال مباشرة للخريطة
     document.getElementById("novara-qc-step1").style.display = "none";
     document.getElementById("novara-qc-step2").style.display = "block";
     novaraInitMap(24.7136, 46.6753);
@@ -1875,11 +1874,13 @@
     );
   };
 
-  window.novaraSubmitOrderWithLocation = function() {
+  window.novaraSubmitOrderWithLocation = async function() {
     if (!novaraPickedLatLng) {
       alert("يرجى تحديد موقعك على الخريطة أولاً.");
       return;
     }
+    const btn = document.getElementById("novara-qc-submit-btn");
+    const statusEl = document.getElementById("novara-qc-sent-banner");
     const customerName = (document.getElementById("novara-qc-name").value || "").trim();
     const phone = (document.getElementById("novara-qc-phone").value || "").trim();
     const email = (document.getElementById("novara-qc-email").value || "").trim();
@@ -1904,14 +1905,39 @@
       localStorage.setItem(OWNER_STORAGE_KEY, JSON.stringify(existing));
     } catch (e) {}
 
-    let statusEl = document.getElementById("novara-qc-sent-banner");
-    if (!statusEl) {
-      statusEl = document.createElement("div");
-      statusEl.id = "novara-qc-sent-banner";
-      statusEl.style.cssText = "margin-top:10px;padding:12px;border-radius:10px;background:#ecfdf5;border:1px solid #10b981;color:#065f46;font-size:13px;line-height:1.6;";
-      const step2 = document.getElementById("novara-qc-step2");
-      if (step2) step2.appendChild(statusEl);
+    if (btn) btn.disabled = true;
+
+    let remoteSent = false;
+    let remoteErrText = "";
+    try {
+      const formData = new URLSearchParams();
+      formData.append("name", customerName);
+      formData.append("phone", phone);
+      formData.append("email", email);
+      formData.append("items", itemsText);
+      formData.append("latitude", String(novaraPickedLatLng.lat));
+      formData.append("longitude", String(novaraPickedLatLng.lng));
+      formData.append("map_url", mapUrl);
+      formData.append("message", `الاسم: ${customerName} | الجوال: ${phone} | البريد: ${email} | الطلب: ${itemsText} | الموقع: ${mapUrl}`);
+
+      const resp = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body: formData.toString()
+      });
+      remoteSent = resp.ok;
+      if (!resp.ok) {
+        const errJson = await resp.json().catch(() => ({}));
+        remoteErrText = errJson.error || `رمز الاستجابة ${resp.status}`;
+      }
+    } catch (err) {
+      remoteErrText = "تعذر الاتصال بخادم Formspree حالياً";
     }
+
+    if (btn) btn.disabled = false;
 
     const msgSummary = encodeURIComponent(
       `طلب جديد من NOVARA\nالاسم الثلاثي: ${customerName}\nالجوال: ${phone}\nالبريد: ${email}\nالطلب: ${itemsText}\nالموقع: ${mapUrl}`
@@ -1920,32 +1946,25 @@
       ? `https://wa.me/?text=${msgSummary}`
       : `mailto:?subject=${encodeURIComponent("طلب وموقع عميل - NOVARA")}&body=${msgSummary}`;
 
-    statusEl.innerHTML = `
-      <div style="font-weight:700;margin-bottom:4px;">تم إرسال الموقع وطلب إلى المالك بنجاح</div>
-      <div style="font-size:12px;color:#047857;margin-bottom:8px;">يرجى الانتظار لحين التواصل معك بخصوص طلبك وموقعك.</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-        <a href="${contactHref}" target="_blank" rel="noopener" style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
-        <span style="font-size:12px;color:#065f46;font-weight:600;">الحالة: بانتظار التواصل معك</span>
-      </div>
-    `;
-
-    const formId = "meagnzqj";
-    if (formId) {
-      fetch(`https://formspree.io/f/${formId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          order_id: record.id,
-          customer_name: customerName,
-          phone: phone,
-          email: email,
-          items: itemsText,
-          latitude: novaraPickedLatLng.lat,
-          longitude: novaraPickedLatLng.lng,
-          google_maps_link: mapUrl,
-          sent_at: record.time
-        })
-      }).catch(() => {});
+    if (statusEl) {
+      statusEl.style.display = "block";
+      statusEl.innerHTML = remoteSent
+        ? `
+          <div style="font-weight:700;margin-bottom:4px;">تم إرسال الموقع وطلب إلى المالك بنجاح</div>
+          <div style="font-size:12px;color:#047857;margin-bottom:8px;">وصل الطلب والموقع إلى نموذج Formspree بنجاح. بانتظار التواصل معك (العملية مستمرة ومفتوحة).</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <a href="${contactHref}" target="_blank" rel="noopener" style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
+            <span style="font-size:12px;color:#065f46;font-weight:600;">الحالة: بانتظار التواصل معك</span>
+          </div>
+        `
+        : `
+          <div style="font-weight:700;color:#b45309;margin-bottom:4px;">تم حفظ الطلب محلياً، ولم يتم تأكيد وصوله إلى Formspree (${remoteErrText})</div>
+          <div style="font-size:12px;color:#78350f;margin-bottom:8px;">يمكنك الضغط على تواصل لإرسال التفاصيل مباشرة أو المحاولة مرة أخرى.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <a href="${contactHref}" target="_blank" rel="noopener" style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
+            <span style="font-size:12px;color:#92400e;font-weight:600;">الحالة: بانتظار التواصل معك</span>
+          </div>
+        `;
     }
 
     if (novaraMap) {
@@ -1978,7 +1997,6 @@
     document.getElementById("novara-owner-locations-modal").style.display = "flex";
   };
 
-  // ربط أزرار الدفع السريع وإخفاء ملخص الطلب والمبلغ في سياق الدفع السريع
   function novaraAttachQuickCheckoutHooks() {
     document.querySelectorAll("button, a").forEach(el => {
       if (el.dataset.novaraBound) return;
@@ -1993,7 +2011,6 @@
       }
     });
 
-    // زر مختصر للمالك في أسفل الصفحة للاطلاع على المواقع المحددة والطلبات المرسلة
     if (!document.getElementById("novara-owner-inbox-btn")) {
       const btn = document.createElement("button");
       btn.id = "novara-owner-inbox-btn";
