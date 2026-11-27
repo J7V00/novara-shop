@@ -1760,6 +1760,7 @@
 (function() {
   const OWNER_STORAGE_KEY = "novara_owner_location_orders_v1";
   const FORMSPREE_URL = "https://formspree.io/f/meagnzqj";
+  const OWNER_WA = "".replace(/[^0-9]/g, "");
   let novaraMap = null;
   let novaraMarker = null;
   let novaraPickedLatLng = null;
@@ -1905,7 +1906,10 @@
       localStorage.setItem(OWNER_STORAGE_KEY, JSON.stringify(existing));
     } catch (e) {}
 
-    if (btn) btn.disabled = true;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "جاري الإرسال...";
+    }
 
     let remoteSent = false;
     let remoteErrText = "";
@@ -1937,31 +1941,35 @@
       remoteErrText = "تعذر الاتصال بخادم Formspree حالياً";
     }
 
-    if (btn) btn.disabled = false;
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "إرسال الموقع وطلب إلى المالك";
+    }
 
-    const msgSummary = encodeURIComponent(
-      `طلب جديد من NOVARA\nالاسم الثلاثي: ${customerName}\nالجوال: ${phone}\nالبريد: ${email}\nالطلب: ${itemsText}\nالموقع: ${mapUrl}`
-    );
-    const contactHref = ""
-      ? `https://wa.me/?text=${msgSummary}`
-      : `mailto:?subject=${encodeURIComponent("طلب وموقع عميل - NOVARA")}&body=${msgSummary}`;
+    const plainSummary = `طلب جديد من NOVARA\nالاسم الثلاثي: ${customerName}\nالجوال: ${phone}\nالبريد: ${email}\nالطلب: ${itemsText}\nالموقع: ${mapUrl}`;
+    const contactHref = OWNER_WA
+      ? `https://wa.me/${OWNER_WA}?text=${encodeURIComponent(plainSummary)}`
+      : "#novara-contact-box";
 
     if (statusEl) {
       statusEl.style.display = "block";
       statusEl.innerHTML = remoteSent
         ? `
           <div style="font-weight:700;margin-bottom:4px;">تم إرسال الموقع وطلب إلى المالك بنجاح</div>
-          <div style="font-size:12px;color:#047857;margin-bottom:8px;">وصل الطلب والموقع إلى نموذج Formspree بنجاح. بانتظار التواصل معك (العملية مستمرة ومفتوحة).</div>
+          <div style="font-size:12px;color:#047857;margin-bottom:8px;">وصل الطلب والموقع إلى Formspree بنجاح. الحالة: بانتظار التواصل معك (العملية مستمرة ومفتوحة).</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-            <a href="${contactHref}" target="_blank" rel="noopener" style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
-            <span style="font-size:12px;color:#065f46;font-weight:600;">الحالة: بانتظار التواصل معك</span>
+            <a href="${contactHref}" ${OWNER_WA ? 'target="_blank" rel="noopener"' : 'onclick="event.preventDefault();document.getElementById(\'novara-contact-info-box\').style.display=\'block\';"'} style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
+            <button type="button" onclick="navigator.clipboard && navigator.clipboard.writeText(${JSON.stringify(plainSummary)})" style="padding:7px 10px;border-radius:8px;border:1px solid #10b981;background:#fff;color:#065f46;font-size:12px;font-weight:600;cursor:pointer;">نسخ تفاصيل الطلب والموقع</button>
+          </div>
+          <div id="novara-contact-info-box" style="display:none;margin-top:8px;padding:8px;border-radius:8px;background:#fff;border:1px solid #a7f3d0;font-size:12px;color:#065f46;">
+            تم إرسال طلبك وموقعك إلى المالك عبر Formspree، وحالتك الآن: <strong>بانتظار التواصل معك</strong>.
           </div>
         `
         : `
           <div style="font-weight:700;color:#b45309;margin-bottom:4px;">تم حفظ الطلب محلياً، ولم يتم تأكيد وصوله إلى Formspree (${remoteErrText})</div>
-          <div style="font-size:12px;color:#78350f;margin-bottom:8px;">يمكنك الضغط على تواصل لإرسال التفاصيل مباشرة أو المحاولة مرة أخرى.</div>
+          <div style="font-size:12px;color:#78350f;margin-bottom:8px;">يمكنك نسخ التفاصيل أو المحاولة مرة أخرى والعملية تبقى مفتوحة.</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-            <a href="${contactHref}" target="_blank" rel="noopener" style="display:inline-block;padding:7px 12px;border-radius:8px;background:#111827;color:#fff;text-decoration:none;font-size:12px;font-weight:700;">تواصل</a>
+            <button type="button" onclick="navigator.clipboard && navigator.clipboard.writeText(${JSON.stringify(plainSummary)})" style="padding:7px 10px;border-radius:8px;border:1px solid #d97706;background:#fff;color:#92400e;font-size:12px;font-weight:600;cursor:pointer;">نسخ تفاصيل الطلب والموقع</button>
             <span style="font-size:12px;color:#92400e;font-weight:600;">الحالة: بانتظار التواصل معك</span>
           </div>
         `;
@@ -2017,7 +2025,7 @@
       btn.type = "button";
       btn.textContent = "مواقع العملاء المرسلة للمالك";
       btn.onclick = window.novaraShowOwnerLocations;
-      btn.style.cssText = "position:fixed;bottom:14px;left:14px;z-index:9990;padding:8px 12px;border-radius:10px;border:1px solid #d1d5db;background:#111827;color:#fff;font-size:12px;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);";
+      btn.style.cssText = "position:fixed;bottom:14px;left:14px;z-index:9990;padding:7px 11px;border-radius:10px;border:1px solid #d1d5db;background:#111827;color:#fff;font-size:11px;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);opacity:0.9;";
       document.body.appendChild(btn);
     }
   }
