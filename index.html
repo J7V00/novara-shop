@@ -676,7 +676,7 @@
       <div class="section-head">
         <div>
           <span class="eyebrow" data-i18n="catEyebrow">AVAILABLE CATALOG</span>
-          <h2 data-i18n="catHeading">جميع المنتجات (72 منتجاً)</h2>
+          <h2 data-i18n="catHeading">جميع المنتجات (75 منتجاًً)</h2>
         </div>
         <p data-i18n="catNote">اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة</p>
       </div>
@@ -904,7 +904,7 @@
           deptNote: "اضغط على أي قسم لعرض المنتجات الخاصة به",
           d1: "1. ملابس رجالية (6)", d2: "2. ملابس نسائية وفساتين (6)", d3: "3. بناطيل رجالية ونسائية (6)", d4: "4. كنزات وجواكيت (6)", d5: "5. أجهزة آيفون 18 و 17 و 16 (6)", d6: "6. أجهزة الآيباد (6)", d7: "7. ماك بوك ولابتوب وبي سي (6)", d8: "8. أجهزة سوني 5 (6)", d9: "9. ساعات أبل AI وساعات (6)", d10: "10. أجهزة المطبخ والمنزل (6)", d11: "11. لوحات جدارية فنية (6)", d12: "12. أحذية نسائية (3)", d13: "13. أحذية رجالية (3)",
           catEyebrow: "AVAILABLE CATALOG",
-          catHeading: "جميع المنتجات (72 منتجاً)",
+          catHeading: "جميع المنتجات (75 منتجاًً)",
           catNote: "اضغط على أي منتج لعرض التفاصيل أو إضافته للسلة",
           searchPh: "ابحث في المنتجات: ثوب، بشت، قميص، فستان، جلابية، بنطلون...",
           priceLbl: "السعر:",
@@ -2040,6 +2040,49 @@
   }
   const obs = new MutationObserver(novaraAttachQuickCheckoutHooks);
   obs.observe(document.body || document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
+
+<script>
+(function () {
+  function ensureWomenShoesAndCatalog() {
+    try {
+      if (typeof products === "undefined" || !Array.isArray(products)) return;
+      const wsItems = products.filter(p => p && p.cat === "women_shoes");
+      // التأكد من وجود أزرار الفلترة أو حاوية الأقسام إذا كانت تُبنى ديناميكياً أو من DOM
+      const btns = Array.from(document.querySelectorAll("button, [data-cat], .cat-btn, .filter-btn"));
+      const hasWomenShoesBtn = btns.some(el => {
+        const c = (el.getAttribute("data-cat") || el.dataset.cat || el.textContent || "");
+        return c.includes("women_shoes") || c.includes("أحذية نسائية");
+      });
+      if (!hasWomenShoesBtn && wsItems.length > 0) {
+        const menShoesBtn = btns.find(el => {
+          const c = (el.getAttribute("data-cat") || el.dataset.cat || el.textContent || "");
+          return c.includes("men_shoes") || c.includes("أحذية رجالية");
+        });
+        if (menShoesBtn && menShoesBtn.parentElement) {
+          const btn = menShoesBtn.cloneNode(true);
+          btn.setAttribute("data-cat", "women_shoes");
+          btn.dataset.cat = "women_shoes";
+          btn.textContent = btn.textContent.replace(/13[^\d]*/, "12. ").replace(/أحذية رجالية[^\d]*/, "أحذية نسائية").replace(/\(\d+\)/, `(${wsItems.length})`);
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (typeof filterProducts === "function") filterProducts("women_shoes");
+            else if (typeof selectCategory === "function") selectCategory("women_shoes");
+          });
+          menShoesBtn.parentElement.insertBefore(btn, menShoesBtn);
+        }
+      }
+    } catch (err) {
+      console.warn("Novara catalog guard:", err);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ensureWomenShoesAndCatalog);
+  } else {
+    ensureWomenShoesAndCatalog();
+  }
 })();
 </script>
 
